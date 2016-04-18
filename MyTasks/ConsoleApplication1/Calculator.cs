@@ -7,7 +7,7 @@ using ClassLibrary1;
 
 namespace ConsoleApplication1
 {
-    class Program
+    class Calculator
     {
         static void Main(string[] args)
         {

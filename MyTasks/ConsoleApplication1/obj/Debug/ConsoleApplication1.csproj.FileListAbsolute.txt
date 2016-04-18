@@ -1,0 +1,6 @@
+C:\Users\Aliaksandra_Valodzina@epam.com\Task\MyTasks\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+C:\Users\Aliaksandra_Valodzina@epam.com\Task\MyTasks\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
+C:\Users\Aliaksandra_Valodzina@epam.com\Task\MyTasks\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+C:\Users\Aliaksandra_Valodzina@epam.com\Task\MyTasks\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+C:\Users\Aliaksandra_Valodzina@epam.com\Task\MyTasks\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+C:\Users\Aliaksandra_Valodzina@epam.com\Task\MyTasks\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb

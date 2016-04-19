@@ -70,7 +70,7 @@ namespace ConsoleApplication1 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 21.
+        ///   Looks up a localized string similar to 25.
         /// </summary>
         internal static string num2 {
             get {

@@ -50,7 +50,9 @@ namespace ConsoleApplication1
                         int mult = lib.Mult(a, b);
                         Console.WriteLine("произведение чисел {0} и {1} равно {2}", a, b, mult);
 
-                        int dev = lib.Devide(a, b);
+                    double aDouble = a;
+                    double bDouble = b;
+                    double dev = lib.Devide(aDouble, bDouble);
                         Console.WriteLine("Деление чисел {0} и {1} равно {2}", a, b, dev);
                         Console.ReadLine();
 

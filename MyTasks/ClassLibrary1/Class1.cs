@@ -24,9 +24,9 @@ namespace ClassLibrary1
             return a * b;
         }
 
-        public int Devide(int a, int b)
+        public double Devide(double a, double b)
         {
-            int dev = a / b;
+            double dev = a / b;
             return dev;
 
         }

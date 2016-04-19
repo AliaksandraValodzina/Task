@@ -43,7 +43,7 @@ namespace UnitTests
             int a = 10;
             int b = 5;
             Class1 calc = new Class1();
-            int dev = calc.Devide(a, b);
+            double dev = calc.Devide(a, b);
             Assert.AreEqual(2, dev, 0.001, "Account not debited correctly");
         }
     }

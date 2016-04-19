@@ -13,6 +13,7 @@ namespace ConsoleApplication1
         {
             int a = 0;
             int b = 0;
+            in
             try
             {
                 String readFrom = System.Configuration.ConfigurationManager.AppSettings["read"];

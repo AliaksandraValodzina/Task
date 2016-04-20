@@ -39,7 +39,6 @@ namespace FileWorker
             string filePath = folderPath + "/WriteLines.txt";
 
             File.WriteAllLines(filePath, lines);
-
         }
     }
 }

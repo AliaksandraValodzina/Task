@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace FrameworkDesign
 {
-    // (a) Interface for page
-    public interface PageWorker
+    // (a) Abstract class for page
+    public abstract class PageWorker
     {
-        void LoadPage(string pathToPage);
+        public abstract void LoadPage(string pathToPage);
     }
 
     // (b.i) Interface for element

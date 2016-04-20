@@ -10,9 +10,9 @@ namespace ConsoleApplication1
             string message = "Enter QUIT fot exit.";
             Console.WriteLine(message);
 
-            var intMassive = new List<int>();
-            var doubleMassive = new List<double>();
-            var notNumbers = new List<String>();
+            List<int> intMassive = new List<int>();
+            List<double> doubleMassive = new List<double>();
+            List<string> notNumbers = new List<string>();
             string inputValue = Console.ReadLine();
 
             while (!inputValue.Equals("QUIT", StringComparison.InvariantCultureIgnoreCase))
@@ -76,16 +76,13 @@ namespace ConsoleApplication1
             Console.WriteLine("");
 
             // Write to console not-a-numbers.
+            notNumbers.Sort();
             foreach (string element in notNumbers)
             {
                 Console.CursorLeft = Console.BufferWidth - element.Length;
                 Console.WriteLine(element);
             }
             Console.WriteLine("");
-
-            String str = "123";
-            int code = (int)str[1];
-            Console.WriteLine(code);
 
             Console.ReadLine();
         }

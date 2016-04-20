@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApplication1
 {
@@ -10,38 +7,85 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            string message = "Для выхода из программы введите STOP.";
+            string message = "Enter QUIT fot exit.";
             Console.WriteLine(message);
 
-            string text = string.Empty;
-            char[] arr;
-            var intMassive = new List<char>();
-            var doubleMassive = new List<char>();
+            var intMassive = new List<int>();
+            var doubleMassive = new List<double>();
+            var notNumbers = new List<String>();
+            string inputValue = Console.ReadLine();
 
-            do {
-                text = Console.ReadLine();
-                arr = text.ToCharArray();
-
-                foreach (char element in arr) {
-                if (char.IsDigit(element)) {
-                
-                    if ((element % 1) == 0) {
-                            // Char is integer
-                            intMassive.Add(element);
-                    }else {
-                            // Char is double
-                            doubleMassive.Add(element);
+            while (!inputValue.Equals("QUIT", StringComparison.InvariantCultureIgnoreCase))
+            {
+                double value;
+                if (Double.TryParse(inputValue, out value))
+                {
+                    if ((value % 1) == 0)
+                    {
+                        // Value is integer. Add it to massive with integers.
+                        intMassive.Add(Convert.ToInt32(value));
+                    }
+                    else
+                    {
+                        // Value is double. Add it to massive with doubles.
+                        doubleMassive.Add(value);
                     }
                 }
-
+                else
+                {
+                    // Value is not a number. Add it to massive with strings.
+                    notNumbers.Add(inputValue);
                 }
 
-            } while (!text.Equals("quit", StringComparison.InvariantCultureIgnoreCase));
+                inputValue = Console.ReadLine();
+            }
 
-            foreach (char element in intMassive) {
-                //Console.CursorLeft = Console.BufferWidth;
+            // Write to console integers and average of it.
+            Console.WriteLine("");
+            int iteratorInt = 0;
+            int sumInt = 0;
+            foreach (int element in intMassive)
+            {
+                string elementString = element.ToString();
+                Console.CursorLeft = Console.BufferWidth - elementString.Length;
+                Console.WriteLine(element);
+                sumInt = sumInt + element;
+                iteratorInt++;
+            }
+            int averageInt = (iteratorInt > 0) ? sumInt / iteratorInt : 0;
+            string averageIntString = averageInt.ToString();
+            Console.CursorLeft = Console.BufferWidth - averageIntString.Length;
+            Console.WriteLine(averageInt);
+            Console.WriteLine("");
+
+            // Write to console doubles and average of it.
+            int iteratorDouble = 0;
+            double sumDouble = 0;
+            foreach (double element in doubleMassive)
+            {
+                string elementString = element.ToString();
+                Console.CursorLeft = Console.BufferWidth - elementString.Length;
+                Console.WriteLine(element);
+                sumDouble = sumDouble + element;
+                iteratorDouble++;
+            }
+            double averageDouble = (iteratorDouble > 0) ? sumDouble / iteratorDouble : 0;
+            string averageDoubleString = averageDouble.ToString();
+            Console.CursorLeft = Console.BufferWidth - averageDoubleString.Length;
+            Console.WriteLine(averageDouble);
+            Console.WriteLine("");
+
+            // Write to console not-a-numbers.
+            foreach (string element in notNumbers)
+            {
+                Console.CursorLeft = Console.BufferWidth - element.Length;
                 Console.WriteLine(element);
             }
+            Console.WriteLine("");
+
+            String str = "123";
+            int code = (int)str[1];
+            Console.WriteLine(code);
 
             Console.ReadLine();
         }

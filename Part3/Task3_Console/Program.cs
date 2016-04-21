@@ -20,19 +20,27 @@ namespace QuadraticDecision
                 // Solve a quadratic equation.
                 case "Q":
                     // Enter A, B, C
-                    Console.Write("Plese enter constants of a quadratic equation: A B C\r\n");
+                    Console.Write("Plese enter constants of a quadratic equation: A B C.\r\n");
                     List<int> constants = quadratic.InputValue();
+
                     // Find roots
-                    quadratic.OuadraticDecision(constants);
+                    string messageOuadratic = quadratic.OuadraticDecision(constants);
+
+                    // Write to log
+                    quadratic.Logger(constants, messageOuadratic);
                     break;
 
                 // Solve a linear equation.
                 case "L":
                     // Enter A, B
-                    Console.Write("Plese enter constants of a linear equation: A B\r\n");
+                    Console.Write("Plese enter constants of a linear equation: A B.\r\n");
                     List<int> constantsLinear = quadratic.InputValue();
+
                     // Find root
-                    quadratic.LinearDecision(constantsLinear);
+                    string messageLinear = quadratic.LinearDecision(constantsLinear);
+
+                    // Write to log
+                    quadratic.Logger(constantsLinear, messageLinear);
                     break;
 
                 default:

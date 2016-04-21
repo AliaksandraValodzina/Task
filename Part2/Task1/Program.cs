@@ -41,8 +41,5 @@ namespace FileOrString
             }
             Console.ReadLine();
         }
-
-        
-
         }
     }

@@ -126,7 +126,7 @@ namespace Equation
             }
         }
 
-        // Write to log file uncorrect input
+        // Write to log file incorrect input
         public void Logger(String message)
         {
             string fileName = "C:/EquationLog.txt";
@@ -140,7 +140,7 @@ namespace Equation
 
                 using (StreamWriter w = File.AppendText(fileName))
                 {
-                    w.Write("Uncorrect input: ");
+                    w.Write("Incorrect input: ");
                     w.Write(message);
                     w.Write("\r\n");
                     w.Write("\r\n");
@@ -150,6 +150,75 @@ namespace Equation
             {
                 throw;
             }
+        }
+
+        // Task four
+        public void Multiplication(String filePath)
+        {
+            string fileOne = "C:/MatrixOne.txt";
+            string fileTwo = "C:/MatrixTwo.txt";
+
+            int[,] matrixA = CreateMatrix(fileOne);
+            int[,] matrixB = CreateMatrix(fileTwo);
+
+            int row_One = matrixA.GetLength(0);
+            int col_One = matrixA.GetLength(1);
+
+            int row_Two = matrixB.GetLength(0);
+            int col_Two = matrixB.GetLength(1);
+
+            int[,] matrixC = new int[row_One, col_Two];
+
+            if (row_One.Equals(col_Two))
+            {
+                for (int row = 0; row < row_One; row++)
+                {
+                    for (int col = 0; col < col_Two; col++)
+                    {
+                        for (int inner = 0; inner < col_One; inner++)
+                        {
+                            //matrixC[row][col] += matrixA[row][inner] * matrixB[inner][col];
+                        }
+                        //std::cout << matrixC[row][col] << "  ";
+                    }
+                    //std::cout << "\n";
+                }
+            }
+        }
+
+        // Matrix multidimensional array
+        static int[,] CreateMatrix(string pathToFile)
+        {
+            string line = string.Empty;
+            List<int[]> arrays = new List<int[]>();
+
+            using (StreamReader reader = new StreamReader(pathToFile))
+            {
+                while ((line = reader.ReadLine()) != null)
+                {
+                    line = reader.ReadLine();
+                    string[] lineArray = line.Split(' ');
+                    int[] myIntsArray = Array.ConvertAll(lineArray, int.Parse);
+                    arrays.Add(myIntsArray);
+                }
+            }
+
+            int minorLength = arrays[0].Length;
+            int[,] ret = new int[arrays.Count, minorLength];
+            for (int i = 0; i < arrays.Count; i++)
+            {
+                var array = arrays[i];
+                if (array.Length != minorLength)
+                {
+                    throw new ArgumentException
+                        ("All arrays must be the same length");
+                }
+                for (int j = 0; j < minorLength; j++)
+                {
+                    ret[i, j] = array[j];
+                }
+            }
+            return ret;
         }
     }
 }

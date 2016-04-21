@@ -10,9 +10,6 @@ namespace FileOrString
             Console.WriteLine("Please enter a path to txt file.");
             String path = Console.ReadLine();
 
-            //if (Path.HasExtension(path) && Path.GetExtension(path).Equals(".txt")) {
-
-            //}else {
             if (File.Exists(path))
             {
                 string[] readText = File.ReadAllLines(path);

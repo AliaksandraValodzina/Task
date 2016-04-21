@@ -22,25 +22,25 @@ namespace ConsoleApplication1
                 {
                     if ((value % 1) == 0)
                     {
-                        // Value is integer. Add it to massive with integers.
+                        // Value is integer. Add it to array with integers.
                         intMassive.Add(Convert.ToInt32(value));
                     }
                     else
                     {
-                        // Value is double. Add it to massive with doubles.
+                        // Value is double. Add it to array with doubles.
                         doubleMassive.Add(value);
                     }
                 }
                 else
                 {
-                    // Value is not a number. Add it to massive with strings.
+                    // Value is not a number. Add it to array with strings.
                     notNumbers.Add(inputValue);
                 }
 
                 inputValue = Console.ReadLine();
             }
 
-            // Write to console integers and average of it.
+            // Write to console integers and average value.
             Console.WriteLine("");
             int iteratorInt = 0;
             int sumInt = 0;
@@ -58,7 +58,7 @@ namespace ConsoleApplication1
             Console.WriteLine(averageInt);
             Console.WriteLine("");
 
-            // Write to console doubles and average of it.
+            // Write to console doubles and average value.
             int iteratorDouble = 0;
             double sumDouble = 0;
             foreach (double element in doubleMassive)

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task1", "ConsoleApplication1\Task1.csproj", "{32063D14-D4C8-411F-A24D-7EE80DCC9B39}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task1", "Task1\Task1.csproj", "{32063D14-D4C8-411F-A24D-7EE80DCC9B39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task2_Library", "ClassLibrary1\Task2_Library.csproj", "{ACC29121-1A22-4C29-8F7A-8B2C52813C6E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task2_Library", "Task2\Task2_Library.csproj", "{ACC29121-1A22-4C29-8F7A-8B2C52813C6E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{2056A5F7-B9F1-4613-8969-11B5904F7E4A}"
 EndProject

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileAct", "FileOrString\FileAct.csproj", "{08E4D128-10AF-4088-8F05-53112C734982}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileAct", "Task1\FileAct.csproj", "{08E4D128-10AF-4088-8F05-53112C734982}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringAct", "ConsoleApplication1\StringAct.csproj", "{908BA41A-9103-4442-AEE3-048905AAD14F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringAct", "Task2\StringAct.csproj", "{908BA41A-9103-4442-AEE3-048905AAD14F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

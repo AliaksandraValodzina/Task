@@ -38,7 +38,6 @@ namespace FileOrString
                     indexOne++;
                 }
 
-                //}
             }
             Console.ReadLine();
         }

@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWorker", "FileWorker\FileWorker.csproj", "{35A6F41D-C534-45FB-B813-A284F11D93A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWorker", "Task1\FileWorker.csproj", "{35A6F41D-C534-45FB-B813-A284F11D93A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameworkDesign", "FrameworkDesign\FrameworkDesign.csproj", "{8E99E84C-3F2F-4FAE-B953-31AF564A37B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameworkDesign", "Task2\FrameworkDesign.csproj", "{8E99E84C-3F2F-4FAE-B953-31AF564A37B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuadraticEquation", "QuadraticEquation\QuadraticEquation.csproj", "{0C7BADF6-6C4A-4208-B7A8-180132DC919B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuadraticEquation", "Task3_Library\QuadraticEquation.csproj", "{0C7BADF6-6C4A-4208-B7A8-180132DC919B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuadraticDecision", "QuadraticDecision\QuadraticDecision.csproj", "{FC17FCAF-F299-4550-BF0D-39E2AC167F8A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuadraticDecision", "Task3_Console\QuadraticDecision.csproj", "{FC17FCAF-F299-4550-BF0D-39E2AC167F8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

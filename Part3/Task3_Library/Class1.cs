@@ -55,13 +55,31 @@ namespace Equation
             string[] constArray = constRead.Split(' ');
             List<int> constants = new List<int>();
             int oneConst;
+            bool isInteger = true;
+
             foreach (string s in constArray)
             {
-                if (Int32.TryParse(s, out oneConst))
+                if (!Int32.TryParse(s, out oneConst))
                 {
-                    constants.Add(oneConst);
-                }
+                    isInteger = false;
+                } 
             }
+
+            if (isInteger == true)
+            {
+                foreach (string s in constArray)
+                {
+                    if (Int32.TryParse(s, out oneConst))
+                    {
+                        constants.Add(oneConst);
+                    }
+                }
+            } else {
+                Console.Write("Plese enter constants of a quadratic equation: \r\n");
+                Logger(constRead);
+                constants = InputValue();
+            }
+
             return constants;
         }
 
@@ -100,8 +118,35 @@ namespace Equation
                     w.Write("\r\n");
                     w.Write(message);
                     w.Write("\r\n");
+                    w.Write("\r\n");
                 }
             } catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        // Write to log file uncorrect input
+        public void Logger(String message)
+        {
+            string fileName = "C:/EquationLog.txt";
+
+            try
+            {
+                if (!File.Exists(fileName))
+                {
+                    File.Create(fileName);
+                }
+
+                using (StreamWriter w = File.AppendText(fileName))
+                {
+                    w.Write("Uncorrect input: ");
+                    w.Write(message);
+                    w.Write("\r\n");
+                    w.Write("\r\n");
+                }
+            }
+            catch (Exception)
             {
                 throw;
             }

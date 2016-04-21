@@ -69,9 +69,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\ClassLibrary1.csproj">
+    <ProjectReference Include="..\ClassLibrary1\Task2_Library.csproj">
       <Project>{acc29121-1a22-4c29-8f7a-8b2c52813c6e}</Project>
-      <Name>ClassLibrary1</Name>
+      <Name>Task2_Library</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

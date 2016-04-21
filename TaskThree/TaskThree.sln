@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWorker", "FileWorker\Fi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameworkDesign", "FrameworkDesign\FrameworkDesign.csproj", "{8E99E84C-3F2F-4FAE-B953-31AF564A37B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuadraticEquation", "QuadraticEquation\QuadraticEquation.csproj", "{0C7BADF6-6C4A-4208-B7A8-180132DC919B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuadraticDecision", "QuadraticDecision\QuadraticDecision.csproj", "{FC17FCAF-F299-4550-BF0D-39E2AC167F8A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{8E99E84C-3F2F-4FAE-B953-31AF564A37B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E99E84C-3F2F-4FAE-B953-31AF564A37B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E99E84C-3F2F-4FAE-B953-31AF564A37B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C7BADF6-6C4A-4208-B7A8-180132DC919B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C7BADF6-6C4A-4208-B7A8-180132DC919B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C7BADF6-6C4A-4208-B7A8-180132DC919B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C7BADF6-6C4A-4208-B7A8-180132DC919B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC17FCAF-F299-4550-BF0D-39E2AC167F8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC17FCAF-F299-4550-BF0D-39E2AC167F8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC17FCAF-F299-4550-BF0D-39E2AC167F8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC17FCAF-F299-4550-BF0D-39E2AC167F8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

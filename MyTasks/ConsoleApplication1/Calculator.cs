@@ -1,7 +1,7 @@
 ﻿using System;
-using ClassLibrary1;
+using Task2;
 
-namespace ConsoleApplication1
+namespace Task1
 {
     class Calculator
     {

@@ -10,17 +10,21 @@ namespace Runner
         {
             // Task2
 
-            /*Fibonacci fibonacci = new Fibonacci();
+            /*
+            Fibonacci fibonacci = new Fibonacci();
             int numFibonacci = fibonacci.fib(7);
             Console.Write(numFibonacci);
-            Console.Read();*/
+            Console.Read();
+            */
 
             // Task3
-
+            /*
             BasicClass classOne = new BasicClass();
             BasicClass classTwo = new BasicClass();
             Console.Write(BasicClass.count);
             Console.Read();
+            */
+
 
         }
     }

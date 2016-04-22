@@ -11,7 +11,7 @@ namespace Task4
         int Id { get; set; }
         string Name { get; set; }
         string Category { get; set; }
-        string Price { get; set; }
+        int Price { get; set; }
     }
 
     // Product class
@@ -23,7 +23,7 @@ namespace Task4
 
         public string Category { get; set; }
 
-        public string Price { get; set; }
+        public int Price { get; set; }
     }
 
     // Basket interface
@@ -33,25 +33,36 @@ namespace Task4
 
         void ClearBasket(params Product[] products);
 
-        void SummaryCost(params Product[] products);
+        int SummaryCost();
     }
 
     // Basket class
     public class Basket : IBasket
     {
+        private List<Product> productsInBasket = new List<Product>();
+
         public void AddToBasket(params Product[] products)
         {
-            throw new NotImplementedException();
+            foreach (Product currentProduct in products) {
+                productsInBasket.Add(currentProduct);
+            }
         }
 
         public void ClearBasket(params Product[] products)
         {
-            throw new NotImplementedException();
+            productsInBasket.Clear();
         }
 
-        public void SummaryCost(params Product[] products)
+        public int SummaryCost()
         {
-            throw new NotImplementedException();
+            int summary = 0;
+
+            foreach (Product currentProduct in productsInBasket)
+            {
+                summary += currentProduct.Price;
+            }
+
+            return summary;
         }
     }
 }

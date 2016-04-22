@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft;
 
 namespace FrameworkDesign
 {
@@ -47,7 +45,7 @@ namespace FrameworkDesign
     public abstract class DriverInitialisation
     {
         // (d.iii) Browsers enumeration
-        public enum Browsers {};
+        public enum Browsers { };
 
         // (d.i) Check browsers type
         public abstract void SwitchCase(string browserName);
@@ -65,16 +63,64 @@ namespace FrameworkDesign
     }
 
     // (f) Read config interface 
-    interface IReadConfig {
-        void Read(string filePath);
+    interface IReadConfig
+    {
+        List<string[]> Read(string filePath);
     }
 
     // (f.i) DBWorker
-    public abstract class DBWorker
+    public abstract class DBWorker : IReadConfig
     {
         private string filePath;
-        public string ConfigString { get; set; }
+        //public string ConfigString { get; set; }
 
-        public abstract void Read(string filePath);
+        public abstract List<string[]> Read(string filePath);
+    }
+
+    // (f.ii) XMLWorker
+    public abstract class XMLWorker : IReadConfig
+    {
+        private string filePath;
+        //public string ConfigString { get; set; }
+
+        public abstract List<string[]> Read(string filePath);
+    }
+
+    // (g) Bussness logic
+    public abstract class BusinessLogic
+    {
+        public string PathLogin { get; set; }
+        public string PathPassword { get; set; }
+        public string ButtonName { get; set; }
+
+        void DataSave(string name, string age)
+        {
+            SetText(name, PathLogin);
+            SetText(age, PathPassword);
+            Click(ButtonName);
+        }
+
+        public abstract void Click(string buttonName);
+
+        public abstract void SetText(string text, string xPath);
+
+        void BL_ClassWorker(string className) { }
+
+        void BL_ElementWorker(string elementName) { }
+
+        void BL_MethodWorker(string methodName) { }
+    }
+
+    public class Business : BusinessLogic
+    {
+        public override void Click(string buttonName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void SetText(string text, string xPath)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

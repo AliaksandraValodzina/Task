@@ -153,13 +153,20 @@ namespace Equation
         }
 
         // Task four
-        public void Multiplication(String filePath)
+        public void Multiplication()
         {
-            string fileOne = "C:/MatrixOne.txt";
-            string fileTwo = "C:/MatrixTwo.txt";
+            string file = @"C:\Users\Aliaksandra_Valodzina@epam.com\Task\Part3\Task3_Library\File.txt";
+            string fileOne;
+            string fileTwo;
 
-            int[,] matrixA = CreateMatrix(fileOne);
-            int[,] matrixB = CreateMatrix(fileTwo);
+            using (StreamReader sr = new StreamReader(file))
+            {
+                fileOne = sr.ReadLine();
+                fileTwo = sr.ReadLine();
+            }
+
+            double[,] matrixA = CreateMatrix(fileOne);
+            double[,] matrixB = CreateMatrix(fileTwo);
 
             int row_One = matrixA.GetLength(0);
             int col_One = matrixA.GetLength(1);
@@ -167,44 +174,61 @@ namespace Equation
             int row_Two = matrixB.GetLength(0);
             int col_Two = matrixB.GetLength(1);
 
-            int[,] matrixC = new int[row_One, col_Two];
+            double[,] matrixC = new double[row_One, col_Two];
 
-            if (row_One.Equals(col_Two))
+            try
             {
-                for (int row = 0; row < row_One; row++)
+                if (col_One.Equals(row_Two))
                 {
-                    for (int col = 0; col < col_Two; col++)
+                    for (int row = 0; row < row_One; row++)
                     {
-                        for (int inner = 0; inner < col_One; inner++)
+                        for (int col = 0; col < col_Two; col++)
                         {
-                            //matrixC[row][col] += matrixA[row][inner] * matrixB[inner][col];
+                            for (int inner = 0; inner < row_Two; inner++)
+                            {
+                                matrixC[row, col] += matrixA[row, inner] * matrixB[inner, col];
+                            }
+                            string outMassive = String.Format("{0:0.##} ", matrixC[row, col]);
+                            Console.Write(outMassive);
                         }
-                        //std::cout << matrixC[row][col] << "  ";
+                        Console.Write("\r\n");
                     }
-                    //std::cout << "\n";
                 }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Can not find file.");
             }
         }
 
         // Matrix multidimensional array
-        static int[,] CreateMatrix(string pathToFile)
+        static double[,] CreateMatrix(string pathToFile)
         {
             string line = string.Empty;
-            List<int[]> arrays = new List<int[]>();
+            List<double[]> arrays = new List<double[]>();
+            int minorLength = 0;
 
-            using (StreamReader reader = new StreamReader(pathToFile))
+            try
             {
-                while ((line = reader.ReadLine()) != null)
+                using (StreamReader reader = new StreamReader(pathToFile))
                 {
-                    line = reader.ReadLine();
-                    string[] lineArray = line.Split(' ');
-                    int[] myIntsArray = Array.ConvertAll(lineArray, int.Parse);
-                    arrays.Add(myIntsArray);
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        string[] lineArray = line.Split(' ');
+                        double[] myIntsArray = Array.ConvertAll(lineArray, double.Parse);
+                        arrays.Add(myIntsArray);
+                    }
                 }
+
+                minorLength = arrays[0].Length;
+            }
+            catch (Exception)
+            {
+                throw new Exception();
             }
 
-            int minorLength = arrays[0].Length;
-            int[,] ret = new int[arrays.Count, minorLength];
+
+            double[,] ret = new double[arrays.Count, minorLength];
             for (int i = 0; i < arrays.Count; i++)
             {
                 var array = arrays[i];
@@ -218,7 +242,10 @@ namespace Equation
                     ret[i, j] = array[j];
                 }
             }
+
             return ret;
+
         }
     }
 }
+

@@ -15,7 +15,7 @@ namespace Task5
     
 
     public interface IRectangularWorker {
-        
+         void RectInRect(Rectangular r1, Rectangular r2);
     }
 
     public class RectangularWorker

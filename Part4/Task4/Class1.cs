@@ -35,7 +35,7 @@ namespace Task4
     // Basket class
     public class Basket : IBasket
     {
-        public List<Product> productsInBasket { get; set; }
+        private List<Product> productsInBasket = new List<Product>();
 
         public void AddToBasket(params Product[] products)
         {

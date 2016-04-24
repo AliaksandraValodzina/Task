@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Task4
 {
@@ -39,7 +35,7 @@ namespace Task4
     // Basket class
     public class Basket : IBasket
     {
-        private List<Product> productsInBasket = new List<Product>();
+        public List<Product> productsInBasket { get; set; }
 
         public void AddToBasket(params Product[] products)
         {

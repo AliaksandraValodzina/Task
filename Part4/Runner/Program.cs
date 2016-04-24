@@ -1,6 +1,7 @@
 ﻿using System;
 using Task2;
 using Task3;
+using Task5;
 
 namespace Runner
 {
@@ -25,6 +26,18 @@ namespace Runner
             Console.Read();
             */
 
+            // Task5
+            Rectangular rBig = new Rectangular();
+            rBig.width = 10;
+            rBig.heigth = 10;
+
+            Rectangular rSmall = new Rectangular();
+            rSmall.width = 3;
+            rSmall.heigth = 1;
+
+            RectangularWorker worker = new RectangularWorker();
+            worker.RectInRect(rBig, rSmall);
+            Console.Read();
 
         }
     }

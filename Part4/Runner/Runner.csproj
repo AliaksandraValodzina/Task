@@ -58,6 +58,10 @@
       <Project>{23841247-7a31-4429-a2ae-2bb6ccfa195b}</Project>
       <Name>Task3</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Task5\Task5.csproj">
+      <Project>{a6dca809-d792-4545-b2ec-3b628d1f61fb}</Project>
+      <Name>Task5</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -36,8 +36,20 @@ namespace Task5
                     int restPutWidthRight = restWidth / twoHeigth;
                     int restPutHeigthRight = oneHeigth / twoWidth;
 
-                    int restPutWidthBottom = restHeigth / twoWidth;
-                    int restPutHeigthBottom = oneWidth / twoHeigth;
+                    int restHeigthAfterPut = oneHeigth % twoWidth;
+
+                    int restPutWidthBottom;
+                    int restPutHeigthBottom;
+
+                    if (restHeigthAfterPut >= twoWidth)
+                    {
+                        restPutWidthBottom = restHeigth / twoWidth;
+                        restPutHeigthBottom = oneWidth / twoHeigth;
+                    } else
+                    {
+                        restPutWidthBottom = restHeigth / twoWidth;
+                        restPutHeigthBottom = (oneWidth - twoHeigth) / twoHeigth;
+                    }
 
                     inRect = onePut * twoPut + restPutWidthRight * restPutHeigthRight + restPutWidthBottom * restPutHeigthBottom;
                 } else

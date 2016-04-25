@@ -8,8 +8,5 @@ namespace Task1
 {
     class TimeCalculator
     {
-    public string StartTime() {
-
-    }
     }
 }

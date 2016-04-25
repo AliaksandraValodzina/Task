@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Task1;
 
 namespace Task1_Runner
 {
@@ -10,6 +8,16 @@ namespace Task1_Runner
     {
         static void Main(string[] args)
         {
+            CollectionWorker worker = new CollectionWorker();
+            LogWriter writer = new LogWriter();
+
+            List<int> list = new List<int>();
+            DateTime before = DateTime.Now;
+            worker.AddToCollection(list);
+            DateTime after = DateTime.Now;
+
+
+
         }
     }
 }

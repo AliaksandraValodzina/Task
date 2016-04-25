@@ -61,10 +61,59 @@ namespace SampleQueries
 			}
 		}
 
-        public void Linq0001()
+        public void Linq0003()
         {
+            try
+            {
+                var clients =
+                from p in dataSource.Customers
+                where p.Orders[2].Total > 10
+                select p;
 
+            foreach (var p in clients)
+                {
+                    ObjectDumper.Write(p);
+                }
+            } catch (Exception)
+            {
+
+            }
         }
 
-	}
+        public void Linq0004()
+        {
+            try
+            {
+                var clientsId =
+                from p in dataSource.Customers
+                select p.CustomerID;
+
+                DateTime firstData = DateTime.Now;
+                foreach (var p in dataSource.Customers)
+                {
+                    DateTime data = p.Orders[1].OrderDate;
+                    if (data < firstData)
+                    {
+                        firstData = data;
+                    }
+
+                }
+
+                /*var clients =
+                from p in dataSource.Customers
+                where p.Orders[1].OrderDate = firstData
+                select p;*/
+
+                foreach (var p in clientsId)
+                {
+                    ObjectDumper.Write(p);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+    }
 }

@@ -61,20 +61,89 @@ namespace SampleQueries
 			}
 		}
 
+        public void Linq0001()
+        {
+            try
+            {
+                decimal x = 10000.0m;
+                decimal sum = 0.0m;
+
+                var customer =
+                from p in dataSource.Customers
+                select p;
+
+
+                foreach (var p in customer)
+                {
+                    sum += p.Orders[2].Total;
+                    if (sum >= x)
+                    {
+                        ObjectDumper.Write(sum);
+                    }
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+
+            }
+        }
+
+        public void Linq0002()
+        {
+            try
+            {
+                var customer =
+                from c in dataSource.Customers
+                select c;
+
+                var supplies =
+                from s in dataSource.Suppliers
+                select s;
+
+
+                foreach (var c in customer)
+                {
+                    string output = $"Customer: {c.CustomerID} from {c.Country} {c.City}";
+                    ObjectDumper.Write(output);
+                    foreach (var s in supplies)
+                    {
+                        if (c.Country == s.Country && c.City == s.City)
+                        {
+                            output = $"Supplies: {s.SupplierName} from {s.Country} {s.City}";
+                            ObjectDumper.Write(output);
+                        }
+                    }
+                    ObjectDumper.Write("\r\n");
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+
+            }
+        }
+
         public void Linq0003()
         {
             try
             {
-                var clients =
+                decimal x = 1000.0m;
+
+                var customer =
                 from p in dataSource.Customers
-                where p.Orders[2].Total > 10
                 select p;
 
-            foreach (var p in clients)
+
+                foreach (var p in customer)
                 {
-                    ObjectDumper.Write(p);
+                    decimal order = p.Orders[2].Total;
+                    if (order >= x)
+                    {
+                        string output = $"Customer: {p.CustomerID} has order {order}";
+                        ObjectDumper.Write(output);
+                    }
                 }
-            } catch (Exception)
+            }
+            catch (IndexOutOfRangeException)
             {
 
             }

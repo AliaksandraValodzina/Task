@@ -65,7 +65,31 @@ namespace SampleQueries
         {
             try
             {
-                decimal x = 10000.0m;
+                decimal x = 1000000.0m;
+
+                var customer =
+                dataSource.Customers.
+                Where(c => c.Orders.Sum(o => o.Total) > x)
+                .ToList();
+
+
+                foreach (var p in customer)
+                {
+                    string output = $"Customer: {p.CustomerID} orders summ {p}";
+                    ObjectDumper.Write(output);
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+
+            }
+        }
+
+        /*public void Linq0001_DELETE()
+        {
+            try
+            {
+                decimal x = 1000000.0m;
                 decimal sum = 0.0m;
 
                 var customer =
@@ -75,70 +99,13 @@ namespace SampleQueries
 
                 foreach (var p in customer)
                 {
-                    sum += p.Orders[2].Total;
+                    for (int i = 0; i < p.Orders.Length; i++)
+                    {
+                        sum += p.Orders[i].Total;
+                    }
                     if (sum >= x)
                     {
-                        ObjectDumper.Write(sum);
-                    }
-                }
-            }
-            catch (IndexOutOfRangeException)
-            {
-
-            }
-        }
-
-        public void Linq0002()
-        {
-            try
-            {
-                var customer =
-                from c in dataSource.Customers
-                select c;
-
-                var supplies =
-                from s in dataSource.Suppliers
-                select s;
-
-
-                foreach (var c in customer)
-                {
-                    string output = $"Customer: {c.CustomerID} from {c.Country} {c.City}";
-                    ObjectDumper.Write(output);
-                    foreach (var s in supplies)
-                    {
-                        if (c.Country == s.Country && c.City == s.City)
-                        {
-                            output = $"Supplies: {s.SupplierName} from {s.Country} {s.City}";
-                            ObjectDumper.Write(output);
-                        }
-                    }
-                    ObjectDumper.Write("\r\n");
-                }
-            }
-            catch (IndexOutOfRangeException)
-            {
-
-            }
-        }
-
-        public void Linq0003()
-        {
-            try
-            {
-                decimal x = 1000.0m;
-
-                var customer =
-                from p in dataSource.Customers
-                select p;
-
-
-                foreach (var p in customer)
-                {
-                    decimal order = p.Orders[2].Total;
-                    if (order >= x)
-                    {
-                        string output = $"Customer: {p.CustomerID} has order {order}";
+                        string output = $"Customer: {p.CustomerID} orders summ {sum}";
                         ObjectDumper.Write(output);
                     }
                 }
@@ -147,36 +114,115 @@ namespace SampleQueries
             {
 
             }
-        }
+        }*/
 
-        public void Linq0004()
+        public void Linq0002()
         {
             try
             {
-                var clientsId =
-                from p in dataSource.Customers
-                select p.CustomerID;
+                var customerAndSupplies =
+                from c in dataSource.Customers
+                from s in dataSource.Suppliers
+                where c.Country == s.Country
+                where c.City == s.City
+                group s.SupplierName by c.CustomerID;
 
-                DateTime firstData = DateTime.Now;
-                foreach (var p in dataSource.Customers)
+                foreach (var p in customerAndSupplies)
                 {
-                    DateTime data = p.Orders[1].OrderDate;
-                    if (data < firstData)
+                    string output = $"Customer: {p.Key}";
+                    ObjectDumper.Write(output);
+
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+
+            }
+        }
+
+        //????
+        /*public void Linq0003()
+        {
+            try
+            {
+                decimal x = 0.0m;
+
+                var orders = from o in dataSource.Customers
+                             select o.Orders.Where(p => p.Total > x);
+
+
+                var customer =
+                from c in dataSource.Customers
+                where c.Orders.Contains(x => orders.Contains(x))
+                select c.CustomerID;
+
+                foreach (var c in customer)
+                {
+                    ObjectDumper.Write(c);
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+
+            }
+        }*/
+
+        public void Linq0004()
+        {
+
+            DateTime data = DateTime.Now;
+            try
+            {
+
+                var query = dataSource.Customers
+                    .Select(grp => new
                     {
-                        firstData = data;
-                    }
+                        ID = grp.CustomerID,
+                        MinDate = grp.Orders.Min(t => t.OrderDate)
+                    });
 
-                }
-
-                /*var clients =
-                from p in dataSource.Customers
-                where p.Orders[1].OrderDate = firstData
-                select p;*/
-
-                foreach (var p in clientsId)
+                foreach (var c in query)
                 {
-                    ObjectDumper.Write(p);
+                    ObjectDumper.Write(c);
                 }
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        public void Linq0005()
+        {
+
+            DateTime data = DateTime.Now;
+            try
+            {
+
+
+                var latest = (from d in dataSource.Customers
+                              select new
+                              {
+                                  d.CustomerID,
+                                  d.Orders,
+                                  d.Orders
+                              }).First();
+
+                /*var query = dataSource.Customers
+                    .Select(grp => new
+                    {
+                        ID = grp.CustomerID,
+                        Date = grp.Orders.GetValue
+                        // Date = grp.Orders.GetValue(x => x.OrderDate)
+                        //.GroupBy(t => t.OrderDate.Year)
+                    });*/
+
+                foreach (var c in query)
+                {
+                    ObjectDumper.Write(c);
+                }
+
             }
             catch (Exception)
             {

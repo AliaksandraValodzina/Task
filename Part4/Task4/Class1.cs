@@ -3,7 +3,8 @@
 namespace Task4
 {
     // Product interface
-    public interface IProduct {
+    public interface IProduct 
+    {
         int Id { get; set; }
         string Name { get; set; }
         string Category { get; set; }

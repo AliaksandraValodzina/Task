@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Task1
 {
@@ -27,5 +28,20 @@ namespace Task1
             string returnStr = $"X = {X}, Y = {Y}";
             return returnStr;
         }
+    }
+
+    [TestClass]
+    public class MyTestClass
+    {
+        [TestMethod]
+        public void MyTestMethod()
+        {
+            Point p1 = new Point(1, 2);
+            Point p2 = new Point(1, 2);
+
+            Assert.AreEqual(p1.Equals(p2), true);
+
+        }
+
     }
 }

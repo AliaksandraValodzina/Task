@@ -2,7 +2,8 @@
 
 namespace Task5
 {
-    public interface IRectangular {
+    public interface IRectangular 
+    {
         int width { get; set; }
         int heigth { get; set; }
     }
@@ -14,13 +15,15 @@ namespace Task5
         }
     
 
-    public interface IRectangularWorker {
+    public interface IRectangularWorker 
+    {
          void RectInRect(Rectangular r1, Rectangular r2);
     }
 
     public class RectangularWorker
     {
-        public static int InRectOne(int oneWidth, int oneHeigth, int twoWidth, int twoHeigth) {
+        public static int InRectOne(int oneWidth, int oneHeigth, int twoWidth, int twoHeigth) 
+        {
             int inRect;
 
             int onePut = oneWidth / twoWidth;
@@ -45,14 +48,16 @@ namespace Task5
                     {
                         restPutWidthBottom = restHeigth / twoWidth;
                         restPutHeigthBottom = oneWidth / twoHeigth;
-                    } else
+                    } 
+                    else
                     {
                         restPutWidthBottom = restHeigth / twoWidth;
                         restPutHeigthBottom = (oneWidth - twoHeigth) / twoHeigth;
                     }
 
                     inRect = onePut * twoPut + restPutWidthRight * restPutHeigthRight + restPutWidthBottom * restPutHeigthBottom;
-                } else
+                } 
+                else
                 {
                     int restPutWidthRight = restWidth / twoHeigth;
                     int restPutHeigthRight = oneHeigth / twoWidth;
@@ -60,7 +65,8 @@ namespace Task5
                     inRect = onePut * twoPut + restPutWidthRight * restPutHeigthRight;
                 }
 
-            } else
+            } 
+            else
             {
                 inRect = onePut * twoPut;
             }
@@ -90,7 +96,8 @@ namespace Task5
                 int count = (countOne > countTwo) ? countOne : countTwo;
                 string message = $"We can insert {count} rectangulars {rectOneX}x{rectOneY} in rectangular {rectTwoX}x{rectTwoY}.";
                 Console.Write(message);
-            } else
+            } 
+            else
             {
                 Console.Write("You can not insert triangle.");
             }

@@ -44,7 +44,7 @@ namespace Task1_Runner
 
             // Add to Dictionary
             before = DateTime.Now;
-            worker.AddToCollection(dictionary, numberOfElements);
+            worker.AddToDirectory(dictionary, numberOfElements);
             after = DateTime.Now;
             time = timer.periodOfTime(before, after);
             message = $"Dictionary add {numberOfElements} elements for {time}";

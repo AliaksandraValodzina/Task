@@ -13,13 +13,22 @@ namespace Task1
             return collection;
         }
 
-        public IDictionary<int, int> AddToCollection(IDictionary<int, int> collection, int numberOfElements)
+        public IDictionary<int, int> AddToDirectory(IDictionary<int, int> directory, int numberOfElements)
         {
             for (int i = 0; i <= numberOfElements; i++)
             {
-                collection.Add(i, i);
+                directory.Add(i, i);
             }
-            return collection;
+            return directory;
+        }
+
+        public Queue<T><int> AddToQueue<T>(IDictionary<int, int> directory, int numberOfElements)
+        {
+            for (int i = 0; i <= numberOfElements; i++)
+            {
+                directory.Add(i, i);
+            }
+            return directory;
         }
 
         public ICollection<int> ChangeElement(ICollection<int> collection, int item)

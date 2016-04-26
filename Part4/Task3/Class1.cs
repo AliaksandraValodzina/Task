@@ -10,7 +10,8 @@ namespace Task3
     {
         public static int count = 0;
 
-        public BasicClass() {
+        public BasicClass() 
+        {
             count++;
         }
     }

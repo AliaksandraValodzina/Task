@@ -2,7 +2,7 @@
 
 namespace Task1
 {
-    class LogWriter
+    public class LogWriter
     {
         public string fileName = "C:/Log.txt";
 

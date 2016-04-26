@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace Task1
 {
-    class TimeCalculator
+    public class TimeCalculator
     {
+
+    public string periodOfTime(DateTime start, DateTime end) {
+            string time;
+            long elapsedTicks = start.Ticks - end.Ticks;
+            TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
+            time = $"{elapsedSpan.Minutes} minutes, {elapsedSpan.Seconds} seconds";
+            return time;
+    }
     }
 }

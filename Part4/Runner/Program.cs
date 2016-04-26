@@ -11,12 +11,12 @@ namespace Runner
         {
             // Task2
 
-            /*
+            
             Fibonacci fibonacci = new Fibonacci();
-            int numFibonacci = fibonacci.fib(7);
+            decimal numFibonacci = fibonacci.fib(100);
             Console.Write(numFibonacci);
             Console.Read();
-            */
+            
 
             // Task3
             /*
@@ -27,7 +27,7 @@ namespace Runner
             */
 
             // Task5
-            Rectangular rBig = new Rectangular();
+            /*Rectangular rBig = new Rectangular();
             rBig.width = 10;
             rBig.heigth = 10;
 
@@ -37,7 +37,7 @@ namespace Runner
 
             RectangularWorker worker = new RectangularWorker();
             worker.RectInRect(rBig, rSmall);
-            Console.Read();
+            Console.Read();*/
 
         }
     }

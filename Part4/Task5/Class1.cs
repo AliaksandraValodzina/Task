@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Task5
 {
@@ -74,7 +75,8 @@ namespace Task5
             return inRect;
         }
 
-        public void RectInRect(Rectangular r1, Rectangular r2) {
+        public int RectInRect(Rectangular r1, Rectangular r2) {
+            int count = -1;
             int rectOneX = r1.width;
             int rectOneY = r1.heigth;
 
@@ -85,7 +87,7 @@ namespace Task5
             {
                 int countOne = InRectOne(rectOneX, rectOneY, rectTwoX, rectTwoY);
                 int countTwo = InRectOne(rectOneX, rectOneY, rectTwoY, rectTwoX);
-                int count = (countOne > countTwo) ? countOne : countTwo;
+                count = (countOne > countTwo) ? countOne : countTwo;
                 string message = $"We can insert {count} rectangulars {rectTwoX}x{rectTwoY} in rectangular {rectOneX}x{rectOneY}.";
                 Console.Write(message);
             }
@@ -93,15 +95,37 @@ namespace Task5
             {
                 int countOne = InRectOne(rectTwoX, rectTwoY, rectOneX, rectOneY);
                 int countTwo = InRectOne(rectTwoX, rectTwoY, rectOneY, rectOneX);
-                int count = (countOne > countTwo) ? countOne : countTwo;
+                count = (countOne > countTwo) ? countOne : countTwo;
                 string message = $"We can insert {count} rectangulars {rectOneX}x{rectOneY} in rectangular {rectTwoX}x{rectTwoY}.";
                 Console.Write(message);
             } 
             else
             {
-                Console.Write("You can not insert triangle.");
+                Console.Write("You can not insert rectangular.");
             }
 
+            return count;
         }
+    }
+
+    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClass]
+    public class MyTestClass
+    {
+        [TestMethod]
+        public void MyTestMethod()
+        {
+            Rectangular r1 = new Rectangular();
+            r1.width = 4;
+            r1.heigth = 4;
+
+            Rectangular r2 = new Rectangular();
+            r2.width = 1;
+            r2.heigth = 3;
+
+            RectangularWorker worker = new RectangularWorker();
+            int count = worker.RectInRect(r1, r2);
+            Assert.AreEqual(count.Equals(5), true);
+        }
+
     }
 }

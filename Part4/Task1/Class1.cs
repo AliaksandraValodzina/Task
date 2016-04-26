@@ -15,7 +15,18 @@ namespace Task1
 
         public override bool Equals(Object obj)
         {
-            return obj is Point && this == (Point)obj;
+            if (obj == null)
+            {
+                return false;
+            }
+
+            Point p = obj as Point;
+            if ((System.Object)p == null)
+            {
+                return false;
+            }
+
+            return (this.X == p.X) && (this.Y == p.Y);
         }
 
         public override int GetHashCode()

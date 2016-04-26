@@ -1,25 +1,31 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace Task1
 {
     public class LogWriter
     {
-        public string fileName = "C:/Log.txt";
+        public string fileName = "Log.txt";
 
         public void WriteToFile(string message)
         {
-            if (!File.Exists(fileName))
+            try
             {
-                File.Create(fileName);
-            }
+                if (!File.Exists(fileName))
+                {
+                    File.Create(fileName);
+                }
 
-            using (StreamWriter w = File.AppendText(fileName))
+                using (StreamWriter w = File.AppendText(fileName))
+                {
+                    w.Write(message);
+                    w.Write("\r\n");
+                }
+            } catch (Exception)
             {
-                w.Write("Time: ");
-                w.Write(message);
-                w.Write("\r\n");
+                Console.Write("!!!");
             }
-        }
+        } 
 
 }
 }

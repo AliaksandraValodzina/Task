@@ -1,65 +1,230 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Task1
 {
     public class CollectionWorker
     {
-        public ICollection<int> AddToCollection(ICollection<int> collection, int numberOfElements) {
+        // Add to Collection and calculate an addition time
+        public long Add(ICollection<int> collection, int numberOfElements) 
+        {
+            DateTime start = DateTime.Now;
             for (int i = 0; i <= numberOfElements; i++)
             {
                 collection.Add(i);
             }
-            return collection;
+            DateTime end = DateTime.Now;
+            long elapsedTicks = start.Ticks - end.Ticks;
+            return elapsedTicks;
         }
 
-        public IDictionary<int, int> AddToDirectory(IDictionary<int, int> directory, int numberOfElements)
+        // Add to Dictionary and calculate an addition time
+        public long Add(IDictionary<int, int> directory, int numberOfElements)
         {
+            DateTime start = DateTime.Now;
             for (int i = 0; i <= numberOfElements; i++)
             {
                 directory.Add(i, i);
             }
-            return directory;
+            DateTime end = DateTime.Now;
+            long elapsedTicks = start.Ticks - end.Ticks;
+            return elapsedTicks;
         }
 
-        public Queue<T><int> AddToQueue<T>(IDictionary<int, int> directory, int numberOfElements)
+        // Add to Queue and calculate an addition time
+        public long Add(Queue<int> queue, int numberOfElements)
         {
+            DateTime start = DateTime.Now;
             for (int i = 0; i <= numberOfElements; i++)
             {
-                directory.Add(i, i);
+                queue.Enqueue(i);
             }
-            return directory;
+            DateTime end = DateTime.Now;
+            long elapsedTicks = start.Ticks - end.Ticks;
+            return elapsedTicks;
         }
 
-        public ICollection<int> ChangeElement(ICollection<int> collection, int item)
+        // Add to Stack and calculate an addition time
+        public long Add(Stack<int> stack, int numberOfElements)
         {
-            //int n;
-            for (int i = 0; i <= 500000; i++)
+            DateTime start = DateTime.Now;
+            for (int i = 0; i <= numberOfElements; i++)
+            {
+                stack.Push(i);
+            }
+            DateTime end = DateTime.Now;
+            long elapsedTicks = start.Ticks - end.Ticks;
+            return elapsedTicks;
+        }
+
+        // Add to SortedSet and calculate an addition time
+        public long Add(ISet<int> set, int numberOfElements)
+        {
+            DateTime start = DateTime.Now;
+            for (int i = 0; i <= numberOfElements; i++)
+            {
+                set.Add(i);
+            }
+            DateTime end = DateTime.Now;
+            long elapsedTicks = start.Ticks - end.Ticks;
+            return elapsedTicks;
+        }
+
+        // Read List and calculate an addition time
+        public long Read(List<int> collection, int numberOfElements)
+        {
+            DateTime start = DateTime.Now;
+            for (int i = 0; i <= numberOfElements; i++)
+            {
+                int element = collection[i] + 1;
+            }
+            DateTime end = DateTime.Now;
+            long elapsedTicks = start.Ticks - end.Ticks;
+            return elapsedTicks;
+        }
+
+        // Read LinkedList and calculate an addition time
+        public long Read(LinkedList<int> collection, int numberOfElements)
+        {
+            DateTime start = DateTime.Now;
+            for (int i = 0; i <= numberOfElements; i++)
+            {
+                int element = collection.Find(i).Value;
+            }
+            DateTime end = DateTime.Now;
+            long elapsedTicks = start.Ticks - end.Ticks;
+            return elapsedTicks;
+        }
+
+        // Read Dictionary and calculate an addition time
+        public long Read(IDictionary<int, int> collection, int numberOfElements)
+        {
+            DateTime start = DateTime.Now;
+            for (int i = 0; i <= numberOfElements; i++)
+            {
+                int element = collection[i];
+            }
+            DateTime end = DateTime.Now;
+            long elapsedTicks = start.Ticks - end.Ticks;
+            return elapsedTicks;
+        }
+
+        // Read Queue and calculate an addition time
+        public long Read(Queue<int> collection, int numberOfElements)
+        {
+            DateTime start = DateTime.Now;
+            for (int i = 0; i <= numberOfElements; i++)
             {
                 int element = collection.ElementAt(i);
-                //var element = collection.Where(n => n = i);
             }
-
-            return collection;
+            DateTime end = DateTime.Now;
+            long elapsedTicks = start.Ticks - end.Ticks;
+            return elapsedTicks;
         }
 
-        public ICollection<int> DeleteElement(ICollection<int> collection)
+        // Read Stack and calculate an addition time
+        public long Read(Stack<int> collection, int numberOfElements)
         {
+            DateTime start = DateTime.Now;
+            for (int i = 0; i <= numberOfElements; i++)
+            {
+                int element = collection.ElementAt(i);
+            }
+            DateTime end = DateTime.Now;
+            long elapsedTicks = start.Ticks - end.Ticks;
+            return elapsedTicks;
+        }
+
+        // Read Set and calculate an addition time
+        public long Read(ISet<int> set, int numberOfElements)
+        {
+            DateTime start = DateTime.Now;
+            for (int i = 0; i <= numberOfElements; i++)
+            {
+                int element = set.ElementAt(i);
+            }
+            DateTime end = DateTime.Now;
+            long elapsedTicks = start.Ticks - end.Ticks;
+            return elapsedTicks;
+        }
+
+        // Remove List and calculate an addition time
+        public long Delete(List<int> collection, int numberOfElements)
+        {
+            DateTime start = DateTime.Now;
             for (int i = 0; i <= 500000; i++)
+            {
+                collection.RemoveAt(i);
+            }
+            DateTime end = DateTime.Now;
+            long elapsedTicks = start.Ticks - end.Ticks;
+            return elapsedTicks;
+        }
+
+        // Remove LinkedList and calculate an addition time
+        public long Delete(LinkedList<int> collection, int numberOfElements)
+        {
+            DateTime start = DateTime.Now;
+            for (int i = 0; i <= numberOfElements; i++)
             {
                 collection.Remove(i);
             }
-            
-            return collection;
+            DateTime end = DateTime.Now;
+            long elapsedTicks = start.Ticks - end.Ticks;
+            return elapsedTicks;
         }
 
-        public bool ContainElement(ICollection<int> collection, int element)
+        // Remove Dictionary and calculate an addition time
+        public long Delete(Dictionary<int, int> collection, int numberOfElements)
         {
-            bool elementInCollection = collection.Contains(element);
-
-            return elementInCollection;
+            DateTime start = DateTime.Now;
+            for (int i = 0; i <= numberOfElements; i++)
+            {
+                collection.Remove(i);
+            }
+            DateTime end = DateTime.Now;
+            long elapsedTicks = start.Ticks - end.Ticks;
+            return elapsedTicks;
         }
 
+        // Remove Queue and calculate an addition time
+        public long Delete(Queue<int> collection, int numberOfElements)
+        {
+            DateTime start = DateTime.Now;
+            for (int i = 0; i <= numberOfElements; i++)
+            {
+                collection.Dequeue();
+            }
+            DateTime end = DateTime.Now;
+            long elapsedTicks = start.Ticks - end.Ticks;
+            return elapsedTicks;
+        }
 
+        // Remove Stack and calculate an addition time
+        public long Delete(Stack<int> collection, int numberOfElements)
+        {
+            DateTime start = DateTime.Now;
+            for (int i = 0; i <= numberOfElements; i++)
+            {
+                collection.Pop();
+            }
+            DateTime end = DateTime.Now;
+            long elapsedTicks = start.Ticks - end.Ticks;
+            return elapsedTicks;
+        }
+
+        // Remove SortedSet and calculate an addition time
+        public long Delete(SortedSet<int> collection, int numberOfElements)
+        {
+            DateTime start = DateTime.Now;
+            for (int i = 0; i <= numberOfElements; i++)
+            {
+                collection.Remove(i);
+            }
+            DateTime end = DateTime.Now;
+            long elapsedTicks = start.Ticks - end.Ticks;
+            return elapsedTicks;
+        }
     }
 }

@@ -108,7 +108,7 @@ namespace Task5
         }
     }
 
-    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClass]
+    [TestClass]
     public class MyTestClass
     {
         [TestMethod]

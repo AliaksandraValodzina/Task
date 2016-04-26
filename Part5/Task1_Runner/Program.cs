@@ -64,7 +64,7 @@ namespace Task1_Runner
             // Add to SortedDictionary
             elapsedTicks = worker.Add(sortedDict, numberOfElements);
             time = timer.periodOfTime(elapsedTicks);
-            message = $"SortedSet add {numberOfElements} elements for {time}";
+            message = $"SortedDictionary add {numberOfElements} elements for {time}";
             writer.WriteToFile(message);
 
             // Read List

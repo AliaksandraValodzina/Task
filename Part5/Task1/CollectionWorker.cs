@@ -15,7 +15,7 @@ namespace Task1
                 collection.Add(i);
             }
             DateTime end = DateTime.Now;
-            long elapsedTicks = start.Ticks - end.Ticks;
+            long elapsedTicks = end.Ticks - start.Ticks;
             return elapsedTicks;
         }
 
@@ -28,7 +28,7 @@ namespace Task1
                 directory.Add(i, i);
             }
             DateTime end = DateTime.Now;
-            long elapsedTicks = start.Ticks - end.Ticks;
+            long elapsedTicks = end.Ticks - start.Ticks;
             return elapsedTicks;
         }
 
@@ -41,7 +41,7 @@ namespace Task1
                 queue.Enqueue(i);
             }
             DateTime end = DateTime.Now;
-            long elapsedTicks = start.Ticks - end.Ticks;
+            long elapsedTicks = end.Ticks - start.Ticks;
             return elapsedTicks;
         }
 
@@ -54,46 +54,20 @@ namespace Task1
                 stack.Push(i);
             }
             DateTime end = DateTime.Now;
-            long elapsedTicks = start.Ticks - end.Ticks;
-            return elapsedTicks;
-        }
-
-        // Add to SortedSet and calculate an addition time
-        public long Add(ISet<int> set, int numberOfElements)
-        {
-            DateTime start = DateTime.Now;
-            for (int i = 0; i <= numberOfElements; i++)
-            {
-                set.Add(i);
-            }
-            DateTime end = DateTime.Now;
-            long elapsedTicks = start.Ticks - end.Ticks;
+            long elapsedTicks = end.Ticks - start.Ticks;
             return elapsedTicks;
         }
 
         // Read List and calculate an addition time
-        public long Read(List<int> collection, int numberOfElements)
+        public long Read(ICollection<int> collection, int numberOfElements)
         {
             DateTime start = DateTime.Now;
             for (int i = 0; i <= numberOfElements; i++)
             {
-                int element = collection[i] + 1;
+                int element = collection.ElementAt(i);
             }
             DateTime end = DateTime.Now;
-            long elapsedTicks = start.Ticks - end.Ticks;
-            return elapsedTicks;
-        }
-
-        // Read LinkedList and calculate an addition time
-        public long Read(LinkedList<int> collection, int numberOfElements)
-        {
-            DateTime start = DateTime.Now;
-            for (int i = 0; i <= numberOfElements; i++)
-            {
-                int element = collection.Find(i).Value;
-            }
-            DateTime end = DateTime.Now;
-            long elapsedTicks = start.Ticks - end.Ticks;
+            long elapsedTicks = end.Ticks - start.Ticks;
             return elapsedTicks;
         }
 
@@ -106,7 +80,7 @@ namespace Task1
                 int element = collection[i];
             }
             DateTime end = DateTime.Now;
-            long elapsedTicks = start.Ticks - end.Ticks;
+            long elapsedTicks = end.Ticks - start.Ticks;
             return elapsedTicks;
         }
 
@@ -119,7 +93,7 @@ namespace Task1
                 int element = collection.ElementAt(i);
             }
             DateTime end = DateTime.Now;
-            long elapsedTicks = start.Ticks - end.Ticks;
+            long elapsedTicks = end.Ticks - start.Ticks;
             return elapsedTicks;
         }
 
@@ -132,46 +106,20 @@ namespace Task1
                 int element = collection.ElementAt(i);
             }
             DateTime end = DateTime.Now;
-            long elapsedTicks = start.Ticks - end.Ticks;
-            return elapsedTicks;
-        }
-
-        // Read Set and calculate an addition time
-        public long Read(ISet<int> set, int numberOfElements)
-        {
-            DateTime start = DateTime.Now;
-            for (int i = 0; i <= numberOfElements; i++)
-            {
-                int element = set.ElementAt(i);
-            }
-            DateTime end = DateTime.Now;
-            long elapsedTicks = start.Ticks - end.Ticks;
+            long elapsedTicks = end.Ticks - start.Ticks;
             return elapsedTicks;
         }
 
         // Remove List and calculate an addition time
-        public long Delete(List<int> collection, int numberOfElements)
+        public long Delete(ICollection<int> collection, int numberOfElements)
         {
             DateTime start = DateTime.Now;
             for (int i = 0; i <= 500000; i++)
             {
-                collection.RemoveAt(i);
-            }
-            DateTime end = DateTime.Now;
-            long elapsedTicks = start.Ticks - end.Ticks;
-            return elapsedTicks;
-        }
-
-        // Remove LinkedList and calculate an addition time
-        public long Delete(LinkedList<int> collection, int numberOfElements)
-        {
-            DateTime start = DateTime.Now;
-            for (int i = 0; i <= numberOfElements; i++)
-            {
                 collection.Remove(i);
             }
             DateTime end = DateTime.Now;
-            long elapsedTicks = start.Ticks - end.Ticks;
+            long elapsedTicks = end.Ticks - start.Ticks;
             return elapsedTicks;
         }
 
@@ -184,7 +132,7 @@ namespace Task1
                 collection.Remove(i);
             }
             DateTime end = DateTime.Now;
-            long elapsedTicks = start.Ticks - end.Ticks;
+            long elapsedTicks = end.Ticks - start.Ticks;
             return elapsedTicks;
         }
 
@@ -197,7 +145,7 @@ namespace Task1
                 collection.Dequeue();
             }
             DateTime end = DateTime.Now;
-            long elapsedTicks = start.Ticks - end.Ticks;
+            long elapsedTicks = end.Ticks - start.Ticks;
             return elapsedTicks;
         }
 
@@ -210,20 +158,7 @@ namespace Task1
                 collection.Pop();
             }
             DateTime end = DateTime.Now;
-            long elapsedTicks = start.Ticks - end.Ticks;
-            return elapsedTicks;
-        }
-
-        // Remove SortedSet and calculate an addition time
-        public long Delete(SortedSet<int> collection, int numberOfElements)
-        {
-            DateTime start = DateTime.Now;
-            for (int i = 0; i <= numberOfElements; i++)
-            {
-                collection.Remove(i);
-            }
-            DateTime end = DateTime.Now;
-            long elapsedTicks = start.Ticks - end.Ticks;
+            long elapsedTicks = end.Ticks - start.Ticks;
             return elapsedTicks;
         }
     }

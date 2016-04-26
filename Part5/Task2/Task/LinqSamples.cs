@@ -129,7 +129,7 @@ namespace SampleQueries
 
                 foreach (var p in customerAndSupplies)
                 {
-                    string output = $"Customer: {p.Key}";
+                    string output = $"p.Key";
                     ObjectDumper.Write(output);
 
                 }

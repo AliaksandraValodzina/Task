@@ -14,6 +14,7 @@ namespace Task1_Runner
             string message;
             int numberOfElements = 1000000;
             string time;
+            Console.Write("Programm is working...");
 
             //Create collections
             List<int> list = new List<int>();
@@ -27,7 +28,7 @@ namespace Task1_Runner
             // Add to List
             long elapsedTicks = worker.Add(list, numberOfElements);
             time = timer.periodOfTime(elapsedTicks);
-            message = $"List add {numberOfElements} million elements for {time}";
+            message = $"List add {numberOfElements} elements for {time}";
             writer.WriteToFile(message);
 
             // Add to LinkedList
@@ -69,85 +70,85 @@ namespace Task1_Runner
             // Read List
             elapsedTicks = worker.Read(list, numberOfElements);
             time = timer.periodOfTime(elapsedTicks);
-            message = $"List read {numberOfElements} million elements for {time}";
+            message = $"List read {numberOfElements} elements for {time}";
             writer.WriteToFile(message);
 
             // Read LinkedList
             elapsedTicks = worker.Read(linkedList, numberOfElements);
             time = timer.periodOfTime(elapsedTicks);
-            message = $"LinkedList read {numberOfElements} million elements for {time}";
+            message = $"LinkedList read {numberOfElements} elements for {time}";
             writer.WriteToFile(message);
 
             // Read Dictionary
             elapsedTicks = worker.Read(dictionary, numberOfElements);
             time = timer.periodOfTime(elapsedTicks);
-            message = $"Dictionary read {numberOfElements} million elements for {time}";
+            message = $"Dictionary read {numberOfElements} elements for {time}";
             writer.WriteToFile(message);
 
             // Read Queue
             elapsedTicks = worker.Read(queue, numberOfElements);
             time = timer.periodOfTime(elapsedTicks);
-            message = $"Queue read {numberOfElements} million elements for {time}";
+            message = $"Queue read {numberOfElements} elements for {time}";
             writer.WriteToFile(message);
 
             // Read Stack
             elapsedTicks = worker.Read(stack, numberOfElements);
             time = timer.periodOfTime(elapsedTicks);
-            message = $"Stack read {numberOfElements} million elements for {time}";
+            message = $"Stack read {numberOfElements} elements for {time}";
             writer.WriteToFile(message);
 
             // Read SortedSet
             elapsedTicks = worker.Read(sortedSet, numberOfElements);
             time = timer.periodOfTime(elapsedTicks);
-            message = $"SortedSet read {numberOfElements} million elements for {time}";
+            message = $"SortedSet read {numberOfElements} elements for {time}";
             writer.WriteToFile(message);
 
             // Read SortedDictionary
             elapsedTicks = worker.Read(sortedDict, numberOfElements);
             time = timer.periodOfTime(elapsedTicks);
-            message = $"SortedDictionary read {numberOfElements} million elements for {time}";
+            message = $"SortedDictionary read {numberOfElements} elements for {time}";
             writer.WriteToFile(message);
 
             // Remove List
             elapsedTicks = worker.Read(list, numberOfElements);
             time = timer.periodOfTime(elapsedTicks);
-            message = $"List remove {numberOfElements} million elements for {time}";
+            message = $"List remove {numberOfElements} elements for {time}";
             writer.WriteToFile(message);
 
             // Remove LinkedList
             elapsedTicks = worker.Read(linkedList, numberOfElements);
             time = timer.periodOfTime(elapsedTicks);
-            message = $"LinkedList remove {numberOfElements} million elements for {time}";
+            message = $"LinkedList remove {numberOfElements} elements for {time}";
             writer.WriteToFile(message);
 
             // Remove Dictionary
             elapsedTicks = worker.Read(dictionary, numberOfElements);
             time = timer.periodOfTime(elapsedTicks);
-            message = $"Dictionary remove {numberOfElements} million elements for {time}";
+            message = $"Dictionary remove {numberOfElements} elements for {time}";
             writer.WriteToFile(message);
 
             // Remove Queue
             elapsedTicks = worker.Read(queue, numberOfElements);
             time = timer.periodOfTime(elapsedTicks);
-            message = $"Queue remove {numberOfElements} million elements for {time}";
+            message = $"Queue remove {numberOfElements} elements for {time}";
             writer.WriteToFile(message);
 
             // Remove Stack
             elapsedTicks = worker.Read(stack, numberOfElements);
             time = timer.periodOfTime(elapsedTicks);
-            message = $"Stack remove {numberOfElements} million elements for {time}";
+            message = $"Stack remove {numberOfElements} elements for {time}";
             writer.WriteToFile(message);
 
             // Remove SortedSet
             elapsedTicks = worker.Read(sortedSet, numberOfElements);
             time = timer.periodOfTime(elapsedTicks);
-            message = $"SortedSet remove {numberOfElements} million elements for {time}";
+            message = $"SortedSet remove {numberOfElements} elements for {time}";
             writer.WriteToFile(message);
 
             // Remove SortedDictionary
             elapsedTicks = worker.Read(sortedDict, numberOfElements);
             time = timer.periodOfTime(elapsedTicks);
-            message = $"SortedDictionary remove {numberOfElements} million elements for {time}";
+            message = $"SortedDictionary remove {numberOfElements} elements for {time}";
             writer.WriteToFile(message);
         }
     }

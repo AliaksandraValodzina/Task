@@ -28,17 +28,17 @@ namespace Task1_Runner
             // Add to List
             long elapsedTicks = worker.Add(list, numberOfElements);
             time = timer.periodOfTime(elapsedTicks);
-            message = $"{numberOfElements} elements have been added to List            | in {time}";
+            message = $"{numberOfElements} elements have been added to List            in {time}";
 
             // Read List
             elapsedTicks = worker.Read(list, numberOfElements);
             time = timer.periodOfTime(elapsedTicks);
-            message += $", | read in {time}";
+            message += $", read in {time}";
 
             // Remove List
             elapsedTicks = worker.Read(list, numberOfElements);
             time = timer.periodOfTime(elapsedTicks);
-            message += $", | removed in {time}";
+            message += $", removed in {time}";
             writer.WriteToFile(message);
 
             // Add to LinkedList

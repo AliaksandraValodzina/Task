@@ -12,7 +12,7 @@ namespace Task1
             DateTime start = DateTime.Now;
             for (int i = 0; i <= numberOfElements; i++)
             {
-                collection.Add(i);
+                collection.Add(i + 1);
             }
             DateTime end = DateTime.Now;
             long elapsedTicks = end.Ticks - start.Ticks;
@@ -25,7 +25,7 @@ namespace Task1
             DateTime start = DateTime.Now;
             for (int i = 0; i <= numberOfElements; i++)
             {
-                directory.Add(i, i);
+                directory.Add(i, i + 1);
             }
             DateTime end = DateTime.Now;
             long elapsedTicks = end.Ticks - start.Ticks;
@@ -38,7 +38,7 @@ namespace Task1
             DateTime start = DateTime.Now;
             for (int i = 0; i <= numberOfElements; i++)
             {
-                queue.Enqueue(i);
+                queue.Enqueue(i + 1);
             }
             DateTime end = DateTime.Now;
             long elapsedTicks = end.Ticks - start.Ticks;

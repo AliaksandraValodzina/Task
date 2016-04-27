@@ -8,7 +8,7 @@ namespace Task1
     public string periodOfTime(long elapsedTicks) {
             string time;
             TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
-            time = $"{elapsedSpan.Milliseconds} milliseconds";
+            time = $"{elapsedSpan.TotalMilliseconds}";
 
             // Pesults print to console while programm work
             Console.Write("\r\n");

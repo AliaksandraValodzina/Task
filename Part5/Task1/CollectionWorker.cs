@@ -51,14 +51,14 @@ namespace Task1
             DateTime start = DateTime.Now;
             for (int i = 0; i <= numberOfElements; i++)
             {
-                stack.Push(i);
+                stack.Push(i + 1);
             }
             DateTime end = DateTime.Now;
             long elapsedTicks = end.Ticks - start.Ticks;
             return elapsedTicks;
         }
 
-        // Read List and calculate an addition time
+        // Read Collection and calculate an addition time
         public long Read(ICollection<int> collection, int numberOfElements)
         {
             DateTime start = DateTime.Now;
@@ -90,7 +90,7 @@ namespace Task1
             DateTime start = DateTime.Now;
             for (int i = 0; i <= numberOfElements; i++)
             {
-                int element = collection.ElementAt(i);
+                int element = collection.Peek();
             }
             DateTime end = DateTime.Now;
             long elapsedTicks = end.Ticks - start.Ticks;
@@ -103,7 +103,7 @@ namespace Task1
             DateTime start = DateTime.Now;
             for (int i = 0; i <= numberOfElements; i++)
             {
-                int element = collection.ElementAt(i);
+                int element = collection.Peek();
             }
             DateTime end = DateTime.Now;
             long elapsedTicks = end.Ticks - start.Ticks;
@@ -116,7 +116,7 @@ namespace Task1
             DateTime start = DateTime.Now;
             for (int i = 0; i <= 500000; i++)
             {
-                collection.Remove(i);
+                collection.Remove(collection.ElementAt(i));
             }
             DateTime end = DateTime.Now;
             long elapsedTicks = end.Ticks - start.Ticks;

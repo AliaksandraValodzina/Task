@@ -9,8 +9,6 @@ namespace Task1
 
         public void WriteToFile(string message)
         {
-            try
-            {
                 if (!File.Exists(fileName))
                 {
                     File.Create(fileName);
@@ -21,11 +19,6 @@ namespace Task1
                     w.Write(message);
                     w.Write("\r\n");
                 }
-            } catch (Exception)
-            {
-                Console.Write("!!!");
-            }
         } 
-
 }
 }

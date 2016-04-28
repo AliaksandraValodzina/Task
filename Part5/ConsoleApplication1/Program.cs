@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Task2;
-using Task3;
 using System.Linq;
+using Task3;
 
 namespace ConsoleApplication1
 {
@@ -57,11 +56,11 @@ namespace ConsoleApplication1
             }*/
 
             Customers c = new Customers();
-            List<string> l = c.Linq_9();
-            for (int i = 0; i < 2; i++)
+            IDictionary<string, double> l = c.Linq_9();
+            for (int i = 0; i < l.Count(); i++)
             {
 
-                Console.Write(l.ElementAt(i) + "\n");
+                Console.Write(i + " " + l.ElementAt(i) + "\n");
 
             }
 

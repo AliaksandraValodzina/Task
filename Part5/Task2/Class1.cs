@@ -35,7 +35,7 @@ namespace Task2
         }
 
         // 1. Prime numbers in fibbonacci List
-        public IEnumerable<decimal> PrimeList(List<decimal> fib)
+        public IEnumerable<decimal> Task1(List<decimal> fib)
         {
             var simpleFibList = fib.Where(x => IsPrime(x));
 
@@ -43,7 +43,7 @@ namespace Task2
         }
 
         // 2. How much numbers devide on sum numeral
-        public int FibDevide(List<decimal> fib)
+        public int Task2(List<decimal> fib)
         {
             var simpleFibList = from f in fib
                                 let digits_sequence = f.ToString().Select(x => x - '0')
@@ -52,6 +52,26 @@ namespace Task2
                                 select f;
 
             return simpleFibList.Count();
+        }
+
+        // 3.
+        public string Task3(List<decimal> fib)
+        {
+            var resultList = from f in fib
+                                where (f % 5).Equals(0m)
+                                select f;
+
+            return (resultList.Count() > 0) ? "List has number(s) divided by five" : "No number divided by five";
+        }
+
+        // 4.
+        public IEnumerable<double> Task4(List<decimal> fib)
+        {
+            var resultList = from f in fib
+                             where f.ToString().Contains('2')
+                             select Math.Floor(Math.Sqrt(Decimal.ToInt32(f)));
+
+            return resultList;
         }
     }
 
@@ -72,7 +92,7 @@ namespace Task2
         {
             Fibonacci fib = new Fibonacci();
             List<decimal> fibList = fib.Fib(100);
-            IEnumerable<decimal> primesList = fib.PrimeList(fibList);
+            IEnumerable<decimal> primesList = fib.Task1(fibList);
             decimal fibPrime = primesList.ElementAt(5);
             Assert.IsTrue(fib.IsPrime(fibPrime));
         }
@@ -82,8 +102,28 @@ namespace Task2
         {
             Fibonacci fib = new Fibonacci();
             List<decimal> fibList = fib.Fib(7);
-            int count = fib.FibDevide(fibList);
+            int count = fib.Task2(fibList);
             Assert.AreEqual(count.Equals(6), true);
+        }
+
+        [TestMethod]
+        public void Test3()
+        {
+            Fibonacci fib = new Fibonacci();
+            List<decimal> fibList = fib.Fib(10);
+            string returnedStr = fib.Task3(fibList);
+            string result = "List has number(s) divided by five";
+            Assert.AreEqual(returnedStr.Equals(result), true);
+        }
+
+        [TestMethod]
+        public void Test4()
+        {
+            Fibonacci fib = new Fibonacci();
+            List<decimal> fibList = fib.Fib(10);
+            var returnedList = fib.Task4(fibList);
+            double root = returnedList.ElementAt(1);
+            Assert.AreEqual(root.Equals(4), true);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Task2;
+using Task3;
 using System.Linq;
 
 namespace ConsoleApplication1
@@ -10,8 +11,8 @@ namespace ConsoleApplication1
         static void Main(string[] args)
         {
 
-            Fibonacci fib = new Fibonacci();
-            List<decimal> fibList = fib.Fib(15);
+            //Fibonacci fib = new Fibonacci();
+            //List<decimal> fibList = fib.Fib(15);
 
             /* Task 4
             IEnumerable<double> count = fib.Task4(fibList);
@@ -47,14 +48,23 @@ namespace ConsoleApplication1
             Console.Write(average);*/
 
             //Task 6
-            var list = fib.Task6(fibList);
+            /*var list = fib.Task6(fibList);
             for (int i = 0; i < list.Count(); i++)
             {
 
                     Console.Write(list.ElementAt(i) + " ");
 
+            }*/
+
+            Customers c = new Customers();
+            List<string> l = c.Linq_9();
+            for (int i = 0; i < 2; i++)
+            {
+
+                Console.Write(l.ElementAt(i) + "\n");
+
             }
-            //Console.Write(average);
+
 
 
             Console.Read();

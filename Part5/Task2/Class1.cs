@@ -93,7 +93,6 @@ namespace Task2
                        from p in (from k in fib
                                   let indexOne = index - 5
                                   let indexTwo = index + 5
-
                                   where fib.IndexOf(k) > indexOne && fib.IndexOf(k) < indexTwo
                                   select k)
                        let firstNum = f % 10

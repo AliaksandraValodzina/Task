@@ -5,7 +5,7 @@ namespace Task1
     public class TimeCalculator
     {
 
-    public string periodOfTime(long elapsedTicks)
+    public string PeriodOfTime(long elapsedTicks)
         {
             string time;
             TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);

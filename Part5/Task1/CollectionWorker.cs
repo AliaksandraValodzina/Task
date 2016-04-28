@@ -72,12 +72,12 @@ namespace Task1
         }
 
         // Read Dictionary and calculate an addition time
-        public long Read(IDictionary<int, int> collection, int numberOfElements)
+        public long Read(IDictionary<int, int> dictionary, int numberOfElements)
         {
             DateTime start = DateTime.Now;
             for (int i = 0; i <= numberOfElements; i++)
             {
-                int element = collection[i];
+                int element = dictionary[i];
             }
             DateTime end = DateTime.Now;
             long elapsedTicks = end.Ticks - start.Ticks;
@@ -114,7 +114,7 @@ namespace Task1
         public long Delete(ICollection<int> collection, int numberOfElements)
         {
             DateTime start = DateTime.Now;
-            for (int i = 0; i <= 500000; i++)
+            for (int i = 0; i <= numberOfElements; i++)
             {
                 collection.Remove(collection.ElementAt(i));
             }

@@ -46,8 +46,8 @@ namespace Task2
         public int Task2(List<decimal> fib)
         {
             var simpleFibList = from f in fib
-                                let digits_sequence = f.ToString().Select(x => x - '0')
-                                let sum = digits_sequence.Sum()
+                                let digitsSequence = f.ToString().Select(x => x - '0')
+                                let sum = digitsSequence.Sum()
                                 where (f % sum).Equals(0m)
                                 select f;
 
@@ -72,6 +72,64 @@ namespace Task2
                              select Math.Floor(Math.Sqrt(Decimal.ToInt32(f)));
 
             return resultList;
+        }
+
+        // 5.
+        public IEnumerable<decimal> Task5(List<decimal> fib)
+        {
+            var resultList = fib
+            .Where(f => f.ToString().Length > 1)
+            .OrderByDescending(f => f.ToString().Take(2).Skip(1).ElementAt(0));
+
+            return resultList;
+        }
+
+        // 6.
+        public IEnumerable<decimal> Task6(List<decimal> fib)
+        {
+
+            var list = (from f in fib
+                       let index = fib.IndexOf(f)
+                       from p in (from k in fib
+                                  let indexOne = index - 5
+                                  let indexTwo = index + 5
+
+                                  where fib.IndexOf(k) > indexOne && fib.IndexOf(k) < indexTwo
+                                  select k)
+                       let firstNum = f % 10
+                       let secondNum = ((f - firstNum) % 100) / 10
+                       where ((firstNum + secondNum) % 3).Equals(0m)
+                       where p % 5 == 0
+                       select f).Distinct();
+            return list;
+        }
+
+        // 7.
+        public int Task7(List<decimal> fib)
+        {
+            var resultList = from f in fib
+                             let d = f.ToString().Select(x => x - '0')
+                             let digitsSequence = d.Sum(x => x*x)
+                             select digitsSequence;
+
+            int max = resultList.Max();
+
+            return max;
+        }
+
+        // 8.
+        public double Task8(List<decimal> fib)
+        {
+            var list = from f in fib
+                             select f.ToString().ToList();
+
+            var chars = list.SelectMany(s => s);
+
+            var zeroList = chars.Where(x => x.Equals('0'));
+
+            double average = Math.Round(1.0 * zeroList.Count()/chars.Count(), 2);
+
+            return average;
         }
     }
 
@@ -124,6 +182,43 @@ namespace Task2
             var returnedList = fib.Task4(fibList);
             double root = returnedList.ElementAt(1);
             Assert.AreEqual(root.Equals(4), true);
+        }
+
+        [TestMethod]
+        public void Test5()
+        {
+            Fibonacci fib = new Fibonacci();
+            List<decimal> fibList = fib.Fib(10);
+            var returnedList = fib.Task5(fibList);
+            decimal root = returnedList.ElementAt(0);
+            Assert.AreEqual(root.Equals(55m), true);
+        }
+
+        [TestMethod]
+        public void Test6()
+        {
+            Fibonacci fib = new Fibonacci();
+            List<decimal> fibList = fib.Fib(15);
+            IEnumerable<decimal> result = fib.Task6(fibList);
+            Assert.AreEqual(result.ElementAt(2).Equals(233), true);
+        }
+
+        [TestMethod]
+        public void Test7()
+        {
+            Fibonacci fib = new Fibonacci();
+            List<decimal> fibList = fib.Fib(10);
+            int max = fib.Task7(fibList);
+            Assert.AreEqual(max.Equals(64), true);
+        }
+
+        [TestMethod]
+        public void Test8()
+        {
+            Fibonacci fib = new Fibonacci();
+            List<decimal> fibList = fib.Fib(15);
+            double average = fib.Task8(fibList);
+            Assert.AreEqual(average.Equals(0.04), true);
         }
     }
 }

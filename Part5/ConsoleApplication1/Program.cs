@@ -88,14 +88,24 @@ namespace ConsoleApplication1
             }*/
 
             // 3.
-            Customers customer = new Customers();
+            /*Customers customer = new Customers();
             List<string> customerList = customer.Linq0003(5000.0);
 
             foreach (var i in customerList)
             {
                 string output = $"Customer {i}";
                 Console.Write(output + "\n");
-            }
+            }*/
+
+            // 4.
+            Customers customer = new Customers();
+            List<DateTime> custList = customer.Linq0004();
+
+            /*foreach (var i in customerList)
+            {
+                string output = $"Customer {i}";
+                Console.Write(output + "\n");
+            }*/
 
             Console.Read();
         }

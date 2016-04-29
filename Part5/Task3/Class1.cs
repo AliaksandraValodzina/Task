@@ -10,17 +10,15 @@ namespace Task3
     {
 
         //private string path = $@"{Environment.CurrentDirectory}\Data\Customers.xml";
-        /*XDocument Doc;
+        XDocument Doc;
 
         public Customers() {
             Doc = XDocument.Load($@"{Environment.CurrentDirectory}\Data\Customers.xml");
-        }*/
+        }
 
         // 1.
         public List<string> Linq0001(double x)
         {
-            XDocument Doc = XDocument.Load($@"{Environment.CurrentDirectory}\Data\Customers.xml");
-
             var customers = (from c in Doc.Descendants("customer")
                             group c by (string)c.Element("customer") into g
                             from s in g
@@ -41,8 +39,6 @@ namespace Task3
         // 2.
         public IDictionary<string, List<string>> Linq0002()
         {
-            XDocument Doc = XDocument.Load($@"{Environment.CurrentDirectory}\Data\Customers.xml");
-
             var customers = (from c in Doc.Element("customers").Elements("customer")
                              group c.Element("id").Value by c.Element("country").Value
                              ).ToDictionary(o => o.Key, o => o.ToList());
@@ -53,8 +49,6 @@ namespace Task3
         // 3.
         public List<string> Linq0003(double x)
         {
-            XDocument Doc = XDocument.Load($@"{Environment.CurrentDirectory}\Data\Customers.xml");
-
             var orders = (from o in Doc.Element("customers").Elements("customer")
                           let total = o.Element("orders").Elements("order").Elements("total").ToList()
                           from t in total
@@ -62,6 +56,35 @@ namespace Task3
                           select (string)o.Element("id")).Distinct().ToList();
 
             return orders;
+        }
+
+        // 4.
+        public List<DateTime> Linq0004()
+        {
+
+            /*var query = dataSource.Customers
+                    .Select(grp => new
+                    {
+                        ID = grp.CustomerID,
+                        MinDate = grp.Orders.Min(t => t.OrderDate)
+                    });*/
+
+            /*let dataStr = c.Element("orders").Elements("order").Elements("total").Min()
+                     let data = Convert.ToDateTime(dataStr)
+                     group c by (string)c.Element("id") into g
+                     */
+
+
+            /*var customers = (from c in Doc.Element("customers").Elements("customer")
+                             group (string)c.Element("id").Value by Convert.ToDateTime(c.Element("orderdate").Value)
+                             ).ToDictionary(o => o.Key, o => o.ToList());*/
+
+            var customers = (from c in Doc.Element("customers").Elements("customer").Elements("orders").Elements("order")
+                             select Convert.ToDateTime(c.Elements("orderdate").Min())).ToList();
+
+
+
+            return customers;
         }
     }
 

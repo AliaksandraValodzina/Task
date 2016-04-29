@@ -55,16 +55,47 @@ namespace ConsoleApplication1
 
             }*/
 
-            Customers c = new Customers();
+            /*Customers c = new Customers();
             IDictionary<string, double> l = c.Linq_9();
             for (int i = 0; i < l.Count(); i++)
             {
 
                 Console.Write(i + " " + l.ElementAt(i) + "\n");
 
+            }*/
+
+            // 1.
+            /*Customers customer = new Customers();
+            List<string> customerList = customer.Linq0001(1000.0);
+            string zero = customerList.ElementAt(0);
+
+            foreach (var i in customerList)
+            {
+                string output = $"Customer {i}";
+                Console.Write(output + "\n");
+            }*/
+
+            // 2.
+            /*Customers customer = new Customers();
+            IDictionary<string, List<string>> customerList = customer.Linq0002();
+            List<string> germanyCustomers = customerList["Germany"];
+            bool isTrue = germanyCustomers.Contains("ALFKI");
+
+            foreach (var i in customerList)
+            {
+                string output = $"Customer {i}";
+                Console.Write(output + "\n");
+            }*/
+
+            // 3.
+            Customers customer = new Customers();
+            List<string> customerList = customer.Linq0003(5000.0);
+
+            foreach (var i in customerList)
+            {
+                string output = $"Customer {i}";
+                Console.Write(output + "\n");
             }
-
-
 
             Console.Read();
         }

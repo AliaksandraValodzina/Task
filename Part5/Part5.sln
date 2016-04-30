@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task1", "Task1\Task1.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task2", "Task2\Task2.csproj", "{8B275986-34AA-4ED4-8188-8D471B3F4274}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{9FCDAC96-D8F3-4D43-B500-6AF51B4E2322}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task2,3_Runner", "Task2,3_Runner\ConsoleApplication1.csproj", "{9FCDAC96-D8F3-4D43-B500-6AF51B4E2322}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task3", "Task3\Task3.csproj", "{EAEA66A3-8EB0-4D4B-8CF4-25ED6C25B0FB}"
 EndProject

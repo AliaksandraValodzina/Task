@@ -64,6 +64,8 @@ namespace ConsoleApplication1
 
             }*/
 
+            Customers customer = new Customers();
+
             // 1.
             /*Customers customer = new Customers();
             List<string> customerList = customer.Linq0001(1000.0);
@@ -98,14 +100,17 @@ namespace ConsoleApplication1
             }*/
 
             // 4.
-            Customers customer = new Customers();
-            List<DateTime> custList = customer.Linq0004();
+            //var custList = customer.Linq0004();
 
-            /*foreach (var i in customerList)
-            {
-                string output = $"Customer {i}";
-                Console.Write(output + "\n");
-            }*/
+            // 5.
+            //var custList = customer.Linq0005();
+
+            // 6.
+            //var custList = customer.Linq0006();
+
+            // 7.
+            var custList = customer.Linq0007();
+
 
             Console.Read();
         }

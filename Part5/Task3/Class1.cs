@@ -59,36 +59,71 @@ namespace Task3
         }
 
         // 4.
-        public List<DateTime> Linq0004()
+        public IDictionary<string, DateTime> Linq0004()
         {
-
-            /*var query = dataSource.Customers
-                    .Select(grp => new
-                    {
-                        ID = grp.CustomerID,
-                        MinDate = grp.Orders.Min(t => t.OrderDate)
-                    });*/
-
-            /*let dataStr = c.Element("orders").Elements("order").Elements("total").Min()
-                     let data = Convert.ToDateTime(dataStr)
-                     group c by (string)c.Element("id") into g
-                     */
-
-
-            /*var customers = (from c in Doc.Element("customers").Elements("customer")
-                             group (string)c.Element("id").Value by Convert.ToDateTime(c.Element("orderdate").Value)
-                             ).ToDictionary(o => o.Key, o => o.ToList());*/
-
-            var customers = (from c in Doc.Element("customers").Elements("customer").Elements("orders").Elements("order")
-                             select Convert.ToDateTime(c.Elements("orderdate").Min())).ToList();
-
-
+            var customers = (from c in Doc.Descendants("customer")
+                             let elements = c.Element("orders").Elements("order").ToList()
+                             where elements.Count > 0
+                             let data = elements.Min(order => DateTime.Parse(order.Element("orderdate").Value))
+                             select new
+                             {
+                                 Name = c.Element("name").Value,
+                                 Value = data
+                             }).ToDictionary(o => o.Name, o => o.Value);
 
             return customers;
         }
+
+        // 5.
+        public Dictionary<string, DateTime> Linq0005()
+        {
+
+            var customers = (from c in Doc.Descendants("customer")
+                             let elements = c.Element("orders").Elements("order").ToList()
+                             where elements.Count > 0
+                             let data = elements.Min(order => DateTime.Parse(order.Element("orderdate").Value))
+                             let sum = elements.Sum(order => double.Parse(order.Element("total").Value))
+                             orderby data, sum, c.Element("name")
+                             select new
+                             {
+                                 Name = c.Element("name").Value,
+                                 Value = data
+                             }).ToDictionary(o => o.Name, o => o.Value);
+
+            return customers;
+        }
+
+        // 6.
+        public List<string> Linq0006()
+        {
+            int i;
+
+            var customers = (from c in Doc.Descendants("customer")
+                             let region = (string)c.Element("region") ?? String.Empty
+                             where String.IsNullOrEmpty(region)
+                    || !c.Element("phone").Value.Contains('(')
+                    || !c.Element("phone").Value.Contains(')')
+                    || Int32.TryParse(c.Element("postalcode").Value, out i)
+                             select c.Element("name").Value).ToList();
+
+            return customers;
+        }
+
+        public IDictionary<string, List<double>> Linq0007()
+        {
+
+            var rez = (from c in Doc.Element("customers").Elements("customer")
+                       //let total = c.Elements("total").ToList()
+                       //let sum = total.Sum(e => Double.Parse((string)e))
+                       group c.Elements("total").Sum(e => Double.Parse((string)e)) by c.Element("city").Value
+                       //).ToDictionary(o => o.Key, o => o.ToList().Sum(e => Double.Parse((string)e)));
+                       ).ToDictionary(o => o.Key, o => o.ToList());
+
+            return rez;
+        }
     }
 
-[TestClass]
+    [TestClass]
 public class Test
 {
     [TestMethod]
@@ -116,114 +151,31 @@ public class Test
             List<string> customerList = customer.Linq0003(5000.0);
             Assert.IsTrue(customerList.Contains("BLONP"));
         }
-    }
 
-    //????
-    /*public void Linq0003()
-    {
-        try
+        [TestMethod]
+        public void Test_4()
         {
-            decimal x = 0.0m;
-
-            var orders = from o in dataSource.Customers
-                         select o.Orders.Where(p => p.Total > x);
-
-
-            var customer =
-            from c in dataSource.Customers
-            where c.Orders.Contains(x => orders.Contains(x))
-            select c.CustomerID;
-
-            foreach (var c in customer)
-            {
-                ObjectDumper.Write(c);
-            }
+            Customers customer = new Customers();
+            var customerList = customer.Linq0004();
+            DateTime data = new DateTime(1997, 8, 25, 0, 0, 0);
+            Assert.IsTrue(customerList["Alfreds Futterkiste"].Equals(data));
         }
-        catch (IndexOutOfRangeException)
-        {
 
+        [TestMethod]
+        public void Test_5()
+        {
+            Customers customer = new Customers();
+            var customerList = customer.Linq0005();
+            DateTime data = new DateTime(1996, 7, 4, 0, 0, 0);
+            Assert.IsTrue(customerList["Wilman Kala"].Equals(data));
         }
-    }*/
 
-    /*public void Linq0004()
-    {
-
-        DateTime data = DateTime.Now;
-        try
+        [TestMethod]
+        public void Test_6()
         {
-
-            var query = dataSource.Customers
-                .Select(grp => new
-                {
-                    ID = grp.CustomerID,
-                    MinDate = grp.Orders.Min(t => t.OrderDate)
-                });
-
-            foreach (var c in query)
-            {
-                ObjectDumper.Write(c);
-            }
-
-        }
-        catch (Exception)
-        {
-
+            Customers customer = new Customers();
+            var customerList = customer.Linq0006();
+            Assert.IsTrue(customerList.Contains("Alfreds Futterkiste"));
         }
     }
-
-    public void Linq0005()
-    {
-
-        DateTime data = DateTime.Now;
-        try
-        {
-
-
-            var latest = (from d in dataSource.Customers
-                          select new
-                          {
-                              d.CustomerID,
-                              d.Orders,
-                              d.Orders
-                          }).First();
-
-            /*var query = dataSource.Customers
-                .Select(grp => new
-                {
-                    ID = grp.CustomerID,
-                    Date = grp.Orders.GetValue
-                    // Date = grp.Orders.GetValue(x => x.OrderDate)
-                    //.GroupBy(t => t.OrderDate.Year)
-                });
-
-            foreach (var c in query)
-            {
-                ObjectDumper.Write(c);
-            }
-
-        }
-        catch (Exception)
-        {
-
-        }
-    }
-
-}*/
-
-    /*public IDictionary<string, double> Linq_8()
-        {
-            XDocument doc = XDocument.Load($@"{Environment.CurrentDirectory}\Data\Customers.xml");
-
-            // Вывод суммы!!! 
-
-            var rez = (from c in doc.Descendants("customer")
-                       group c by (string)c.Element("city") into g
-                       select new
-                       {
-                           city = g.Key,
-                           total = g.Elements("total").Sum(el => (double)el)
-                       }).ToDictionary(o => o.city, o => o.total);
-
-            return rez;
-        }*/
 }

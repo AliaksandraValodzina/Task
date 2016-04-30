@@ -109,7 +109,7 @@ namespace ConsoleApplication1
             //var custList = customer.Linq0006();
 
             // 7.
-            var custList = customer.Linq0007();
+            var custList = customer.Linq0008_3();
 
 
             Console.Read();

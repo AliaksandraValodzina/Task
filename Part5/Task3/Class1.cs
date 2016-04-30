@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Globalization;
 
 namespace Task3
 {
     public class Customers
     {
 
-        //private string path = $@"{Environment.CurrentDirectory}\Data\Customers.xml";
         XDocument Doc;
 
         public Customers() {
@@ -20,18 +20,11 @@ namespace Task3
         public List<string> Linq0001(double x)
         {
             var customers = (from c in Doc.Descendants("customer")
-                            group c by (string)c.Element("customer") into g
-                            from s in g
-                            let sum = (double)s.Elements("orders").Elements("order").Elements("total").Sum(n => double.Parse(n.Value))
-                            where sum > x
-                            select (string)s.Element("id")).ToList();
-
-            /*var sum = (from c in doc.Descendants("customer")
-                       group c by (string)c.Element("customer") into g
-                       from s in g
-                       let tSum = (double)s.Elements("orders").Elements("order").Elements("total").Sum(n => double.Parse(n.Value))
-                       where tSum > x
-                       select tSum).ToList();*/
+                             group c by (string)c.Element("customer") into g
+                             from s in g
+                             let sum = (double)s.Elements("orders").Elements("order").Elements("total").Sum(n => double.Parse(n.Value))
+                             where sum > x
+                             select (string)s.Element("id")).ToList();
 
             return customers;
         }
@@ -52,7 +45,7 @@ namespace Task3
             var orders = (from o in Doc.Element("customers").Elements("customer")
                           let total = o.Element("orders").Elements("order").Elements("total").ToList()
                           from t in total
-                          where  Double.Parse((string)t) > x
+                          where Double.Parse((string)t) > x
                           select (string)o.Element("id")).Distinct().ToList();
 
             return orders;
@@ -109,18 +102,95 @@ namespace Task3
             return customers;
         }
 
-        public IDictionary<string, List<double>> Linq0007()
+        // 7. Average Turnover In Towns
+        public IDictionary<string, double> Linq0007_2()
         {
 
-            var rez = (from c in Doc.Element("customers").Elements("customer")
-                       //let total = c.Elements("total").ToList()
-                       //let sum = total.Sum(e => Double.Parse((string)e))
-                       group c.Elements("total").Sum(e => Double.Parse((string)e)) by c.Element("city").Value
-                       //).ToDictionary(o => o.Key, o => o.ToList().Sum(e => Double.Parse((string)e)));
-                       ).ToDictionary(o => o.Key, o => o.ToList());
+            var rez = Doc.Element("customers").Elements("customer")
+                       .GroupBy(x => x.Element("city").Value)
+                       .Select(l => new
+                       {
+                           Name = l.Key,
+                           Value = l.Average(c => c.Element("orders").Elements("order").Count())
+                       }).ToDictionary(o => o.Name, o => Math.Round(o.Value, 2));
 
             return rez;
         }
+
+        // 7. Average orders count
+        public IDictionary<string, double> Linq0007_1()
+        {
+
+            var rez = (from f in Doc.Element("customers").Elements("customer")
+                       from k in f.Elements("orders").Elements("order")
+                       group k.Element("total").Value by f.Element("city").Value into g
+                       select new
+                       {
+                           Name = g.Key,
+                           Value = g.ToList().Average(x => double.Parse(x))
+                       }).ToDictionary(o => o.Name, o => Math.Round(o.Value, 2));
+
+            return rez;
+            }
+
+        // 8. Month
+        public IDictionary<int, double> Linq0008_Month()
+        {
+
+            var rez = (from f in Doc.Element("customers").Elements("customer")
+                       from k in f.Elements("orders").Elements("order")
+                       let month = DateTime.ParseExact((string)k.Element("orderdate").Value, "yyyy-M-dTH:mm:ss", CultureInfo.InvariantCulture).Month
+                       orderby month
+                       group k.Element("total").Value by month into g
+                       select new
+                       {
+                           Name = g.Key,
+                           Value = g.Sum(x => double.Parse(x))
+        }).ToDictionary(o => o.Name, o => Math.Round(o.Value, 2));
+
+            return rez;
+        }
+
+        // 8. Year
+        public IDictionary<int, double> Linq0008_Year()
+        {
+
+            var rez = (from f in Doc.Element("customers").Elements("customer")
+                       from k in f.Elements("orders").Elements("order")
+                       let year = DateTime.ParseExact((string)k.Element("orderdate").Value, "yyyy-M-dTH:mm:ss", CultureInfo.InvariantCulture).Year
+                       orderby year
+                       group k.Element("total").Value by year into g
+                       select new
+                       {
+                           Name = g.Key,
+                           Value = g.Sum(x => double.Parse(x))
+                       }).ToDictionary(o => o.Name, o => Math.Round(o.Value, 2));
+
+            return rez;
+        }
+
+        // 8. Year, month
+        public IDictionary<string, double> Linq0008_YearMonth()
+        {
+
+            var rez = (from f in Doc.Element("customers").Elements("customer")
+                       from k in f.Elements("orders").Elements("order")
+                       let year = DateTime.ParseExact((string)k.Element("orderdate").Value, "yyyy-M-dTH:mm:ss", CultureInfo.InvariantCulture).Year
+                       let month = DateTime.ParseExact((string)k.Element("orderdate").Value, "yyyy-M-dTH:mm:ss", CultureInfo.InvariantCulture).Month
+                       let monthYear = year.ToString() + "-" + month.ToString()
+                       orderby year
+                       group k.Element("total").Value by monthYear into g
+                       select new
+                       {
+                           Name = g.Key,
+                           Value = g.Sum(x => double.Parse(x))
+                       }).ToDictionary(o => o.Name, o => Math.Round(o.Value, 2));
+
+            return rez;
+        }
+
+
+
     }
 
     [TestClass]
@@ -176,6 +246,46 @@ public class Test
             Customers customer = new Customers();
             var customerList = customer.Linq0006();
             Assert.IsTrue(customerList.Contains("Alfreds Futterkiste"));
+        }
+
+        [TestMethod]
+        public void Test_7_1()
+        {
+            Customers customer = new Customers();
+            var customerList = customer.Linq0007_1();
+            Assert.IsTrue(customerList["London"].Equals(1148.37));
+        }
+
+        [TestMethod]
+        public void Test_7_2()
+        {
+            Customers customer = new Customers();
+            var customerList = customer.Linq0007_2();
+            Assert.IsTrue(customerList["London"].Equals(7.67));
+        }
+
+        [TestMethod]
+        public void Test_8_1()
+        {
+            Customers customer = new Customers();
+            var customerList = customer.Linq0008_Month();
+            Assert.IsTrue(customerList[1].Equals(155480.19));
+        }
+
+        [TestMethod]
+        public void Test_8_2()
+        {
+            Customers customer = new Customers();
+            var customerList = customer.Linq0008_Year();
+            Assert.IsTrue(customerList[1996].Equals(208083.97));
+        }
+
+        [TestMethod]
+        public void Test_8_3()
+        {
+            Customers customer = new Customers();
+            var customerList = customer.Linq0008_YearMonth();
+            Assert.IsTrue(customerList["1996-9"].Equals(26381.4));
         }
     }
 }

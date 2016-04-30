@@ -35,9 +35,9 @@ namespace Task2
         }
 
         // 1. Prime numbers in fibbonacci List
-        public IEnumerable<decimal> Task1(List<decimal> fib)
+        public int Task1(List<decimal> fib)
         {
-            var simpleFibList = fib.Where(x => IsPrime(x));
+            var simpleFibList = fib.Where(x => IsPrime(x)).Count();
 
             return simpleFibList;
         }
@@ -87,7 +87,6 @@ namespace Task2
         // 6.
         public IEnumerable<decimal> Task6(List<decimal> fib)
         {
-
             var list = (from f in fib
                        let index = fib.IndexOf(f)
                        from p in (from k in fib
@@ -100,6 +99,7 @@ namespace Task2
                        where ((firstNum + secondNum) % 3).Equals(0m)
                        where p % 5 == 0
                        select f).Distinct();
+
             return list;
         }
 
@@ -148,10 +148,14 @@ namespace Task2
         public void Test1()
         {
             Fibonacci fib = new Fibonacci();
-            List<decimal> fibList = fib.Fib(100);
-            IEnumerable<decimal> primesList = fib.Task1(fibList);
-            decimal fibPrime = primesList.ElementAt(5);
-            Assert.IsTrue(fib.IsPrime(fibPrime));
+            List<decimal> fibList = fib.Fib(15);
+            int fibPrime = fib.Task1(fibList);
+            int count = 0;
+            for (int i = 0; i < fibList.Count(); i++)
+            {
+                if (fib.IsPrime(fibList.ElementAt(i))) count++;
+            }
+            Assert.IsTrue(count.Equals(fibPrime));
         }
 
         [TestMethod]

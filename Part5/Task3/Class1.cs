@@ -177,7 +177,7 @@ namespace Task3
                        from k in f.Elements("orders").Elements("order")
                        let year = DateTime.ParseExact((string)k.Element("orderdate").Value, "yyyy-M-dTH:mm:ss", CultureInfo.InvariantCulture).Year
                        let month = DateTime.ParseExact((string)k.Element("orderdate").Value, "yyyy-M-dTH:mm:ss", CultureInfo.InvariantCulture).Month
-                       let monthYear = year.ToString() + "-" + month.ToString()
+                       let monthYear = year.ToString() + "/" + month.ToString()
                        orderby year
                        group k.Element("total").Value by monthYear into g
                        select new
@@ -285,7 +285,7 @@ public class Test
         {
             Customers customer = new Customers();
             var customerList = customer.Linq0008_YearMonth();
-            Assert.IsTrue(customerList["1996-9"].Equals(26381.4));
+            Assert.IsTrue(customerList["1996/9"].Equals(26381.4));
         }
     }
 }

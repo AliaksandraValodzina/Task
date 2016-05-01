@@ -12,7 +12,22 @@ namespace ConsoleApplication1
         {
             // Fibonacci
             Fibonacci fib = new Fibonacci();
-            List<decimal> fibList = fib.Fib(15);
+            Console.Write("Сколько чисел Фибоначчи из последовательности вы хотете рассмотреть?\n");
+            var nStr = Console.ReadLine();
+            int n = 0;
+
+            try
+            {
+                n = int.Parse(nStr);
+            }
+            catch (FormatException)
+            {
+                Console.Write($"Вы ввели недопустимый символ - {nStr}. Введите число. \n");
+                nStr = Console.ReadLine();
+                n = int.Parse(nStr);
+            }
+
+            List<decimal> fibList = fib.Fib(n);
             Console.Write("Числа Фибоначчи:\n\n");
             for (int i = 0; i < fibList.Count(); i++)
             {

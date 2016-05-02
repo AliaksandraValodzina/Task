@@ -18,21 +18,28 @@ namespace ClickRunner
             var pathToButtonStatus = page.pathButtonStatus();
             XDocument pathButtonStatus = XDocument.Load(pathToButtonStatus);
 
-            var buttonWithStatus = page.buttonStatus(pathPage, pathButtonStatus);
+            var buttonList = page.buttonName(pathPage);
 
-            foreach (var but in buttonWithStatus) 
+            foreach (var but in buttonList) 
             {
-                Button button = new Button();
-                button.Name = but.Key;
-                button.Enabled = but.Value;
-                page.buttonList.Add(button);
+                if (page.buttonStatus(pathButtonStatus, but) == true)
+                {
+                    Button button = new Button();
+                    button.Name = but;
+                    button.Enabled = true;
+                    page.buttonList.Add(button);
+                }
+                else
+                {
+                    throw new EnabledStatusException();
+                }
             }
 
             var a = page.buttonList;
 
             foreach (var but in a)
             {
-                Console.Write($"but = {but.Name} {but.Enabled}");
+                Console.Write($"but = {but.Name} {but.Enabled}\n");
             }
 
             Console.Write($"path = {pathToPage}");

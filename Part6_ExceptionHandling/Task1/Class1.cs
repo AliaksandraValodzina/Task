@@ -31,7 +31,7 @@ namespace Task1
     }
 
     [Serializable]
-    internal class EnabledStatusException : Exception
+    public class EnabledStatusException : Exception
     {
         public EnabledStatusException()
         {

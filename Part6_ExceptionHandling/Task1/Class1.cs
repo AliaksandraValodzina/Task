@@ -17,7 +17,7 @@ namespace Task1
     {
         public string Name { get; set; }
 
-        public bool Enabled { get; }
+        public bool Enabled { get; set; }
 
         public string Click()
         {

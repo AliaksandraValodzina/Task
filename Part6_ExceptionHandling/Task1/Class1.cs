@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task1
 {
     interface IClickable
     {
-        string Click(EventArgs eventArgs);
+        string Click();
     }
 
     public abstract class BaseElement
@@ -21,9 +17,9 @@ namespace Task1
     {
         public string Name { get; set; }
 
-        public bool Enabled { get; set; }
+        public bool Enabled { get; }
 
-        public string Click(EventArgs eventArgs)
+        public string Click()
         {
             if (Enabled == false)
             {
@@ -32,11 +28,6 @@ namespace Task1
 
             return Name;
         }
-    }
-
-    public class Page : Button
-    {
-
     }
 
     [Serializable]

@@ -23,7 +23,7 @@ namespace Task1
         {
             if (Enabled == false)
             {
-                throw new EnabledStatusException("Button is disabled.");
+                throw new EnabledStatusException($@"You can't click on the button {Name}. Button is disabled.");
             }
 
             return Name;

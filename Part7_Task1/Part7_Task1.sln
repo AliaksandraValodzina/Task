@@ -3,7 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrowserRunner", "BrowserRunner\BrowserRunner.csproj", "{DFD05005-5A02-4CF5-9831-CF5109941A40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{7FC4702D-9521-414C-B02F-A751E8E3337A}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DFD05005-5A02-4CF5-9831-CF5109941A40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFD05005-5A02-4CF5-9831-CF5109941A40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFD05005-5A02-4CF5-9831-CF5109941A40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFD05005-5A02-4CF5-9831-CF5109941A40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FC4702D-9521-414C-B02F-A751E8E3337A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FC4702D-9521-414C-B02F-A751E8E3337A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FC4702D-9521-414C-B02F-A751E8E3337A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FC4702D-9521-414C-B02F-A751E8E3337A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection

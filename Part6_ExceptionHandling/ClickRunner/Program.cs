@@ -36,9 +36,6 @@ namespace ClickRunner
 
             foreach (var but in buttons) 
             {
-                    /*try
-                    {
-                        var butIsSingle = worker.ButtonSingleOrNot(pathPage, but);*/
                         Button button = new Button();
                         button.Name = but;
                         string status;
@@ -67,12 +64,6 @@ namespace ClickRunner
                         }
 
                         page.Buttons.Add(button);
-                    /*} catch (InvalidOperationException)
-                    {
-                        Console.WriteLine($"The button \"{but}\" is not a single on the page");
-                        Console.WriteLine("You can not click on this button");
-                    }*/
-
                 }
 
                 foreach (var but in page.Buttons)

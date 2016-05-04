@@ -8,6 +8,7 @@
 			<button Name = "Cancel">Cancel</button>
 			<button Name = "Start">Start</button>
 			<button Name = "Stop">Stop</button>
+			<button Name = "Stop">Stop</button>
 		</buttons>
 		<checkboxes>
 			<checkbox>One</checkbox>

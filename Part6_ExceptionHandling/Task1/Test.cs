@@ -13,9 +13,9 @@ namespace Task1
         {
             Page page = new Page();
             PageWorker worker = new PageWorker();
-            worker.Path = XDocument.Load($@"{Environment.CurrentDirectory}\\Data\\Path.xml");
+            worker.Path = XDocument.Load(@"C:\Users\Aliaksandra_Valodzina@epam.com\Task\Part6_ExceptionHandling\ClickRunner\App.config");
 
-            var pathToPage = worker.PathPage();
+            var pathToPage = worker.PathToPageData();
             XDocument pathPage = XDocument.Load(pathToPage);
 
             var buttons = worker.ButtonName(pathPage);
@@ -28,8 +28,8 @@ namespace Task1
         {
             Page page = new Page();
             PageWorker worker = new PageWorker();
-            worker.Path = XDocument.Load($@"{Environment.CurrentDirectory}\\Data\\Path.xml");
-            var pathToPage = worker.PathPage();
+            worker.Path = XDocument.Load(@"C:\Users\Aliaksandra_Valodzina@epam.com\Task\Part6_ExceptionHandling\ClickRunner\App.config");
+            var pathToPage = worker.PathToPageData();
             // Get expected result from file
             var expectedRes = $@"C:\Users\Aliaksandra_Valodzina@epam.com\Task\Part6_ExceptionHandling\ClickRunner\bin\Debug\Data\PageData.xml";
             Assert.AreEqual(pathToPage.Equals(expectedRes), true);
@@ -40,7 +40,7 @@ namespace Task1
         {
             Page page = new Page();
             PageWorker worker = new PageWorker();
-            worker.Path = XDocument.Load($@"{Environment.CurrentDirectory}\\Data\\Path.xml");
+            worker.Path = XDocument.Load(@"C:\Users\Aliaksandra_Valodzina@epam.com\Task\Part6_ExceptionHandling\ClickRunner\App.config");
             var pathToPage = worker.PathButtonState();
             // Get expected result from file
             var expectedRes = $@"C:\Users\Aliaksandra_Valodzina@epam.com\Task\Part6_ExceptionHandling\ClickRunner\bin\Debug\Data\ButtonState.xml";
@@ -51,10 +51,10 @@ namespace Task1
         public void ButtonStateTest()
         {
             PageWorker worker = new PageWorker();
-            worker.Path = XDocument.Load($@"{Environment.CurrentDirectory}\\Data\\Path.xml");
+            worker.Path = XDocument.Load(@"C:\Users\Aliaksandra_Valodzina@epam.com\Task\Part6_ExceptionHandling\ClickRunner\App.config");
 
             // Path to page
-            var pathToPage = worker.PathPage();
+            var pathToPage = worker.PathToPageData();
             XDocument pathPage = XDocument.Load(pathToPage);
 
             var buttons = worker.ButtonName(pathPage);
@@ -67,21 +67,5 @@ namespace Task1
             var state = bool.Parse(worker.ButtonState(pathButtonState, buttons.ElementAt(1)));
             Assert.IsFalse(state);
         }
-
-        /*[TestMethod]
-        public void SingleButtonState()
-        {
-            PageWorker worker = new PageWorker();
-            worker.Path = XDocument.Load($@"{Environment.CurrentDirectory}\\Data\\Path.xml");
-
-            // Path to page
-            var pathToPage = worker.PathPage();
-            XDocument pathPage = XDocument.Load(pathToPage);
-
-            var buttons = worker.ButtonName(pathPage);
-
-            var singleStateOrNot = worker.ButtonSingle(pathPage, buttons.ElementAt(1));
-            Assert.AreEqual(singleStateOrNot.Equals("Previous Page"), true);
-        }*/
     }
 }

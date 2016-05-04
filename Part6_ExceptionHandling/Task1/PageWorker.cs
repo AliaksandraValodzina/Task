@@ -10,7 +10,7 @@ namespace Task1
         public XDocument Path { get; set; }
 
         // Page path
-        public string PathPage()
+        public string PathToPageData()
         {
             var pagePath = Path.Element("configuration").Elements("paths").Elements("path")
             .Where(a => (string)a.Attribute("Name") == "PageData")
@@ -40,17 +40,6 @@ namespace Task1
 
             return button;
         }
-
-        /*// Button is single or not
-        public string ButtonSingle(XDocument pathPage, string name)
-        {
-            var button = pathPage.Element("page").Element("elements").Elements("buttons").Elements("button")
-                                .Where(e => (string)e.Attribute("Name") == name)
-                                .Select(e => (string)e.Value)
-                                .Single();
-
-            return button;
-        }*/
 
         // Get a button status
         public string ButtonState(XDocument pathButtonState, string button)

@@ -47,7 +47,7 @@ namespace ClickRunner
                         catch (InvalidOperationException)
                         {
                             Console.Write($"File ButtonState do not have a status for button \"{but}\".\n");
-                            Console.WriteLine($"Or status of button is not a single, or do not have a value");
+                            Console.WriteLine($"Or status of button is not a single");
                             Console.Write("Status will be changed on \"false\".\n\n");
                             status = "false";
                         }

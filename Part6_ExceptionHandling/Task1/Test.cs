@@ -19,6 +19,7 @@ namespace Task1
             XDocument pathPage = XDocument.Load(pathToPage);
 
             var buttons = worker.ButtonName(pathPage);
+            // Get expected result from file
             Assert.AreEqual(buttons.Contains("Next Page"), true);
         }
 

@@ -29,5 +29,15 @@ namespace BrowserRunner
             }
             return _driver;
         }
+
+        class FireFoxFactory
+        {
+            public static IWebDriver GetDriver()
+            {
+                IWebDriver firefoxDriver = new FirefoxDriver();
+                return _driver;
+            }
+        }
+
     }
 }

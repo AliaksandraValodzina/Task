@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Task1
@@ -10,7 +11,7 @@ namespace Task1
 
     public abstract class BaseElement
     {
-
+        
     }
 
     public class Button : BaseElement, IClickable
@@ -28,25 +29,10 @@ namespace Task1
 
             return Name;
         }
-    }
 
-    [Serializable]
-    public class EnabledStatusException : Exception
-    {
-        public EnabledStatusException()
+        public static implicit operator List<object>(Button v)
         {
-        }
-
-        public EnabledStatusException(string message) : base(message)
-        {
-        }
-
-        public EnabledStatusException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-
-        protected EnabledStatusException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<buttonstates>
+	<state Name = "Next Page">by</state>
+	<state Name = "Previous Page">false</state>
+	<state Name = "Ok">true</state>
+	<state Name = "Cancel">true</state>
+	<state Name = "Start">true</state>
+	<state Name = "Stop">true</state>
+</buttonstates>

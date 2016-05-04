@@ -191,7 +191,7 @@ namespace Task2
         public void Test5()
         {
             Fibonacci fib = new Fibonacci();
-            List<decimal> fibList = fib.Fib(10);
+            List<decimal> fibList = fib.Fib(70);
             var returnedList = fib.Task5(fibList);
             decimal root = returnedList.ElementAt(0);
             Assert.AreEqual(root.Equals(55m), true);

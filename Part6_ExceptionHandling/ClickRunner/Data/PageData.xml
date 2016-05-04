@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<page>
+	<elements>
+		<buttons>
+			<button Name = "Next Page">Next Page</button>
+			<button Name = "Previous Page">Previous Page</button>
+			<button Name = "Ok">Ok</button>
+			<button Name = "Cancel">Cancel</button>
+			<button Name = "Start">Start</button>
+			<button Name = "Stop">Stop</button>
+		</buttons>
+		<checkboxes>
+			<checkbox>One</checkbox>
+			<checkbox>Two</checkbox>
+		</checkboxes>
+		<radiobuttons>
+			<radiobutton>group1</radiobutton>
+			<radiobutton>group2</radiobutton>
+			<radiobutton>group3</radiobutton>
+			<radiobutton>group4</radiobutton>
+		</radiobuttons>
+	</elements>
+</page>

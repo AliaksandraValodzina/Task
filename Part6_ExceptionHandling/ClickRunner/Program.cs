@@ -12,8 +12,8 @@ namespace ClickRunner
         {
             // Path to config file
             Console.Write($"Enter a path to config file\n");
-            Console.Write($"This file must have a fields PageData and ButtonState with paths to files.\n");
-            Console.Write($"(If you will not input path it will equal - \n{Environment.CurrentDirectory}\\App.config.)\n");
+            Console.Write($"This file must have fields PageData and ButtonState with paths to these files.\n");
+            Console.Write($"(If you do not input path it will be - \n{Environment.CurrentDirectory}\\App.config.)\n");
             string consol = Console.ReadLine();
             string path = String.IsNullOrEmpty(consol) ? $@"{Environment.CurrentDirectory}\\App.config" : consol;
 
@@ -50,12 +50,12 @@ namespace ClickRunner
                     }
                     catch (InvalidOperationException)
                     {
-                        Console.Write($"File ButtonState do not have a state for button \"{but}\".\n");
-                        Console.WriteLine($"Or state of button is not a single.\n");
+                        Console.Write($"File ButtonState does not have a state for button \"{but}\".\n");
+                        Console.WriteLine($"Or state of button is not single.\n");
                     }
                     catch (FormatException)
                     {
-                        Console.WriteLine($"Invalid state of button \"{but}\".\n");
+                        Console.WriteLine($"Invalid state of the button \"{but}\".\n");
                     }
                 }
 
@@ -64,11 +64,11 @@ namespace ClickRunner
                     try
                     {
                         but.Click();
-                        Console.Write($"You clicked on the button \"{but.Name}\".\n");
+                        Console.Write($"You clicked the button \"{but.Name}\".\n");
                     }
                     catch (EnabledStatusException)
                     {
-                        Console.Write($"You can not click on the button \"{but.Name}\". Button is disabled.\n");
+                        Console.Write($"You can not click the button \"{but.Name}\". The button is disabled.\n");
                     }
                 }
             }

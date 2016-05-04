@@ -20,7 +20,7 @@ namespace Task1
             return pagePath;
         }
 
-        // Path to ButtonState file
+        // ButtonState file path
         public string PathButtonState()
         {
             var buttonStatePath = Path.Element("configuration").Elements("paths").Elements("path")
@@ -31,7 +31,7 @@ namespace Task1
             return buttonStatePath;
         }
 
-        // Get all name of buttons
+        // Get all names of buttons
         public List<string> ButtonName(XDocument pathPage)
         {
             var button = pathPage.Element("page").Element("elements").Elements("buttons").Elements("button")
@@ -41,7 +41,7 @@ namespace Task1
             return button;
         }
 
-        // Get a button status
+        // Get a button state
         public string ButtonState(XDocument pathButtonState, string button)
         {
             var status = pathButtonState.Element("buttonstates").Elements("state")

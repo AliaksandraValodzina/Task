@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Configuration;
+using OpenQA.Selenium;
 
 namespace BrowserRunner
 {
     class WebDriver : IWebDriver
     {
-        private static InitWebDriver _driver = new InitWebDriver();
+        private static IWebDriver _driver;
 
 
-        public static InitWebDriver GetDriver()
+        public static IWebDriver GetDriver()
         {
             return _driver;
         }
@@ -17,7 +18,14 @@ namespace BrowserRunner
         {
             switch (ConfigurationManager.AppSettings["browser"])
             {
-
+                case "chrome":
+                    _driver = new FirefoxDriver();
+                    break;
+                case "firefox":
+                    _driver = new ChromeDriver();
+                    break;
+                default:
+                    Console.WriteLine("Do not valid value in config file");
             }
             return _driver;
         }

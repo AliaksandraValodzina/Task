@@ -8,7 +8,7 @@ namespace Task1
 {
     public class Page
     {
-        // Buttons on the page
+        // Buttons on the page list
         private List<Button> buttons = new List<Button>();
 
         public List<Button> Buttons

@@ -12,7 +12,7 @@ namespace Task1
         // Page path
         public string PathPage()
         {
-            var pagePath = Path.Elements("paths").Elements("path")
+            var pagePath = Path.Element("configuration").Elements("paths").Elements("path")
             .Where(a => (string)a.Attribute("Name") == "PageData")
             .Select(a => (string)a)
             .First();
@@ -23,7 +23,7 @@ namespace Task1
         // Path to ButtonState file
         public string PathButtonState()
         {
-            var buttonStatePath = Path.Elements("paths").Elements("path")
+            var buttonStatePath = Path.Element("configuration").Elements("paths").Elements("path")
                 .Where(a => (string)a.Attribute("Name") == "ButtonState")
                 .Select(a => (string)a)
                 .First();
@@ -41,7 +41,7 @@ namespace Task1
             return button;
         }
 
-        // Button is single or not
+        /*// Button is single or not
         public string ButtonSingle(XDocument pathPage, string name)
         {
             var button = pathPage.Element("page").Element("elements").Elements("buttons").Elements("button")
@@ -50,7 +50,7 @@ namespace Task1
                                 .Single();
 
             return button;
-        }
+        }*/
 
         // Get a button status
         public string ButtonState(XDocument pathButtonState, string button)

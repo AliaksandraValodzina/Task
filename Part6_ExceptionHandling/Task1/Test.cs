@@ -68,7 +68,7 @@ namespace Task1
             Assert.IsFalse(state);
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void SingleButtonState()
         {
             PageWorker worker = new PageWorker();
@@ -82,6 +82,6 @@ namespace Task1
 
             var singleStateOrNot = worker.ButtonSingle(pathPage, buttons.ElementAt(1));
             Assert.AreEqual(singleStateOrNot.Equals("Previous Page"), true);
-        }
+        }*/
     }
 }

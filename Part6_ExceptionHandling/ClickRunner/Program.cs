@@ -15,7 +15,7 @@ namespace ClickRunner
             Console.Write($"This file must have a fields PageData and ButtonState with paths to files.\n");
             Console.Write($"(If you will not input path it will equal - \n{Environment.CurrentDirectory}\\Data\\Path.xml.)\n");
             string consol = Console.ReadLine();
-            string path = String.IsNullOrEmpty(consol) ? $@"{Environment.CurrentDirectory}\\Data\\Path.xml" : consol;
+            string path = String.IsNullOrEmpty(consol) ? $@"{Environment.CurrentDirectory}\\App.config" : consol;
 
             Page page = new Page();
             PageWorker worker = new PageWorker();
@@ -68,16 +68,14 @@ namespace ClickRunner
 
                 foreach (var but in page.Buttons)
             {
-                Button button = but;
-
                 try
                 {
-                    button.Click();
-                    Console.Write($"You click on the button \"{button.Name}\".\n");
+                    but.Click();
+                    Console.Write($"You click on the button \"{but.Name}\".\n");
                 }
                 catch (EnabledStatusException)
                 {
-                    Console.Write($"You can not click on the button \"{button.Name}\". Button is disabled.\n");
+                    Console.Write($"You can not click on the button \"{but.Name}\". Button is disabled.\n");
                 }
             }
             }

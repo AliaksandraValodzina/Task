@@ -11,6 +11,7 @@ namespace Decorator
         static void Main(string[] args)
         {
             double sum = 0;
+            int countComponents = 0;
 
             //Choose a pizza
             Pizza pizza = null;
@@ -34,7 +35,7 @@ namespace Decorator
                     pizza = new PizzaVegitarian();
                     break;
                 default:
-                    Console.WriteLine("Invalid input. Try again");
+                    Console.WriteLine("Invalid input. Try again choose a pizza.\n");
                     goto startAddPizza;
             }
 
@@ -53,22 +54,24 @@ namespace Decorator
             {
                 case "1":
                     component = new Mushrooms(pizza);
+                    countComponents++;
                     break;
                 case "2":
                     component = new Pepper(pizza);
+                    countComponents++;
                     break;
                 case "3":
                     component = new Pepperoni(pizza);
+                    countComponents++;
                     break;
                 case "4":
                     goto nextPizza;
-                    break;
                 default:
-                    Console.WriteLine("Invalid input. Try again");
+                    Console.WriteLine("Invalid input. Try again add a component.\n");
                     goto startAddComponents;
             }
 
-            startMoreComponents:
+            moreComponents:
             // One more components
             Console.WriteLine($"Do you want to choose one more component?\n");
             Console.WriteLine($"Enter Y for yes, N for no.\n");
@@ -84,13 +87,15 @@ namespace Decorator
                     break;
                 default:
                     Console.WriteLine("Invalid input. Try again");
-                    goto startMoreComponents;
+                    goto moreComponents;
             }
 
             nextPizza:
-            sum += component.GetPrice();
+            if (!(component == null)) sum += component.GetPrice();
+            if ((component == null)) sum += pizza.GetPrice();
 
             // One more pizza
+            morePizza:
             Console.WriteLine($"Do you want to choose one more pizza?\n");
             Console.WriteLine($"Enter Y for yes, N for no.\n");
 
@@ -99,13 +104,16 @@ namespace Decorator
             switch (consoleLine)
             {
                 case "Y":
-                    goto startAddComponents;
+                    pizza = null;
+                    goto startAddPizza;
                 case "N":
                     break;
                 default:
                     Console.WriteLine("Invalid input. Try again");
-                    goto startAddPizza;
+                    goto morePizza;
             }
+
+            if (countComponents > 1) sum = sum * 0.95;
 
             // Print and wait for user
             Console.WriteLine($"Sum = {sum}");

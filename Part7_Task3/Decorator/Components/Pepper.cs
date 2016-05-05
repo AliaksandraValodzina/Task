@@ -11,7 +11,7 @@ namespace Decorator
         Pizza pizza;
         private double price = 10.0;
 
-        private Pepper(Pizza pizza)
+        public Pepper(Pizza pizza)
         {
             this.pizza = pizza;
         }

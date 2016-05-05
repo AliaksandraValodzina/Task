@@ -1,43 +1,54 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 
 namespace BrowserRunner
 {
-    class WebDriver : IWebDriver
+
+    public class SingletonFactory
     {
-        private static IWebDriver _driver;
+        private static IWebDriver _driver = InitWebDriver();
 
-
-        public static IWebDriver GetDriver()
+        private SingletonFactory()
         {
-            return _driver;
+        
         }
 
-        static InitWebDriver InitWD()
+        public static IWebDriver InitWebDriver()
         {
             switch (ConfigurationManager.AppSettings["browser"])
             {
-                case "chrome":
-                    _driver = new FirefoxDriver();
-                    break;
                 case "firefox":
-                    _driver = new ChromeDriver();
-                    break;
+                    return new FirefoxDriver();
+
+                case "chrome":
+                    return new ChromeDriver();
+
                 default:
-                    Console.WriteLine("Do not valid value in config file");
+                    return new FirefoxDriver();
             }
-            return _driver;
         }
+    }
 
-        class FireFoxFactory
+    [TestClass]
+    public class UnitTest
+    {
+        [TestMethod]
+        public void Test()
         {
-            public static IWebDriver GetDriver()
-            {
-                IWebDriver firefoxDriver = new FirefoxDriver();
-                return _driver;
-            }
+            IWebDriver driver = SingletonFactory.InitWebDriver();
+            driver.Navigate().GoToUrl("http://www.google.com/");
         }
 
+        [TestMethod]
+        public void TestClose()
+        {
+            IWebDriver driver = SingletonFactory.InitWebDriver();
+            driver.Navigate().GoToUrl("http://www.google.com/");
+            driver.Quit();
+
+        }
     }
 }

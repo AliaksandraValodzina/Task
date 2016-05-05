@@ -30,9 +30,5 @@ namespace Task1
             return Name;
         }
 
-        public static implicit operator List<object>(Button v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

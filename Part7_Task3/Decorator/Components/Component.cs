@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Decorator.Components
+namespace Decorator
 {
     public abstract class Component : Pizza
     {
         Pizza pizza;
-        private double price;
+        double price;
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Decorator.Components
+namespace Decorator
 {
-    class Pepperoni : Component
+    public class Pepperoni : Component
     {
         Pizza pizza;
         private double price = 30.0;

@@ -51,7 +51,7 @@
     <Compile Include="Pizza\MeatPizza.cs" />
     <Compile Include="Pizza\Pizza.cs" />
     <Compile Include="Pizza\PizzaVegitarian.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="MainClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace CommandPattern
 {
-    class Program
+    class Main
     {
         static void Main(string[] args)
         {

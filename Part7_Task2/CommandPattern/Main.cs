@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace CommandPattern
 {
-    class Main
+    class MainClass
     {
         static void Main(string[] args)
         {
@@ -32,12 +32,12 @@ namespace CommandPattern
                 case "2":
                     Console.WriteLine("Enter X and Y for first point\n");
                     var coordPoint1Str = Console.ReadLine();
-                    int[] XYPoint1 = coordPoint1Str.Split(' ').Select(n => Convert.ToInt32(n)).ToArray();
+                    double[] XYPoint1 = coordPoint1Str.Split(' ').Select(n => Convert.ToDouble(n)).ToArray();
                     Point point1 = new Point(XYPoint1[0], XYPoint1[1]);
 
                     Console.WriteLine("Enter X and Y for second point\n");
                     var coordPoint2Str = Console.ReadLine();
-                    int[] XYPoint2 = coordPoint1Str.Split(' ').Select(n => Convert.ToInt32(n)).ToArray();
+                    double[] XYPoint2 = coordPoint1Str.Split(' ').Select(n => Convert.ToDouble(n)).ToArray();
                     Point point2 = new Point(XYPoint2[0], XYPoint2[1]);
 
                     command = new DistanceCalculator(point1, point2);

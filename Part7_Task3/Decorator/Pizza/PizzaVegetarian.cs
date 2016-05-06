@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Decorator
 {
-    public class PizzaVegitarian : Pizza
+    public class PizzaVegetarian : Pizza
     {
         private double price = 200.0;
 

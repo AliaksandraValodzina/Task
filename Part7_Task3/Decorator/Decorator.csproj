@@ -50,10 +50,10 @@
     <Compile Include="Pizza\CheesePizza.cs" />
     <Compile Include="Pizza\MeatPizza.cs" />
     <Compile Include="Pizza\Pizza.cs" />
-    <Compile Include="Pizza\PizzaVegitarian.cs" />
+    <Compile Include="Pizza\PizzaVegetarian.cs" />
     <Compile Include="MainClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserConnection\Messeges.cs" />
+    <Compile Include="UserConnection\ChooseItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChooseCommand.cs" />
     <Compile Include="Commands\CheckPrime.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\DistanceCalculator.cs" />

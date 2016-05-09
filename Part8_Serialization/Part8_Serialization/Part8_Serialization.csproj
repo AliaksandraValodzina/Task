@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Elements\Book.cs" />
+    <Compile Include="Elements\Catalog.cs" />
     <Compile Include="Run.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -51,7 +53,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="XML Files\XMLFile1.xml">
+    <Content Include="XML Files\Books.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XML Files\RezultBooks.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

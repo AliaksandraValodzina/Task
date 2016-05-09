@@ -111,6 +111,10 @@ namespace Decorator
         // One more pizza
         public void NextPizza() 
         {
+            AddToPrice();
+            pizza = null;
+            component = null;
+
             Console.WriteLine($"Do you want to choose one more pizza?\n");
             Console.WriteLine($"Enter Y for yes, N for no.\n");
 
@@ -119,12 +123,9 @@ namespace Decorator
             switch (consoleLine)
             {
                 case "Y":
-                    AddToPrice();
-                    pizza = null;
                     ChoosePizza();
                     break;
                 case "N":
-                    AddToPrice();
                     break;
                 default:
                     Console.WriteLine("Invalid input. Try again");

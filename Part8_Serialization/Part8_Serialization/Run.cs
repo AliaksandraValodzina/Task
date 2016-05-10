@@ -18,6 +18,7 @@ namespace Part8_Serialization
 
             var deSerializer = new XmlSerializer(typeof(Catalog));
             var catalog = deSerializer.Deserialize(new FileStream(xmlFile, FileMode.Open)) as Catalog;
+
             foreach (Book book in catalog.Books)
             {
                 Console.WriteLine(book);

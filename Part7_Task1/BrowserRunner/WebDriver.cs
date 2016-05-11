@@ -6,29 +6,33 @@ using OpenQA.Selenium.Firefox;
 
 namespace BrowserRunner
 {
-
     public class SingletonFactory
     {
         private static IWebDriver _driver = InitWebDriver();
 
         private SingletonFactory()
         {
-        
         }
 
         public static IWebDriver InitWebDriver()
         {
-            switch (ConfigurationManager.AppSettings["browser"])
+            if (_driver == null)
             {
-                case "firefox":
-                    return new FirefoxDriver();
-
-                case "chrome":
-                    return new ChromeDriver();
-
-                default:
-                    return new FirefoxDriver();
+                switch (ConfigurationManager.AppSettings["browser"])
+                {
+                    case "firefox":
+                        _driver = FirefoxDriverFactory.GetDriver();
+                        break;
+                    case "chrome":
+                        _driver = ChromeDriverFactory.GetDriver();
+                        break;
+                    default:
+                        _driver = FirefoxDriverFactory.GetDriver();
+                        break;
+                }
             }
+
+            return _driver;
         }
     }
 

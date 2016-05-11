@@ -46,6 +46,7 @@
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\DistanceCalculator.cs" />
     <Compile Include="Invoker.cs" />
+    <Compile Include="IsPrimeSolver.cs" />
     <Compile Include="Number.cs" />
     <Compile Include="Commands\NumeralCalculator.cs" />
     <Compile Include="Point.cs" />

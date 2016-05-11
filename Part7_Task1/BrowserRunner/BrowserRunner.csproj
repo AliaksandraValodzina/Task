@@ -46,6 +46,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChromeDriverFactory.cs" />
+    <Compile Include="FirefoxDriverFactory.cs" />
     <Compile Include="WebDriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

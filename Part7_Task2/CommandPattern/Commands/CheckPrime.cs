@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CommandPattern
 {
     // ConcreteCommand class
-    class CheckPrime : Command
+    public class CheckPrime : Command
     {
         private Number number;
 
@@ -18,7 +18,7 @@ namespace CommandPattern
 
         public override void Execute()
         {
-            if (IsPrime(number.Num))
+            if (IsPrimeSolver.IsPrime(number.Num))
             {
                 Console.WriteLine("Number is a prime.");
             }
@@ -27,17 +27,5 @@ namespace CommandPattern
                 Console.WriteLine("Number is not a prime.");
             }
         }
-
-        // A number is prime or not
-        public bool IsPrime(int number)
-        {
-            if (number < 2) return false;
-            if (number == 2) return true;
-            if (number % 2 == 0) return false;
-            for (int i = 3; i * i <= number; i += 2)
-                if (number % i == 0) return false;
-            return true;
-        }
-
     }
 }

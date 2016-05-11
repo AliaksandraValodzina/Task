@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace CommandPattern
 {
-    class NumeralCalculator : Command
+    public class NumeralCalculator : Command
     {
         private Number number;
 

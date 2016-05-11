@@ -78,7 +78,11 @@ namespace Part9_WPF_Application
             // Current item
             string currentItem = lbAssembles.SelectedItem.ToString();
 
-            
+            Assembly assembly = Assembly.ReflectionOnlyLoadFrom(currentItem);
+            foreach (Type type in assembly.GetTypes())
+            {
+                lbClasses.Items.Add(type.FullName);
+            }
         }
     }
 }

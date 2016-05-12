@@ -12,6 +12,10 @@ namespace Part9_WPF_Application
     /// </summary>
     public partial class MainWindow : Window
     {
+        string path = string.Empty;
+        string currentItem = string.Empty;
+        Assembly assembly;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -24,7 +28,6 @@ namespace Part9_WPF_Application
 
         private void btBrowse_Click(object sender, RoutedEventArgs e)
         {
-            var path = string.Empty;
 
             using (var dialog = new FolderBrowserDialog())
             {
@@ -47,41 +50,71 @@ namespace Part9_WPF_Application
                 {
                     var fileName = Path.GetFileName(file);
                     lbAssembles.Items.Add(fileName);
-
-                    //Assembly assembly = Assembly.ReflectionOnlyLoadFrom(file);
-                    
-                    //var listOfTypes = assembly.ExportedTypes.ToList();
-
-                    //var typeName = typeof();
-
-                    //var methods = typeName.GetMethods().ToList();
                 }
             }
         }
 
-        /*private void lbAssembles_SelectionChanged(object sender, System.EventArgs e)
-        {
-            // Get the currently selected item in the ListBox.
-            string curItem = listBox1.SelectedItem.ToString();
-
-            // Find the string in ListBox2.
-            int index = listBox2.FindString(curItem);
-            // If the item was not found in ListBox 2 display a message box, otherwise select it in ListBox2.
-            if (index == -1)
-                MessageBox.Show("Item is not available in ListBox2");
-            else
-                listBox2.SetSelected(index, true);
-        }*/
-
         private void lbAssembles_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            // Current item
-            string currentItem = lbAssembles.SelectedItem.ToString();
+            // Current file
+            currentItem = lbAssembles.SelectedItem.ToString();
 
-            Assembly assembly = Assembly.ReflectionOnlyLoadFrom(currentItem);
-            foreach (Type type in assembly.GetTypes())
+            // Get all classes
+            /*var classes = (from t in Assembly.LoadFile(path + @"\" + currentItem).GetTypes()
+                          where t.IsClass
+                          select t).ToList();*/
+
+            // Get all classes
+            assembly = Assembly.LoadFile(path + @"\" + currentItem);
+            var classes = assembly.GetTypes()
+                                .Where(t => t.IsClass)
+                                .ToList();
+
+            // Add class name to listBox
+            foreach (var oneClass in classes)
             {
-                lbClasses.Items.Add(type.FullName);
+                lbClasses.Items.Add(oneClass);
+            }
+        }
+
+        private void lbClasses_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            // Delete all items from listBox
+            lbMethods.Items.Clear();
+
+            // Current class
+            var currentItem = lbClasses.SelectedItem.ToString();
+
+            // Get type of current class
+            var currentClass = assembly.GetTypes()
+                                .Where(t => t.FullName.Equals(currentItem))
+                                .First();
+
+            // Get fields from current class
+            var fields = currentClass.GetFields().ToList();
+
+            // Add field to listBox
+            foreach (var field in fields)
+            {
+                lbMethods.Items.Add(field);
+            }
+
+            // Get properties from current class
+            var properties = currentClass.GetProperties().ToList();
+
+            // Add properties to listBox
+            foreach (var prop in properties)
+            {
+                lbMethods.Items.Add(prop);
+            }
+
+            // Get methods from current class
+            var methods = currentClass.GetMethods().ToList();
+
+            // Add methods to listBox
+            foreach (var method in methods)
+            {
+                lbMethods.Items.Add(method);
             }
         }
     }

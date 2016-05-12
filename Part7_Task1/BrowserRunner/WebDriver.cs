@@ -6,34 +6,35 @@ using OpenQA.Selenium.Firefox;
 
 namespace BrowserRunner
 {
-    public class SingletonFactory
+    public class WebDriver
     {
         private static IWebDriver _driver = InitWebDriver();
 
-        private SingletonFactory()
+        private WebDriver()
         {
+        }
+
+        public static IWebDriver GetDriver()
+        {
+            return _driver;
         }
 
         public static IWebDriver InitWebDriver()
         {
-            if (_driver == null)
-            {
                 switch (ConfigurationManager.AppSettings["browser"])
                 {
                     case "firefox":
-                        _driver = FirefoxDriverFactory.GetDriver();
+                        return FirefoxDriverFactory.CreateDriver();
                         break;
                     case "chrome":
-                        _driver = ChromeDriverFactory.GetDriver();
+                        return ChromeDriverFactory.CreateDriver();
                         break;
                     default:
-                        _driver = FirefoxDriverFactory.GetDriver();
+                        return FirefoxDriverFactory.CreateDriver();
                         break;
                 }
-            }
-
-            return _driver;
         }
+
     }
 
     [TestClass]
@@ -42,14 +43,14 @@ namespace BrowserRunner
         [TestMethod]
         public void Test()
         {
-            IWebDriver driver = SingletonFactory.InitWebDriver();
+            IWebDriver driver = WebDriver.InitWebDriver();
             driver.Navigate().GoToUrl("http://www.google.com/");
         }
 
         [TestMethod]
         public void TestClose()
         {
-            IWebDriver driver = SingletonFactory.InitWebDriver();
+            IWebDriver driver = WebDriver.InitWebDriver();
             driver.Navigate().GoToUrl("http://www.google.com/");
             driver.Quit();
 

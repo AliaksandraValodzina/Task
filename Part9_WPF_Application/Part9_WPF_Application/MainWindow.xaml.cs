@@ -28,7 +28,15 @@ namespace Part9_WPF_Application
 
         private void btBrowse_Click(object sender, RoutedEventArgs e)
         {
-
+            // Clear all boxes
+            cbItems.Items.Clear();
+            lbAttributes.Items.Clear();
+            lbClasses.Items.Clear();
+            tbPath.Clear();
+            lbAssembles.Items.Clear();
+            path = string.Empty;
+            
+            // Path to folder
             using (var dialog = new FolderBrowserDialog())
             {
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -52,17 +60,20 @@ namespace Part9_WPF_Application
                     lbAssembles.Items.Add(fileName);
                 }
             }
+
+            cbItems.Items.Add("All");
+            cbItems.Items.Add("Fields");
+            cbItems.Items.Add("Properties");
+            cbItems.Items.Add("Methods");
         }
 
         private void lbAssembles_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             // Current file
-            currentItem = lbAssembles.SelectedItem.ToString();
-
-            // Get all classes
-            /*var classes = (from t in Assembly.LoadFile(path + @"\" + currentItem).GetTypes()
-                          where t.IsClass
-                          select t).ToList();*/
+            if (lbAssembles.SelectedItem != null)
+            {
+                currentItem = lbAssembles.SelectedItem.ToString();
+            }
 
             // Get all classes
             assembly = Assembly.LoadFile(path + @"\" + currentItem);
@@ -80,41 +91,89 @@ namespace Part9_WPF_Application
         private void lbClasses_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             // Delete all items from listBox
-            lbMethods.Items.Clear();
+            lbAttributes.Items.Clear();
 
             // Current class
-            var currentItem = lbClasses.SelectedItem.ToString();
+            if (lbClasses.SelectedItem != null)
+            {
+                var currentClass = lbClasses.SelectedItem as Type;
 
-            // Get type of current class
-            var currentClass = assembly.GetTypes()
-                                .Where(t => t.FullName.Equals(currentItem))
-                                .First();
 
+                this.GetFields(currentClass);
+                this.GetMethods(currentClass);
+                this.GetProperties(currentClass);
+            }
+        }
+
+        private void cbItems_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (cbItems.SelectedItem != null && lbClasses.SelectedItem != null)
+            {
+                // Current item
+                var currentItem = cbItems.SelectedItem.ToString();
+
+                // Get type of current class
+                var currentClass = lbClasses.SelectedItem as Type;
+
+                switch (currentItem)
+                {
+                    case "All":
+                        lbAttributes.Items.Clear();
+                        this.GetFields(currentClass);
+                        this.GetMethods(currentClass);
+                        this.GetProperties(currentClass);
+                        break;
+                    case "Properties":
+                        lbAttributes.Items.Clear();
+                        this.GetProperties(currentClass);
+                        break;
+                    case "Methods":
+                        lbAttributes.Items.Clear();
+                        this.GetMethods(currentClass);
+                        break;
+                    case "Fields":
+                        lbAttributes.Items.Clear();
+                        this.GetFields(currentClass);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        public void GetFields(Type currentClass)
+        {
             // Get fields from current class
             var fields = currentClass.GetFields().ToList();
 
             // Add field to listBox
             foreach (var field in fields)
             {
-                lbMethods.Items.Add(field);
+                lbAttributes.Items.Add(field);
             }
+        }
 
+        public void GetProperties(Type currentClass)
+        {
             // Get properties from current class
             var properties = currentClass.GetProperties().ToList();
 
             // Add properties to listBox
             foreach (var prop in properties)
             {
-                lbMethods.Items.Add(prop);
+                lbAttributes.Items.Add(prop);
             }
+        }
 
+        public void GetMethods(Type currentClass)
+        {
             // Get methods from current class
             var methods = currentClass.GetMethods().ToList();
 
             // Add methods to listBox
             foreach (var method in methods)
             {
-                lbMethods.Items.Add(method);
+                lbAttributes.Items.Add(method);
             }
         }
     }

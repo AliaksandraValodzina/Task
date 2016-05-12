@@ -64,6 +64,7 @@ namespace CommandPattern
 
             Console.WriteLine("Enter a Y if you want to continue, Enter - if not.");
             consoleLine = Console.ReadLine();
+
             if (consoleLine == "Y")
             {
                 Choose();

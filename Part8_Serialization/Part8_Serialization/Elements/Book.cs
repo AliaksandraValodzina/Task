@@ -49,7 +49,7 @@ namespace Part8_Serialization.Elements
 
         public override string ToString()
         {
-            return string.Format($"Book id = {Id},\r\n isbn - {Isbn},\r\n author - {Author},\r\n title - {Title},\r\n genre - {Genre},\r\n publisher - {Publish},\r\n publish date - {PublishDate},\r\n deskription - {Description}.");
+            return string.Format($"Book id = {Id},\r\n isbn - {Isbn},\r\n author - {Author},\r\n title - {Title},\r\n genre - {Genre},\r\n publisher - {Publish},\r\n publish date - {PublishDate.Year}-{PublishDate.Month}-{PublishDate.Day},\r\n deskription - {Description}.");
         }
     }
 }

@@ -10,15 +10,9 @@ namespace BrowserRunner
 {
     class FirefoxDriverFactory
     {
-        private static IWebDriver driver = null;
-
-        public static IWebDriver GetDriver()
+        public static IWebDriver CreateDriver()
         {
-            if (driver == null)
-            {
-                driver = new FirefoxDriver();
-            }
-            return driver;
+            return new FirefoxDriver();
         }
     }
 }

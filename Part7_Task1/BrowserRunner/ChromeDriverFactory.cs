@@ -10,15 +10,9 @@ namespace BrowserRunner
 {
     public class ChromeDriverFactory
     {
-        private static IWebDriver driver = null;
-
-        public static IWebDriver GetDriver() 
+        public static IWebDriver CreateDriver() 
         {
-            if(driver == null)
-            {
-                driver = new ChromeDriver();
-            }
-            return driver;
+            return new ChromeDriver();
         }
     }
 }

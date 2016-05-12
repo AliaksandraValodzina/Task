@@ -16,11 +16,11 @@ namespace Decorator
         //Choose a pizza
         public void ChoosePizza()
         {
-            Console.WriteLine($"Choose a pizza:\n");
-            Console.WriteLine($"Enter a number\n");
-            Console.WriteLine($"1 - if you want a meat pizza,\n");
-            Console.WriteLine($"2 - if you want a cheese pizza,\n");
-            Console.WriteLine($"3 - if you want a vegetarian pizza.\n");
+            Console.WriteLine("Choose a pizza:");
+            Console.WriteLine("Enter a number");
+            Console.WriteLine("1 - if you want a meat pizza,");
+            Console.WriteLine("2 - if you want a cheese pizza,");
+            Console.WriteLine("3 - if you want a vegetarian pizza.");
 
             var consoleLine = Console.ReadLine();
 
@@ -39,7 +39,7 @@ namespace Decorator
                     ChooseComponent();
                     break;
                 default:
-                    Console.WriteLine("Invalid input. Try again choose a pizza.\n");
+                    Console.WriteLine("Invalid input. Try again choose a pizza.");
                     ChoosePizza();
                     break;
             }
@@ -48,12 +48,12 @@ namespace Decorator
         //Choose a components
         public void ChooseComponent() 
         {
-            Console.WriteLine($"Choose a component:\n");
-            Console.WriteLine($"Enter a number\n");
-            Console.WriteLine($"1 - if you want more mushrooms,\n");
-            Console.WriteLine($"2 - if you want more pepper,\n");
-            Console.WriteLine($"3 - if you want more pepperoni.\n");
-            Console.WriteLine($"4 - nothing.\n");
+            Console.WriteLine("Choose a component:");
+            Console.WriteLine("Enter a number");
+            Console.WriteLine("1 - if you want more mushrooms,");
+            Console.WriteLine("2 - if you want more pepper,");
+            Console.WriteLine("3 - if you want more pepperoni.");
+            Console.WriteLine("4 - nothing.");
 
             var consoleLine = Console.ReadLine();
 
@@ -78,7 +78,7 @@ namespace Decorator
                     NextPizza();
                     break;
                 default:
-                    Console.WriteLine("Invalid input. Try again add a component.\n");
+                    Console.WriteLine("Invalid input. Try again add a component.");
                     ChooseComponent();
                     break;
             }
@@ -87,8 +87,8 @@ namespace Decorator
         // One more components
         public void NextComponent()
         {
-            Console.WriteLine($"Do you want to choose one more component?\n");
-            Console.WriteLine($"Enter Y for yes, N for no.\n");
+            Console.WriteLine("Do you want to choose one more component?");
+            Console.WriteLine("Enter Y for yes, N for no.");
 
             var consoleLine = Console.ReadLine();
 
@@ -102,7 +102,7 @@ namespace Decorator
                     NextPizza();
                     break;
                 default:
-                    Console.WriteLine("Invalid input. Try again.\n");
+                    Console.WriteLine("Invalid input. Try again.");
                     NextComponent();
                     break;
             }
@@ -115,8 +115,8 @@ namespace Decorator
             pizza = null;
             component = null;
 
-            Console.WriteLine($"Do you want to choose one more pizza?\n");
-            Console.WriteLine($"Enter Y for yes, N for no.\n");
+            Console.WriteLine("Do you want to choose one more pizza?");
+            Console.WriteLine("Enter Y for yes, N for no.");
 
             var consoleLine = Console.ReadLine();
 

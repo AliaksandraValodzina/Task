@@ -14,7 +14,7 @@ namespace CommandPattern
             this.point2 = point2;
         }
 
-        public override void Execute()
+        public void Execute()
         {
             double distance = Math.Sqrt(Math.Pow((point1.X - point2.X), 2) + Math.Pow((point1.Y - point2.Y), 2));
             Console.WriteLine($"Distance equals {distance}");

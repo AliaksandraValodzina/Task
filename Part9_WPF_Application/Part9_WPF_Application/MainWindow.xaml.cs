@@ -30,13 +30,12 @@ namespace Part9_WPF_Application
         {
             // Clear all boxes
             cbItems.Items.Clear();
-            lbAttributes.Items.Clear();
-            lbClasses.Items.Clear();
             tbPath.Clear();
             lbAssembles.Items.Clear();
-            path = string.Empty;
-            
-            // Path to folder
+            lbClasses.Items.Clear();
+            lbAttributes.Items.Clear();
+
+            // Folder path
             using (var dialog = new FolderBrowserDialog())
             {
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -61,6 +60,7 @@ namespace Part9_WPF_Application
                 }
             }
 
+            // Add text to comboBox
             cbItems.Items.Add("All");
             cbItems.Items.Add("Fields");
             cbItems.Items.Add("Properties");
@@ -69,6 +69,9 @@ namespace Part9_WPF_Application
 
         private void lbAssembles_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            // Delete all items from listBox
+            lbClasses.Items.Clear();
+
             // Current file
             if (lbAssembles.SelectedItem != null)
             {
@@ -97,7 +100,6 @@ namespace Part9_WPF_Application
             if (lbClasses.SelectedItem != null)
             {
                 var currentClass = lbClasses.SelectedItem as Type;
-
 
                 this.GetFields(currentClass);
                 this.GetMethods(currentClass);

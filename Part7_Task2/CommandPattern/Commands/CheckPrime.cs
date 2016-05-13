@@ -16,7 +16,7 @@ namespace CommandPattern
             this.number = number;
         }
 
-        public override void Execute()
+        public void Execute()
         {
             if (IsPrimeSolver.IsPrime(number.Num))
             {

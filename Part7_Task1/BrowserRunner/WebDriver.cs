@@ -25,13 +25,10 @@ namespace BrowserRunner
                 {
                     case "firefox":
                         return FirefoxDriverFactory.CreateDriver();
-                        break;
                     case "chrome":
                         return ChromeDriverFactory.CreateDriver();
-                        break;
                     default:
                         return FirefoxDriverFactory.CreateDriver();
-                        break;
                 }
         }
 

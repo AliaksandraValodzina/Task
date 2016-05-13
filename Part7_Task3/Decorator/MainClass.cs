@@ -10,7 +10,7 @@ namespace Decorator
     {
         static void Main(string[] args)
         {
-            ChooseItem item = new ChooseItem();
+            ItemChooser item = new ItemChooser();
 
             //Choose a pizza
             item.ChoosePizza();

@@ -12,7 +12,7 @@ namespace CommandPattern
             this.number = number;
         }
 
-        public override void Execute()
+        public void Execute()
         {
             var sumNumerals = number.Num
                             .ToString()

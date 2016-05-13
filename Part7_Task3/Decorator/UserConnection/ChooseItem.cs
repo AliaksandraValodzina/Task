@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Decorator
 { 
-    public class ChooseItem
+    public class ItemChooser
     {
         private Pizza pizza = null;
         private Component component = null;
@@ -28,19 +28,19 @@ namespace Decorator
             {
                 case "1":
                     pizza = new MeatPizza();
-                    ChooseComponent();
+                    this.ChooseComponent();
                     break;
                 case "2":
                     pizza = new CheesePizza();
-                    ChooseComponent();
+                    this.ChooseComponent();
                     break;
                 case "3":
                     pizza = new PizzaVegetarian();
-                    ChooseComponent();
+                    this.ChooseComponent();
                     break;
                 default:
                     Console.WriteLine("Invalid input. Try again choose a pizza.");
-                    ChoosePizza();
+                    this.ChoosePizza();
                     break;
             }
         }
@@ -62,24 +62,24 @@ namespace Decorator
                 case "1":
                     component = new Mushrooms(pizza);
                     ComponentsCount++;
-                    NextComponent();
+                    this.NextComponent();
                     break;
                 case "2":
                     component = new Pepper(pizza);
                     ComponentsCount++;
-                    NextComponent();
+                    this.NextComponent();
                     break;
                 case "3":
                     component = new Pepperoni(pizza);
                     ComponentsCount++;
-                    NextComponent();
+                    this.NextComponent();
                     break;
                 case "4":
-                    NextPizza();
+                    this.NextPizza();
                     break;
                 default:
                     Console.WriteLine("Invalid input. Try again add a component.");
-                    ChooseComponent();
+                    this.ChooseComponent();
                     break;
             }
         }
@@ -96,14 +96,14 @@ namespace Decorator
             {
                 case "Y":
                     pizza = component;
-                    ChooseComponent();
+                    this.ChooseComponent();
                     break;
                 case "N":
-                    NextPizza();
+                    this.NextPizza();
                     break;
                 default:
                     Console.WriteLine("Invalid input. Try again.");
-                    NextComponent();
+                    this.NextComponent();
                     break;
             }
         }
@@ -111,7 +111,7 @@ namespace Decorator
         // One more pizza
         public void NextPizza() 
         {
-            AddToPrice();
+            this.AddToPrice();
             pizza = null;
             component = null;
 
@@ -123,13 +123,13 @@ namespace Decorator
             switch (consoleLine)
             {
                 case "Y":
-                    ChoosePizza();
+                    this.ChoosePizza();
                     break;
                 case "N":
                     break;
                 default:
                     Console.WriteLine("Invalid input. Try again");
-                    NextPizza();
+                    this.NextPizza();
                     break;
             }
         }

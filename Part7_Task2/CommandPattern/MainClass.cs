@@ -7,7 +7,7 @@ namespace CommandPattern
     {
         static void Main(string[] args)
         {
-            ChooseCommand commandChoose = new ChooseCommand();
+            CommandController commandChoose = new CommandController();
             commandChoose.Choose();
 
             // Wait for user

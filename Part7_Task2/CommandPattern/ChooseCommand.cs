@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CommandPattern
 {
-    class ChooseCommand
+    class CommandController
     {
         Invoker invoker = new Invoker();
         Command command = null;
@@ -34,11 +34,11 @@ namespace CommandPattern
                     break;
                 case "2":
                     Console.WriteLine("Enter X and Y for first point");
-                    double[] XYPoint1 = AddCoordinates();
+                    double[] XYPoint1 = this.AddCoordinates();
                     Point point1 = new Point(XYPoint1[0], XYPoint1[1]);
 
                     Console.WriteLine("Enter X and Y for second point");
-                    double[] XYPoint2 = AddCoordinates();
+                    double[] XYPoint2 = this.AddCoordinates();
                     Point point2 = new Point(XYPoint2[0], XYPoint2[1]);
 
                     command = new DistanceCalculator(point1, point2);
@@ -62,16 +62,21 @@ namespace CommandPattern
                     break;
             }
 
-            Console.WriteLine("Enter a Y if you want to continue, Enter - if not.");
+            Console.WriteLine("Enter a Y if you want to continue, N - if not.");
             consoleLine = Console.ReadLine();
 
             if (consoleLine == "Y")
             {
                 Choose();
             }
+
+            if (consoleLine == "N")
+            {
+                Console.WriteLine("Press any key to continue...");
+            }
         }
 
-        public static double[] AddCoordinates()
+        public double[] AddCoordinates()
         {
             double[] XYPoint = null;
             string coordPointStr  = null;

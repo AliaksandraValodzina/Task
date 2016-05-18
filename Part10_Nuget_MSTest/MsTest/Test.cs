@@ -12,6 +12,8 @@ namespace MsTest
     [TestClass]
     public class Test : BaseClass
     {
+        public static BrowserController controller = new BrowserController();
+
         public TestContext TestContext { get; set; }
 
         public static StringBuilder Log
@@ -32,8 +34,8 @@ namespace MsTest
         [TestMethod]
         [TestCategory("smoke")]
         //[Ignore]
-        //[Timeout(1000), Owner("Mike"), Description("Fix problems")]
-        //[ExpectedException(typeof(FormatException))]
+        //[Timeout(5000), Owner("Mike"), Description("Fix problems")]
+        //[ExpectedException(typeof(Exception))]
         [DeploymentItem("Data.xml")]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
                    "|DataDirectory|\\Data.xml",
@@ -41,21 +43,22 @@ namespace MsTest
                     DataAccessMethod.Sequential)]
         public void TestMethodSetUp()
         {
-            string adress = (string)TestContext.DataRow["adress"];
-            Log.AppendLine("adress = " + adress);
             Log.AppendLine("TestMethodSetUp");
-            //controller.Setup();
+
+            controller.Path = (string)TestContext.DataRow["address"];
+            Log.AppendLine("address = " + controller.Path);
+
+            controller.Setup();
         }
 
         [TestMethod]
         [TestCategory("daily")]
-        //[Timeout(1000), Owner("Lora"), Description("Add comments")]
+        [Timeout(5000), Owner("Lora"), Description("Add comments")]
         public void TestMethodTearDown()
         {
             Log.AppendLine("TestMethodTearDown");
 
-            //Log.AppendLine("Test.TestMethodTearDown()");
-            //controller.TearDown();
+            controller.TearDown();
         }
 
 
@@ -64,9 +67,7 @@ namespace MsTest
         {
             Log.AppendLine("ClassInit");
 
-            //controller.Driver = new FirefoxDriver();
-            //controller.Path = "http://www.google.com/";
-            //Controller.Path = "xcfgsdfg";
+            controller.Driver = new FirefoxDriver();
         }
 
         [ClassCleanup]
@@ -74,18 +75,12 @@ namespace MsTest
         {
             Log.AppendLine("ClassClean");
 
-
             string filePath = ConfigurationManager.AppSettings["filePath"];
             using (FileStream fs = new FileStream(filePath, FileMode.Append, FileAccess.Write))
             using (StreamWriter sw = new StreamWriter(fs))
             {
                 sw.WriteLine(Log);
             }
-
-            //if (controller.BrowserStatus == "on")
-            //{
-            //    controller.TearDown();
-            //}
         }
 
         [TestInitialize]
@@ -99,6 +94,11 @@ namespace MsTest
         public void TestClean()
         {
             Log.AppendLine("TestClean");
+
+            if (controller.BrowserStatus.Equals("on"))
+            {
+                controller.TearDown();
+            }
 
         }
     }

@@ -1,11 +1,15 @@
 ClassInit
 TestInit
-adress = http://www.google.com/
 TestMethodSetUp
+address = http://www.google.com/
 TestClean
 TestInit
-adress = http://www.google.com/
 TestMethodSetUp
+address = http://cosmostv.by/
+TestClean
+TestInit
+TestMethodSetUp
+address = abr
 TestClean
 TestInit
 TestMethodTearDown
@@ -14,12 +18,70 @@ ClassClean
 
 ClassInit
 TestInit
-adress = http://www.google.com/
 TestMethodSetUp
+address = http://www.google.com/
 TestClean
 TestInit
-adress = http://www.richard-banks.org/2010/03/mstest-sucks-for-unit-tests.html
 TestMethodSetUp
+address = http://cosmostv.by/
+TestClean
+TestInit
+TestMethodSetUp
+address = abr
+TestClean
+TestInit
+TestMethodTearDown
+TestClean
+ClassClean
+
+ClassInit
+TestInit
+TestMethodSetUp
+address = http://www.google.com/
+TestClean
+TestInit
+TestMethodSetUp
+address = http://cosmostv.by/
+TestClean
+TestInit
+TestMethodSetUp
+address = abr
+TestClean
+TestInit
+TestMethodTearDown
+TestClean
+ClassClean
+
+ClassInit
+TestInit
+TestMethodSetUp
+address = http://www.google.com/
+TestClean
+TestInit
+TestMethodSetUp
+address = http://cosmostv.by/
+TestClean
+TestInit
+TestMethodSetUp
+address = abr
+TestClean
+TestInit
+TestMethodTearDown
+TestClean
+ClassClean
+
+ClassInit
+TestInit
+TestMethodSetUp
+address = http://www.google.com/
+TestClean
+TestInit
+TestMethodSetUp
+address = http://cosmostv.by/
+TestClean
+TestInit
+TestMethodSetUp
+address = abr
 TestClean
 TestInit
 TestMethodTearDown

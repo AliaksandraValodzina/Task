@@ -12,6 +12,8 @@ namespace MsTest
     [TestClass]
     public class Test : BaseClass
     {
+        public TestContext TestContext { get; set; }
+
         public static StringBuilder Log
         {
             get
@@ -32,8 +34,15 @@ namespace MsTest
         //[Ignore]
         //[Timeout(1000), Owner("Mike"), Description("Fix problems")]
         //[ExpectedException(typeof(FormatException))]
+        [DeploymentItem("Data.xml")]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
+                   "|DataDirectory|\\Data.xml",
+                   "test",
+                    DataAccessMethod.Sequential)]
         public void TestMethodSetUp()
         {
+            string adress = (string)TestContext.DataRow["adress"];
+            Log.AppendLine("adress = " + adress);
             Log.AppendLine("TestMethodSetUp");
             //controller.Setup();
         }
@@ -72,7 +81,6 @@ namespace MsTest
             {
                 sw.WriteLine(Log);
             }
-
 
             //if (controller.BrowserStatus == "on")
             //{

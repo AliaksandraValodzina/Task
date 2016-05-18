@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tests>
+	<test>
+	<browser>firefox</browser>
+	<adress>http://www.google.com/</adress>
+	</test>
+	<test>
+		<browser>chrome</browser>
+		<adress>http://www.google.com/</adress>
+	</test>
+</tests>

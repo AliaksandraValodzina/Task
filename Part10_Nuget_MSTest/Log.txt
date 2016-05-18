@@ -1,5 +1,10 @@
 ClassInit
 TestInit
+adress = http://www.google.com/
+TestMethodSetUp
+TestClean
+TestInit
+adress = http://www.google.com/
 TestMethodSetUp
 TestClean
 TestInit
@@ -9,6 +14,11 @@ ClassClean
 
 ClassInit
 TestInit
+adress = http://www.google.com/
+TestMethodSetUp
+TestClean
+TestInit
+adress = http://www.richard-banks.org/2010/03/mstest-sucks-for-unit-tests.html
 TestMethodSetUp
 TestClean
 TestInit

@@ -53,7 +53,7 @@ namespace MsTest
 
         [TestMethod]
         [TestCategory("daily")]
-        [Timeout(5000), Owner("Lora"), Description("Add comments")]
+        //[Timeout(1000), Owner("Lora"), Description("Add comments")]
         public void TestMethodTearDown()
         {
             Log.AppendLine("TestMethodTearDown");

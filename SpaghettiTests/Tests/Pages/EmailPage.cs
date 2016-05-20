@@ -10,7 +10,7 @@ namespace Tests.Pages
 {
     public class EmailPage
     {
-        [FindsBy(How = How.ClassName, Using = "asl T-I-J3 J-J5-Ji")]
+        [FindsBy(How = How.XPath, Using = "//*[@aria-label = 'В спам!']")]
         public IWebElement ButtonSpam { get; set; }
 
         private IWebDriver driver;

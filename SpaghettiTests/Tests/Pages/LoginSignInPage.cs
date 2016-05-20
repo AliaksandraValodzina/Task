@@ -13,7 +13,7 @@ namespace Tests.Pages
         [FindsBy(How = How.Id, Using = "Email")]
         public IWebElement InputLogin { get; set; }
 
-        [FindsBy(How = How.Name, Using = "signIn")]
+        [FindsBy(How = How.Id, Using = "next")]
         public IWebElement ButtonSubmit { get; set; }
 
         private IWebDriver driver;

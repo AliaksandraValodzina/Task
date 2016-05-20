@@ -5,68 +5,75 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
-using NUnit.Framework;
 using System.Configuration;
 using Tests.Pages;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium.Support.UI;
 
 namespace Tests
 {
+    [TestClass]
     public class Task1_Spam
     {
-        private readonly string userNameOne = ConfigurationManager.AppSettings["user1"];
-        private readonly string passwordOne = ConfigurationManager.AppSettings["password1"];
+        IWebDriver driver;
+        WebDriverWait wait;
 
-        private readonly string userNameTwo = ConfigurationManager.AppSettings["user2"];
-        private readonly string passwordTwo = ConfigurationManager.AppSettings["password2"];
+        public string userNameOne = ConfigurationManager.AppSettings["user1"];
+        public string passwordOne = ConfigurationManager.AppSettings["password1"];
 
-        [Test]
+        public string userNameTwo = ConfigurationManager.AppSettings["user2"];
+        public string passwordTwo = ConfigurationManager.AppSettings["password2"];
+
+
+        [TestInitialize]
+        public void Setup()
+        {
+            driver = new FirefoxDriver();
+            wait = new WebDriverWait(driver, new TimeSpan(0, 0, 5));
+            //driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
+        }
+
+        [TestCleanup]
+        public void Teardown()
+        {
+            driver.Quit();
+        }
+
+        [TestMethod]
         public void test_Spam()
         {
-            IWebDriver driver = new FirefoxDriver();
-            driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
-            StartPage startPage = new StartPage(driver);
+            driver.Navigate().GoToUrl("http://gmail.com/");
+            LoginSignInPage loginPage = new LoginSignInPage(driver);
 
-            // 1.
-            // Go to the login form
-            LoginSignInPage loginPage = startPage.goToLoginForm();
-
-            // Input login user1 ang go to the next page
+            // 1.Login as registred user1
             PasswordSignInPage passwordPage = loginPage.loginSignIn(userNameOne);
-            
-            // Input password user1 ang go to the home page
             HomePage homePage = passwordPage.signIn(passwordOne);
 
-            // 2.
-            // Send message to user2
-            homePage.sendEmail(userNameTwo + "@gmail.com", "Hello!", "Hello man!");
+            // 2. Send message to user2
+            string email = userNameTwo + "@gmail.com";
+            homePage.sendEmail(email, "Hello!", "Hello world!");
+            passwordPage = homePage.exitFromAccount();
+            driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
 
-            // Exit from user1 account
-            startPage = homePage.exitFromAccount();
-
-            // 3.
-            // Go to the login form
+            // 3. Login as registred user2
+            StartPage startPage = passwordPage.goToStartPage();
             loginPage = startPage.goToLoginForm();
-
-            // Input login user2 ang go to the next page
             passwordPage = loginPage.loginSignIn(userNameTwo);
-
-            // Input password user2 ang go to the home page
             homePage = passwordPage.signIn(passwordTwo);
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@email = 'user1spagetti@gmail.com']")));
 
-            // 4.
-            // Mark letter as spam and exit from account
+            // 4. Mark letter as spam 
+            //driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
             EmailPage emailPage = homePage.goToMessage();
             homePage = emailPage.addLetterToSpam();
-            startPage = homePage.exitFromAccount();
+            passwordPage = homePage.exitFromAccount();
 
-            // 5. 
-            // Login user1
-            loginPage = startPage.goToLoginForm();
+            // 5. Login user1
+            /*loginPage = startPage.goToLoginForm();
             passwordPage = loginPage.loginSignIn(userNameOne);
             homePage = passwordPage.signIn(passwordOne);
 
-            // 6.
-            // Send letter to user2
+            // 6. Send letter to user2
             homePage.sendEmail(userNameTwo + "@gmail.com", "Hello two!", "Two : Hello man!");
             startPage = homePage.exitFromAccount();
 
@@ -76,7 +83,7 @@ namespace Tests
             homePage = passwordPage.signIn(passwordTwo);
 
             // 8. Go to folder: Spam
-            SpamPage spamPage = homePage.goToSpam();
+            SpamPage spamPage = homePage.goToSpam();*/
 
         }
     }

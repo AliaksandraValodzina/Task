@@ -31,7 +31,7 @@ namespace Tests.Pages
 
         public HomePage signIn(string password)
         {
-            //wait.Until(ExpectedConditions.ElementIsVisible(By.Id("Passwd")));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Id("Passwd")));
             InputPassword.SendKeys(password);
             ButtonSubmit.Click();
             return new HomePage(driver);

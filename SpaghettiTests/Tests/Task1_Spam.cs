@@ -16,7 +16,6 @@ namespace Tests
     public class Task1_Spam
     {
         IWebDriver driver;
-        WebDriverWait wait;
 
         public string userNameOne = ConfigurationManager.AppSettings["user1"];
         public string passwordOne = ConfigurationManager.AppSettings["password1"];
@@ -29,8 +28,6 @@ namespace Tests
         public void Setup()
         {
             driver = new FirefoxDriver();
-            wait = new WebDriverWait(driver, new TimeSpan(0, 0, 5));
-            //driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
         }
 
         [TestCleanup]
@@ -60,21 +57,19 @@ namespace Tests
             loginPage = startPage.goToLoginForm();
             passwordPage = loginPage.loginSignIn(userNameTwo);
             homePage = passwordPage.signIn(passwordTwo);
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@email = 'user1spagetti@gmail.com']")));
 
             // 4. Mark letter as spam 
-            //driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
             EmailPage emailPage = homePage.goToMessage();
             homePage = emailPage.addLetterToSpam();
             passwordPage = homePage.exitFromAccount();
 
             // 5. Login user1
-            /*loginPage = startPage.goToLoginForm();
+            loginPage = startPage.goToLoginForm();
             passwordPage = loginPage.loginSignIn(userNameOne);
             homePage = passwordPage.signIn(passwordOne);
 
             // 6. Send letter to user2
-            homePage.sendEmail(userNameTwo + "@gmail.com", "Hello two!", "Two : Hello man!");
+            /*homePage.sendEmail(userNameTwo + "@gmail.com", "Hello two!", "Two : Hello man!");
             startPage = homePage.exitFromAccount();
 
             // 7. Login user2

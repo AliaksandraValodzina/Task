@@ -21,11 +21,12 @@ namespace Tests.Pages
         public IWebElement ButtonToLoginPage { get; set; }
 
         private IWebDriver driver;
-        private WebDriverWait wait;
+        WebDriverWait wait;
 
         public PasswordSignInPage(IWebDriver driver)
         {
             this.driver = driver;
+            wait = new WebDriverWait(driver, TimeSpan.FromMinutes(1));
             PageFactory.InitElements(driver, this);
         }
 
@@ -33,12 +34,15 @@ namespace Tests.Pages
         {
             wait.Until(ExpectedConditions.ElementIsVisible(By.Id("Passwd")));
             InputPassword.SendKeys(password);
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Id("signIn")));
             ButtonSubmit.Click();
+
             return new HomePage(driver);
         }
 
         public StartPage goToStartPage()
         {
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Id("account-chooser-link")));
             ButtonToLoginPage.Click();
             return new StartPage(driver);
         }

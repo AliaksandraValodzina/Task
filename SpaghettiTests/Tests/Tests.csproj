@@ -71,7 +71,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages\EmailPage.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Pages\LoginSignInPage.cs" />
     <Compile Include="Pages\PasswordSignInPage.cs" />

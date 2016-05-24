@@ -13,7 +13,7 @@ using OpenQA.Selenium.Support.UI;
 namespace Tests
 {
     [TestClass]
-    public class Task1_Spam
+    public class TestSpam
     {
         IWebDriver driver;
 
@@ -37,7 +37,7 @@ namespace Tests
         }
 
         [TestMethod]
-        public void test_Spam()
+        public void Test()
         {
             driver.Navigate().GoToUrl("http://gmail.com/");
             LoginSignInPage loginPage = new LoginSignInPage(driver);
@@ -50,7 +50,6 @@ namespace Tests
             string email = userNameTwo + "@gmail.com";
             homePage.sendEmail(email, "Hello!", "Hello world!");
             passwordPage = homePage.exitFromAccount();
-            driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
 
             // 3. Login as registred user2
             StartPage startPage = passwordPage.goToStartPage();
@@ -59,18 +58,18 @@ namespace Tests
             homePage = passwordPage.signIn(passwordTwo);
 
             // 4. Mark letter as spam 
-            EmailPage emailPage = homePage.goToMessage();
-            homePage = emailPage.addLetterToSpam();
-            passwordPage = homePage.exitFromAccount();
+            homePage = homePage.addToSpam();
+            startPage = homePage.exitFromAccountToStartPage();
 
             // 5. Login user1
+            //startPage = passwordPage.goToStartPage();
             loginPage = startPage.goToLoginForm();
             passwordPage = loginPage.loginSignIn(userNameOne);
             homePage = passwordPage.signIn(passwordOne);
 
             // 6. Send letter to user2
-            /*homePage.sendEmail(userNameTwo + "@gmail.com", "Hello two!", "Two : Hello man!");
-            startPage = homePage.exitFromAccount();
+            homePage.sendEmail(userNameTwo + "@gmail.com", "Hello two!", "Two : Hello man!");
+            startPage = homePage.exitFromAccountToStartPage();
 
             // 7. Login user2
             loginPage = startPage.goToLoginForm();
@@ -78,8 +77,9 @@ namespace Tests
             homePage = passwordPage.signIn(passwordTwo);
 
             // 8. Go to folder: Spam
-            SpamPage spamPage = homePage.goToSpam();*/
-
+            SpamPage spamPage = homePage.goToSpam();
+            var spamMessages = driver.FindElements(By.XPath("//*[contains(text(), 'Вова Макаров')]"));
+            Assert.IsTrue(spamMessages.Count > 1);
         }
     }
 }

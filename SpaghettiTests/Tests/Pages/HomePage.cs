@@ -26,7 +26,7 @@ namespace Tests.Pages
         [FindsBy(How = How.XPath, Using = "//*[@class = 'T-I J-J5-Ji aoO T-I-atl L3']")]
         public IWebElement ButtonSendEmail { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//*[@class = 'gb_2a gbii']")]
+        [FindsBy(How = How.XPath, Using = "//a[@class = 'gb_b gb_8a gb_R']/span")]
         public IWebElement ButtonAccount { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//a[contains(text(), 'Выйти')]")]
@@ -35,8 +35,17 @@ namespace Tests.Pages
         [FindsBy(How = How.XPath, Using = "//*[@email = 'user1spagetti@gmail.com']")]
         public IWebElement OpenMessage { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//a[contains(text(), 'Спам')]")]
-        public IWebElement OpenSpam { get; set; }
+        [FindsBy(How = How.Id, Using = "gbqfq")]
+        public IWebElement SearchField { get; set; }
+
+        [FindsBy(How = How.Id, Using = "gbqfb")]
+        public IWebElement ButtonFind { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//tr[1]/td/div/div[@class = 'T-Jo-auh']")]
+        public IWebElement PickOutMessage { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//div[@class = 'T-I J-J5-Ji nN T-I-ax7 T-I-Js-Gs T-I-Js-IF ar7']")]
+        public IWebElement ButtonSpam { get; set; }
 
         private IWebDriver driver;
         WebDriverWait wait;
@@ -61,31 +70,56 @@ namespace Tests.Pages
 
         public PasswordSignInPage exitFromAccount()
         {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@class = 'gb_2a gbii']")));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[@class = 'gb_b gb_8a gb_R']/span")));
             ButtonAccount.Click();
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@class = 'gb_Ea gb_Be gb_Je gb_qb']")));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[contains(text(), 'Выйти')]")));
             ButtonExit.Click();
-            IAlert popUp = driver.SwitchTo().Alert();
-            if (popUp.Text.Contains("Эта страница просит вас подтвердить, что вы хотите уйти — при этом введённые вами данные могут не сохраниться."))
-            {
-                popUp.Accept();
-            }
+
+            this.checkAlert();
+
             return new PasswordSignInPage(driver);
         }
 
-        public EmailPage goToMessage()
+        public StartPage exitFromAccountToStartPage()
         {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@email = 'user1spagetti@gmail.com']")));
-            OpenMessage.Click();
-            return new EmailPage(driver);
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[@class = 'gb_b gb_8a gb_R']/span")));
+            ButtonAccount.Click();
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[contains(text(), 'Выйти')]")));
+            ButtonExit.Click();
+
+            this.checkAlert();
+
+            return new StartPage(driver);
+        }
+
+        public void checkAlert()
+        {
+            try
+            {
+                IAlert alert = driver.SwitchTo().Alert();
+                alert.Accept();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        public HomePage addToSpam()
+        {
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//tr[1]/td/div/div[@class = 'T-Jo-auh']")));
+            PickOutMessage.Click();
+            ButtonSpam.Click();
+            return new HomePage(driver);
         }
 
         public SpamPage goToSpam()
         {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[contains(text(), 'Спам')]")));
-            OpenSpam.Click();
+            SearchField.SendKeys("in:spam");
+            ButtonFind.Click();
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[contains(text(), 'Hello!')")));
+            
             return new SpamPage(driver);
-
         }
     }
 }

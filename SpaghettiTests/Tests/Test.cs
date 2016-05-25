@@ -9,25 +9,32 @@ using System.Configuration;
 using Tests.Pages;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium.Support.UI;
+using Tests.Messages;
+using Tests.Steps;
 
 namespace Tests
 {
     [TestClass]
-    public class TestSpam
+    public class Test
     {
         IWebDriver driver;
+        Step step;
 
-        public string userNameOne = ConfigurationManager.AppSettings["user1"];
-        public string passwordOne = ConfigurationManager.AppSettings["password1"];
+        /*private string userNameOne = ConfigurationManager.AppSettings["user1"];
+        private string passwordOne = ConfigurationManager.AppSettings["password1"];
 
-        public string userNameTwo = ConfigurationManager.AppSettings["user2"];
-        public string passwordTwo = ConfigurationManager.AppSettings["password2"];
+        private string userNameTwo = ConfigurationManager.AppSettings["user2"];
+        private string passwordTwo = ConfigurationManager.AppSettings["password2"];*/
 
+        User userOne = new User(ConfigurationManager.AppSettings["user1"], ConfigurationManager.AppSettings["password1"]);
+        User userTwo = new User(ConfigurationManager.AppSettings["user2"], ConfigurationManager.AppSettings["password2"]);
+        User userThree = new User(ConfigurationManager.AppSettings["user3"], ConfigurationManager.AppSettings["password3"]);
 
         [TestInitialize]
         public void Setup()
         {
             driver = new FirefoxDriver();
+            step = new Step(driver);
         }
 
         [TestCleanup]
@@ -37,9 +44,27 @@ namespace Tests
         }
 
         [TestMethod]
-        public void Test()
+        public void TestSpam()
         {
-            driver.Navigate().GoToUrl("http://gmail.com/");
+            step.Login(userOne);
+            Message message = new Message(userTwo.Email + "gmail.com", "First message", "Hello!");
+            step.SendMessage(message);
+            step.Exit();
+
+            step.Login(userTwo);
+            step.AddToSpam();
+            step.Exit();
+
+            step.Login(userOne);
+            message = new Message(userTwo.Email + "gmail.com", "Second message", "Hello!");
+            step.SendMessage(message);
+            step.Exit();
+
+            step.Login(userTwo);
+            step.GoToSpam();
+            Assert.IsTrue(step.CountMessagesByOneEmail(userOne) > 1);
+
+            /*driver.Navigate().GoToUrl("http://gmail.com/");
             LoginSignInPage loginPage = new LoginSignInPage(driver);
 
             // 1.Login as registred user1
@@ -68,6 +93,7 @@ namespace Tests
             homePage = passwordPage.signIn(passwordOne);
 
             // 6. Send letter to user2
+            Message message = new Message();
             homePage.sendEmail(userNameTwo + "@gmail.com", "Hello two!", "Two : Hello man!");
             startPage = homePage.exitFromAccountToStartPage();
 
@@ -77,9 +103,21 @@ namespace Tests
             homePage = passwordPage.signIn(passwordTwo);
 
             // 8. Go to folder: Spam
-            SpamPage spamPage = homePage.goToSpam();
+            homePage = homePage.goToSpam();
             var spamMessages = driver.FindElements(By.XPath("//*[contains(text(), 'Вова Макаров')]"));
-            Assert.IsTrue(spamMessages.Count > 1);
+            Assert.IsTrue(spamMessages.Count > 1);*/
+        }
+
+        [TestMethod]
+        public void TestForward()
+        {
+            step.Login(userTwo);
+            step.ForwardToUser(userThree);
+            step.Exit();
+
+            step.Login(userThree);
+
+
         }
     }
 }

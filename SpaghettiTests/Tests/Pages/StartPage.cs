@@ -9,10 +9,10 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Tests.Pages
 {
-    public class StartPage
+    public class StartPage : BasePage
     {
         [FindsBy(How = How.Id, Using = "account-chooser-add-account")]
-        public IWebElement ButtonGoToAccount { get; set; }
+        private IWebElement ButtonGoToAccount { get; set; }
 
         private IWebDriver driver;
         WebDriverWait wait;

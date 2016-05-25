@@ -9,13 +9,13 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Tests.Pages
 {
-    public class LoginSignInPage
+    public class LoginSignInPage : BasePage
     {
         [FindsBy(How = How.Id, Using = "Email")]
-        public IWebElement InputLogin { get; set; }
+        private IWebElement InputLogin { get; set; }
 
         [FindsBy(How = How.Id, Using = "next")]
-        public IWebElement ButtonSubmit { get; set; }
+        private IWebElement ButtonSubmit { get; set; }
 
         private IWebDriver driver;
         WebDriverWait wait;

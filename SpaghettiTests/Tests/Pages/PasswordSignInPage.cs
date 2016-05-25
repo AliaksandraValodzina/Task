@@ -9,16 +9,16 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Tests.Pages
 {
-    public class PasswordSignInPage
+    public class PasswordSignInPage : BasePage
     {
         [FindsBy(How = How.Id, Using = "Passwd")]
-        public IWebElement InputPassword { get; set; }
+        private IWebElement InputPassword { get; set; }
 
         [FindsBy(How = How.Id, Using = "signIn")]
-        public IWebElement ButtonSubmit { get; set; }
+        private IWebElement ButtonSubmit { get; set; }
 
         [FindsBy(How = How.Id, Using = "account-chooser-link")]
-        public IWebElement ButtonToLoginPage { get; set; }
+        private IWebElement ButtonToLoginPage { get; set; }
 
         private IWebDriver driver;
         WebDriverWait wait;

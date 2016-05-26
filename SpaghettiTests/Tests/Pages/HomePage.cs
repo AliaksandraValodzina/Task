@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -25,6 +26,9 @@ namespace Tests.Pages
         [FindsBy(How = How.XPath, Using = "//*[@class = 'Am Al editable LW-avf']")]
         private IWebElement InputText { get; set; }
 
+        [FindsBy(How = How.XPath, Using = "//*[@class = 'a1 aaA aMZ']")]
+        private IWebElement AddAttachFile { get; set; }
+
         [FindsBy(How = How.XPath, Using = "//*[@class = 'T-I J-J5-Ji aoO T-I-atl L3']")]
         private IWebElement ButtonSendEmail { get; set; }
 
@@ -33,9 +37,6 @@ namespace Tests.Pages
 
         [FindsBy(How = How.XPath, Using = "//a[contains(text(), 'Sign out')]")]
         private IWebElement ButtonExit { get; set; }
-
-        /*[FindsBy(How = How.XPath, Using = "//*[@email = 'user1spagetti@gmail.com']")]
-        private IWebElement OpenMessage { get; set; }*/
 
         [FindsBy(How = How.Id, Using = "gbqfq")]
         private IWebElement SearchField { get; set; }
@@ -49,16 +50,14 @@ namespace Tests.Pages
         [FindsBy(How = How.XPath, Using = "//div[@class = 'T-I J-J5-Ji nN T-I-ax7 T-I-Js-Gs T-I-Js-IF ar7']")]
         private IWebElement ButtonSpam { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//div[@class = 'aos T-I-J3 J-J5-Ji']")]
+        [FindsBy(How = How.XPath, Using = "//div[@class = 'T-I J-J5-Ji ash T-I-ax7 L3']")]
         private IWebElement ButtonSetting { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//div[@id = 'ms']/div[contains(text(), 'Settings')]")]
+        [FindsBy(How = How.XPath, Using = "//div[@id = 'ms']")]
         private IWebElement ItemSettingInMenu { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//tr[@class = 'zA zE'][1]")]
         private IWebElement LastLetter { get; set; }
-
-        
 
         private IWebDriver driver;
         WebDriverWait wait;
@@ -78,6 +77,12 @@ namespace Tests.Pages
             InputAddress.SendKeys(message.Recipient);
             InputTheme.SendKeys(message.Theme);
             InputText.SendKeys(message.TextForRecipient);
+
+            if(!message.PathToAttachFile.Equals("NoPath"))
+            {
+                AddAttachFile.SendKeys(message.PathToAttachFile);
+            }
+
             ButtonSendEmail.Click();
         }
 
@@ -138,7 +143,9 @@ namespace Tests.Pages
         public SettingsPage GoToSettings()
         {
             ButtonSetting.Click();
+            //wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@id = 'ms']")));
             ItemSettingInMenu.Click();
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[@class = 'f0 ou']")));
             return new SettingsPage(driver);
         }
 

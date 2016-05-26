@@ -44,6 +44,7 @@ namespace Tests
         }
 
         [TestMethod]
+        [Ignore]
         public void TestSpam()
         {
             step.Login(userOne);
@@ -112,10 +113,25 @@ namespace Tests
         public void TestForward()
         {
             step.Login(userTwo);
+            step.GoToSettings();
             step.ForwardToUser(userThree);
             step.Exit();
 
             step.Login(userThree);
+            step.ConfirmForward();
+            step.Exit();
+
+            step.Login(userTwo);
+            step.GoToSettings();
+            step.CreateFilter(userOne);
+            step.Exit();
+
+            step.Login(userOne);
+            Message messageWithAttachFile = new Message(userTwo.Email + "gmail.com", "Message with attache file", "", ConfigurationManager.AppSettings["attachFile"]);
+            step.SendMessage(messageWithAttachFile);
+            Message message = new Message(userTwo.Email + "gmail.com", "Message without attache file", "Hello!");
+            step.SendMessage(message);
+            step.Exit();
 
 
         }

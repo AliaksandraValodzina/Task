@@ -33,9 +33,43 @@ namespace Tests.Pages
         [FindsBy(How = How.XPath, Using = "//input[@value = 'Proceed']")]
         private IWebElement ButtonProceed { get; set; }
 
-        public void AddForwardingAddress(User user)
+        [FindsBy(How = How.XPath, Using = "//input[@name = 'sx_em'][@value = '1']")]
+        private IWebElement RadioButtonForwardACopy { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//span[@class = 'sA'][contains(text(), 'Create a new filter')]")]
+        private IWebElement ButtonNewFilter { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//input[@class = 'ZH nr aQa']")]
+        private IWebElement FieldFilterFrom { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//span[@class = 'w-Pv ZG']/input")]
+        private IWebElement CheckboxHasAttachment { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//div[@class = 'acM']")]
+        private IWebElement CreateFilterWithSearch { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//label[contains(text(), 'Delete it')]")]
+        private IWebElement CheckboxDeleteIt { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//label[contains(text(), 'Always mark it as important')]")]
+        private IWebElement CheckboxMarkAsImportant { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//div[contains(text(), 'Create filter')]")]
+        private IWebElement ButtonCreateFilter { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//a[@class = 'gb_b gb_8a gb_R']/span")]
+        private IWebElement ButtonAccount { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//a[contains(text(), 'Sign out')]")]
+        private IWebElement ButtonExit { get; set; }
+
+        public void GoToForwardPage()
         {
             InsetForward.Click();
+        }
+
+        public void AddForwardingAddress(User user)
+        {
             ButtonAddForwardAddress.Click();
             FieldAddForwardAddress.SendKeys(user.Email + "@gmail.com");
             ButtonNext.Click();
@@ -43,6 +77,24 @@ namespace Tests.Pages
             ButtonProceed.Click();
             IAlert alert = driver.SwitchTo().Alert();
             alert.Accept();
+        }
+
+        public void CreateFilter(User user)
+        {
+            RadioButtonForwardACopy.Click();
+            ButtonNewFilter.Click();
+            FieldAddForwardAddress.SendKeys(user.Email + "@gmail.com");
+            CheckboxHasAttachment.Click();
+            CreateFilterWithSearch.Click();
+            CheckboxDeleteIt.Click();
+            CheckboxMarkAsImportant.Click();
+            ButtonCreateFilter.Click();
+        }
+
+        public void ExitFromAccount()
+        {
+            ButtonAccount.Click();
+            ButtonExit.Click();
         }
     }
 }

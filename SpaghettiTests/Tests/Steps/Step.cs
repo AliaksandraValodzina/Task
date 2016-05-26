@@ -64,26 +64,33 @@ namespace Tests.Steps
             return countMessages;
         }
 
-        // Forward to user(
-        public void ForwardToUser(User user)
+        // Go to forward page
+        public void GoToSettings()
         {
             HomePage homePage = new HomePage(driver);
             SettingsPage settingsPage = homePage.GoToSettings();
+            //settingsPage.GoToForwardPage();
+        }
+
+        // Forward to user
+        public void ForwardToUser(User user)
+        {
+            SettingsPage settingsPage = new SettingsPage(driver);
             settingsPage.AddForwardingAddress(user);
         }
 
         // Accept forward
-        public void AcceptForward()
+        public void ConfirmForward()
         {
             HomePage homePage = new HomePage(driver);
             LetterPage letterPage = homePage.ChooseLastLetter();
             letterPage.ConfirmForwardFromUser();
         }
 
-    
-
-
-
-
+        // Create Filter
+        public void CreateFilter(User user)
+        {
+            SettingsPage settingsPage = new SettingsPage(driver);
+        }
     }
 }

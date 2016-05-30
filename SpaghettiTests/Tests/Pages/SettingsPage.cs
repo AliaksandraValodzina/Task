@@ -1,25 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
+using Tests.Pages;
 
 namespace Tests.Pages
 {
     public class SettingsPage : BasePage
     {
         private IWebDriver driver;
+        WebDriverWait wait;
 
         public SettingsPage(IWebDriver driver)
         {
             this.driver = driver;
+            wait = new WebDriverWait(driver, TimeSpan.FromMinutes(1));
             PageFactory.InitElements(driver, this);
         }
 
-        [FindsBy(How = How.XPath, Using = "//a[@class = 'f0 ou']")]
+        [FindsBy(How = How.XPath, Using = "//a[contains(text(), 'Forwarding and POP/IMAP')]")]
         private IWebElement InsetForward { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//a[contains(text(), 'Filters and Blocked Addresses')]")]
+        private IWebElement FiltersAndBlockedAddress { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//input[@value = 'Add a forwarding address']")]
         private IWebElement ButtonAddForwardAddress { get; set; }
@@ -63,32 +67,38 @@ namespace Tests.Pages
         [FindsBy(How = How.XPath, Using = "//a[contains(text(), 'Sign out')]")]
         private IWebElement ButtonExit { get; set; }
 
-        public void GoToForwardPage()
-        {
-            InsetForward.Click();
-        }
+        [FindsBy(How = How.XPath, Using = "//button[@class = 'J-at1-auR']")]
+        private IWebElement ButtonOk { get; set; }
 
         public void AddForwardingAddress(User user)
         {
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[contains(text(), 'Forwarding and POP/IMAP')]")));
+            InsetForward.Click();
             ButtonAddForwardAddress.Click();
             FieldAddForwardAddress.SendKeys(user.Email + "@gmail.com");
             ButtonNext.Click();
             driver.SwitchTo().Window(driver.WindowHandles.Last());
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@value = 'Proceed']")));
             ButtonProceed.Click();
-            IAlert alert = driver.SwitchTo().Alert();
-            alert.Accept();
+            driver.SwitchTo().Window(driver.WindowHandles.First());
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//button[@class = 'J-at1-auR']")));
+            ButtonOk.Click();
         }
 
         public void CreateFilter(User user)
         {
-            RadioButtonForwardACopy.Click();
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[contains(text(), 'Forwarding and POP/IMAP')]")));
+            FiltersAndBlockedAddress.Click();
             ButtonNewFilter.Click();
-            FieldAddForwardAddress.SendKeys(user.Email + "@gmail.com");
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@class = 'ZH nr aQa']")));
+            FieldFilterFrom.SendKeys(user.Email + "@gmail.com");
             CheckboxHasAttachment.Click();
             CreateFilterWithSearch.Click();
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//label[contains(text(), 'Delete it')]")));
             CheckboxDeleteIt.Click();
             CheckboxMarkAsImportant.Click();
             ButtonCreateFilter.Click();
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[@class = 'gb_b gb_8a gb_R']/span")));
         }
 
         public void ExitFromAccount()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tests.Messages
 {
-    public class Message
+    public class Letter
     {
         public string Recipient { get; private set; }
 
@@ -17,14 +17,15 @@ namespace Tests.Messages
         [System.ComponentModel.DefaultValue("NoPath")]
         public string PathToAttachFile { get; private set; }
 
-        public Message(string recipient, string theme, string textForRecipient)
+        public Letter(string recipient, string theme, string textForRecipient)
         {
             this.Recipient = recipient;
             this.Theme = theme;
             this.TextForRecipient = textForRecipient;
+            this.PathToAttachFile = "NoPath";
         }
 
-        public Message(string recipient, string theme, string textForRecipient, string pathToAttachFile)
+        public Letter(string recipient, string theme, string textForRecipient, string pathToAttachFile)
         {
             this.Recipient = recipient;
             this.Theme = theme;

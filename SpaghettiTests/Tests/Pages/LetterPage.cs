@@ -5,20 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 
 namespace Tests.Pages
 {
     public class LetterPage
     {
         private IWebDriver driver;
+        WebDriverWait wait;
 
         public LetterPage(IWebDriver driver)
         {
             this.driver = driver;
+            wait = new WebDriverWait(driver, TimeSpan.FromMinutes(1));
             PageFactory.InitElements(driver, this);
         }
 
-        [FindsBy(How = How.XPath, Using = "//a[contains(text(), 'mail-settings.google.com')]")]
+        [FindsBy(How = How.XPath, Using = "//div[@class = 'ii gt adP adO']/div/a[4]")]
         private IWebElement PathConfirmForward { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//p/input[@value = 'Confirm')]")]
@@ -35,10 +38,19 @@ namespace Tests.Pages
 
         public void ConfirmForwardFromUser()
         {
+            string currentWindow = driver.CurrentWindowHandle;
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@class = 'ii gt adP adO']/div/a[4]")));
             PathConfirmForward.Click();
-            driver.SwitchTo().Window(driver.WindowHandles.Last());
-            ButtonConfirm.Click();
-            driver.SwitchTo().Window(driver.WindowHandles.First());
+            foreach (String window in driver.WindowHandles)
+            {
+                if (window.Contains("Confirmation"))
+                {
+                    wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//p/input[@value = 'Confirm')]")));
+                    ButtonConfirm.Click();
+                }
+            }
+            driver.SwitchTo().Window(currentWindow);
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@class = 'ar6 T-I-J3 J-J5-Ji']")));
             ButtonBackToInbox.Click();
         }
     }

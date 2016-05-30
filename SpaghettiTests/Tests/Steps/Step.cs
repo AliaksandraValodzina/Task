@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 using Tests.Messages;
 using Tests.Pages;
 
@@ -12,24 +13,38 @@ namespace Tests.Steps
     public class Step
     {
         private IWebDriver driver;
+        WebDriverWait wait;
 
         public Step(IWebDriver driver)
         {
             this.driver = driver;
+            wait = new WebDriverWait(driver, TimeSpan.FromMinutes(1));
             PageFactory.InitElements(driver, this);
         }
 
         // Login as user
         public void Login(User user)
         {
-            driver.Navigate().GoToUrl("http://gmail.com/");
+            PasswordSignInPage passwordPage;
+            StartPage startPage = new StartPage(driver);
             LoginSignInPage loginPage = new LoginSignInPage(driver);
-            PasswordSignInPage passwordPage = loginPage.loginSignIn(user.Email);
+
+            if (driver.FindElements(By.Id("account-chooser-link")).Count > 0)
+            {
+                passwordPage = new PasswordSignInPage(driver);
+                startPage = passwordPage.goToStartPage();
+            }
+            if (driver.FindElements(By.Id("account-chooser-add-account")).Count > 0)
+            {
+                loginPage =  startPage.goToLoginForm();
+            }
+
+            passwordPage = loginPage.loginSignIn(user.Email);
             HomePage homePage = passwordPage.signIn(user.Password);
         }
 
         // Send message
-        public void SendMessage(Message message)
+        public void SendMessage(Letter message)
         {
             HomePage homePage = new HomePage(driver);
             homePage.SendEmail(message);
@@ -38,8 +53,16 @@ namespace Tests.Steps
         // Exit from account
         public void Exit()
         {
-            HomePage homePage = new HomePage(driver);
-            PasswordSignInPage passwordPage = homePage.ExitFromAccount();
+            if (driver.FindElements(By.XPath("//*[@class = 'aKz']")).Count > 0)
+            {
+                HomePage homePage = new HomePage(driver);
+                PasswordSignInPage passwordPage = homePage.ExitFromAccount();
+            } 
+            if (driver.FindElements(By.XPath("//a[contains(text(), 'Forwarding and POP/IMAP')]")).Count > 0)
+            {
+                SettingsPage settingPage = new SettingsPage(driver);
+                settingPage.ExitFromAccount();
+            }
         }
 
         // Add message to spam
@@ -91,6 +114,7 @@ namespace Tests.Steps
         public void CreateFilter(User user)
         {
             SettingsPage settingsPage = new SettingsPage(driver);
+            settingsPage.CreateFilter(user);
         }
     }
 }

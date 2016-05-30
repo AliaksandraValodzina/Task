@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using Tests.Messages;
@@ -26,7 +29,7 @@ namespace Tests.Pages
         [FindsBy(How = How.XPath, Using = "//*[@class = 'Am Al editable LW-avf']")]
         private IWebElement InputText { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//*[@class = 'a1 aaA aMZ']")]
+        [FindsBy(How = How.XPath, Using = "//div[@class = 'a1 aaA aMZ']")]
         private IWebElement AddAttachFile { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//*[@class = 'T-I J-J5-Ji aoO T-I-atl L3']")]
@@ -69,19 +72,25 @@ namespace Tests.Pages
             PageFactory.InitElements(driver, this);
         }
 
-        public void SendEmail(Message message)
+        public void SendEmail(Letter letter)
         {
-            //wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[contains(text(), 'COMPOSE')]")));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[contains(text(), 'COMPOSE')]")));
             ButtonNewEmail.Click();
-            //wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@class = 'T-I J-J5-Ji aoO T-I-atl L3']")));
-            InputAddress.SendKeys(message.Recipient);
-            InputTheme.SendKeys(message.Theme);
-            InputText.SendKeys(message.TextForRecipient);
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@class = 'T-I J-J5-Ji aoO T-I-atl L3']")));
+            InputAddress.SendKeys(letter.Recipient);
+            InputTheme.SendKeys(letter.Theme);
+            InputText.SendKeys(letter.TextForRecipient);
 
-            if(!message.PathToAttachFile.Equals("NoPath"))
+            if(!letter.PathToAttachFile.Equals("NoPath"))
             {
-                AddAttachFile.SendKeys(message.PathToAttachFile);
-            }
+                AddAttachFile.Click();
+                
+                SendKeys.SendWait(@"C:\Users\Aliaksandra_Valodzina@epam.com\Task\SpaghettiTests\Tests\bin\Debug\AttachFile.txt");
+                SendKeys.SendWait(@"{Enter}");
+                //AddAttachFile.SendKeys(message.PathToAttachFile);
+            
+                
+                }
 
             ButtonSendEmail.Click();
         }
@@ -142,16 +151,16 @@ namespace Tests.Pages
 
         public SettingsPage GoToSettings()
         {
-            ButtonSetting.Click();
-            //wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@id = 'ms']")));
-            ItemSettingInMenu.Click();
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[@class = 'f0 ou']")));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@class = 'T-I J-J5-Ji ash T-I-ax7 L3']")));
+            new Actions(driver).MoveToElement(ButtonSetting).ClickAndHold().MoveToElement(ItemSettingInMenu).Release().Perform();
             return new SettingsPage(driver);
         }
 
         public LetterPage ChooseLastLetter()
         {
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//tr[@class = 'zA zE'][1]")));
             LastLetter.Click();
+            //wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@class = 'a3s aXjCH m154f247995ab133c']/a][4]")));
             return new LetterPage(driver);
         }
     }

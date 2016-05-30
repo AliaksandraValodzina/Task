@@ -33,14 +33,19 @@ namespace Tests
         [TestInitialize]
         public void Setup()
         {
+            /*driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(20));
+            driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(30));
+            driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));*/
+
             driver = new FirefoxDriver();
             step = new Step(driver);
+            driver.Navigate().GoToUrl("http://gmail.com/");
         }
 
         [TestCleanup]
         public void Teardown()
         {
-            driver.Quit();
+            //driver.Quit();
         }
 
         [TestMethod]
@@ -48,7 +53,7 @@ namespace Tests
         public void TestSpam()
         {
             step.Login(userOne);
-            Message message = new Message(userTwo.Email + "gmail.com", "First message", "Hello!");
+            Letter message = new Letter(userTwo.Email + "gmail.com", "First message", "Hello!");
             step.SendMessage(message);
             step.Exit();
 
@@ -57,7 +62,7 @@ namespace Tests
             step.Exit();
 
             step.Login(userOne);
-            message = new Message(userTwo.Email + "gmail.com", "Second message", "Hello!");
+            message = new Letter(userTwo.Email + "gmail.com", "Second message", "Hello!");
             step.SendMessage(message);
             step.Exit();
 
@@ -112,7 +117,7 @@ namespace Tests
         [TestMethod]
         public void TestForward()
         {
-            step.Login(userTwo);
+            /*step.Login(userTwo);
             step.GoToSettings();
             step.ForwardToUser(userThree);
             step.Exit();
@@ -124,16 +129,14 @@ namespace Tests
             step.Login(userTwo);
             step.GoToSettings();
             step.CreateFilter(userOne);
-            step.Exit();
+            step.Exit();*/
 
             step.Login(userOne);
-            Message messageWithAttachFile = new Message(userTwo.Email + "gmail.com", "Message with attache file", "", ConfigurationManager.AppSettings["attachFile"]);
+            Letter messageWithAttachFile = new Letter(userTwo.Email + "gmail.com", "Message with attache file", "", ConfigurationManager.AppSettings["attachFile"]);
             step.SendMessage(messageWithAttachFile);
-            Message message = new Message(userTwo.Email + "gmail.com", "Message without attache file", "Hello!");
+            Letter message = new Letter(userTwo.Email + "gmail.com", "Message without attache file", "Hello!");
             step.SendMessage(message);
             step.Exit();
-
-
         }
     }
 }

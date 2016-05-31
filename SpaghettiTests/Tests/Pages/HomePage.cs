@@ -94,9 +94,9 @@ namespace Tests.Pages
 
         public PasswordSignInPage ExitFromAccount()
         {
-            //wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[@class = 'gb_b gb_8a gb_R']/span")));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[@class = 'gb_b gb_8a gb_R']/span")));
             ButtonAccount.Click();
-            //wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[contains(text(), 'Sign out')]")));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[contains(text(), 'Sign out')]")));
             ButtonExit.Click();
 
             this.AsseptAlertIfExist();
@@ -106,9 +106,9 @@ namespace Tests.Pages
 
         public StartPage exitFromAccountToStartPage()
         {
-            //wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[@class = 'gb_b gb_8a gb_R']/span")));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[@class = 'gb_b gb_8a gb_R']/span")));
             ButtonAccount.Click();
-            //wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[contains(text(), 'Выйти')]")));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[contains(text(), 'Выйти')]")));
             ButtonExit.Click();
 
             this.AsseptAlertIfExist();
@@ -131,7 +131,7 @@ namespace Tests.Pages
 
         public HomePage AddToSpam()
         {
-            //wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//tr[1]/td/div/div[@class = 'T-Jo-auh']")));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//tr[1]/td/div/div[@class = 'T-Jo-auh']")));
             PickOutMessage.Click();
             ButtonSpam.Click();
             return new HomePage(driver);
@@ -157,8 +157,7 @@ namespace Tests.Pages
         {
             SearchField.SendKeys("in:spam");
             ButtonFind.Click();
-            //wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[contains(text(), 'Hello!')]")));
-            
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[contains(text(), 'Hello!')]")));
             return new HomePage(driver);
         }
 
@@ -173,7 +172,7 @@ namespace Tests.Pages
         {
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//tr[@class = 'zA zE'][1]")));
             LastLetter.Click();
-            //wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@class = 'a3s aXjCH m154f247995ab133c']/a][4]")));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@class = 'a3s aXjCH m154f247995ab133c']/a][4]")));
             return new LetterPage(driver);
         }
     }

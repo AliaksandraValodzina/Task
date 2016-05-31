@@ -44,10 +44,10 @@ namespace Tests.Steps
         }
 
         // Send message
-        public void SendMessage(Letter message)
+        public void SendLetter(Letter letter)
         {
             HomePage homePage = new HomePage(driver);
-            homePage.SendEmail(message);
+            homePage.SendEmail(letter);
         }
 
         // Exit from account
@@ -79,11 +79,24 @@ namespace Tests.Steps
             homePage = homePage.GoToSpam();
         }
 
-        // Find message
-        public int CountMessagesByOneEmail(User user)
+        // Go to trash
+        public void GoToTrash()
         {
-            var spamMessages = driver.FindElements(By.XPath($"//div/span[@email = '{user.Email}@gmail.com')]"));
-            var countMessages = spamMessages.Count;
+            HomePage homePage = new HomePage(driver);
+            homePage = homePage.GoToTrash();
+        }
+
+        // Go to important
+        public void GoToImportant()
+        {
+            HomePage homePage = new HomePage(driver);
+            homePage = homePage.GoToImportant();
+        }
+
+        // Find message
+        public int CountMessagesByTheme(Letter letter)
+        {
+            var countMessages = driver.FindElements(By.XPath($"//*[contains(text(), '{letter.Theme}')]")).Count;
             return countMessages;
         }
 

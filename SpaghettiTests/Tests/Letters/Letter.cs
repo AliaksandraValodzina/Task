@@ -8,6 +8,8 @@ namespace Tests.Messages
 {
     public class Letter
     {
+        public string Sender { get; private set; }
+
         public string Recipient { get; private set; }
 
         public string Theme { get; private set; }
@@ -17,16 +19,18 @@ namespace Tests.Messages
         [System.ComponentModel.DefaultValue("NoPath")]
         public string PathToAttachFile { get; private set; }
 
-        public Letter(string recipient, string theme, string textForRecipient)
+        public Letter(string sender, string recipient, string theme, string textForRecipient)
         {
+            this.Sender = sender;
             this.Recipient = recipient;
             this.Theme = theme;
             this.TextForRecipient = textForRecipient;
             this.PathToAttachFile = "NoPath";
         }
 
-        public Letter(string recipient, string theme, string textForRecipient, string pathToAttachFile)
+        public Letter(string sender, string recipient, string theme, string textForRecipient, string pathToAttachFile)
         {
+            this.Sender = sender;
             this.Recipient = recipient;
             this.Theme = theme;
             this.TextForRecipient = textForRecipient;

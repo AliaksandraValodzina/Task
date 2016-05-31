@@ -32,7 +32,7 @@ namespace Tests.Pages
         [FindsBy(How = How.XPath, Using = "//div[@class = 'a1 aaA aMZ']")]
         private IWebElement AddAttachFile { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//*[@class = 'T-I J-J5-Ji aoO T-I-atl L3']")]
+        [FindsBy(How = How.XPath, Using = "//div[@class = 'T-I J-J5-Ji aoO T-I-atl L3']")]
         private IWebElement ButtonSendEmail { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//a[@class = 'gb_b gb_8a gb_R']/span")]
@@ -76,7 +76,7 @@ namespace Tests.Pages
         {
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[contains(text(), 'COMPOSE')]")));
             ButtonNewEmail.Click();
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@class = 'T-I J-J5-Ji aoO T-I-atl L3']")));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@class = 'vO']")));
             InputAddress.SendKeys(letter.Recipient);
             InputTheme.SendKeys(letter.Theme);
             InputText.SendKeys(letter.TextForRecipient);
@@ -84,15 +84,12 @@ namespace Tests.Pages
             if(!letter.PathToAttachFile.Equals("NoPath"))
             {
                 AddAttachFile.Click();
-                
-                SendKeys.SendWait(@"C:\Users\Aliaksandra_Valodzina@epam.com\Task\SpaghettiTests\Tests\bin\Debug\AttachFile.txt");
-                SendKeys.SendWait(@"{Enter}");
-                //AddAttachFile.SendKeys(message.PathToAttachFile);
-            
-                
-                }
+                SendKeys.SendWait(ConfigurationManager.AppSettings["attachFile"]);
+                SendKeys.SendWait("{Enter}");
+            }
 
             ButtonSendEmail.Click();
+            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//*[@class = 'T-I J-J5-Ji aoO T-I-atl L3']")));
         }
 
         public PasswordSignInPage ExitFromAccount()
@@ -140,11 +137,27 @@ namespace Tests.Pages
             return new HomePage(driver);
         }
 
+        public HomePage GoToTrash()
+        {
+            SearchField.SendKeys("in:trash");
+            ButtonFind.Click();
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[contains(text(), 'Empty Bin now')]")));
+            return new HomePage(driver);
+        }
+
+        public HomePage GoToImportant()
+        {
+            SearchField.SendKeys("is:important");
+            ButtonFind.Click();
+            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//*[contains(text(), 'Empty Bin now')]")));
+            return new HomePage(driver);
+        }
+
         public HomePage GoToSpam()
         {
             SearchField.SendKeys("in:spam");
             ButtonFind.Click();
-            //wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[contains(text(), 'Hello!')")));
+            //wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[contains(text(), 'Hello!')]")));
             
             return new HomePage(driver);
         }
